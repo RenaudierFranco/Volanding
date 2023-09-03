@@ -1,6 +1,6 @@
 const NavBar = () => {
     return(<h1>
-        Hola estoy aprendiendo react para el cv
+        SEXO DESENFRENADO
     </h1>)
 }
 
