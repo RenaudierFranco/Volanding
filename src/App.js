@@ -7,9 +7,9 @@ import MenuScreen from './components/MenuScreen/MenuScreen';
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      
       <LoginScreen/>
-      <MenuScreen/>
+      
     </div>
   );
 }

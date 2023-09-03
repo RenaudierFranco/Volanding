@@ -1,46 +1,21 @@
 const LoginScreen = () => {
 
     return(
-        <div>
-            <div class="container text-center">
-                <div class="row m-3">
-                    <div class="col">
-                    </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-primary">Log In</button>
-                    </div>
-
-                    <div class="col">
-                    </div>
-                </div>
-
-                <div class="row m-3">
-                    <div class="col">
-                    </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-primary">Sign Up</button>
-                    </div>
-
-                    <div class="col">
-                    </div>
-
-                </div>
-
-                <div class="row m-3">
-                    <div class="col">
-                    </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-primary">Skip</button>
-                    </div>
-
-                    <div class="col">
-                    </div>
-                </div>
+        <div class="container text-center login-back-img"style={{ 
+        backgroundImage: `url("https://images.hdqwalls.com/download/ultimate-freedom-4k-5n-1920x1080.jpg")`
+        }}>
+            <div class="row align-items-end">
+                <button type="button" class="btn btn-outline-info">Log In</button>
             </div>
-        </div>     
+
+            <div class="row align-items-end">
+                <button type="button" class="btn btn-outline-info">Sign Up</button>
+            </div>
+
+            <div class="row align-items-end">
+                <button type="button" class="btn btn-outline-info">Skip</button>
+            </div>
+        </div>   
     )
 }
 
