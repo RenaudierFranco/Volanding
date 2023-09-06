@@ -16,6 +16,7 @@ function App() {
 
         <Routes>
           <Route exact path="LoginScreen" element={<LoginScreen/>} />
+          <Route exact path="NavBar" element={<NavBar/>} />
           <Route exact path="FormLogin" element={<FormLogin/>} />
           <Route exact path="FormRegister" element={<FormRegister/>} />
           <Route exact path="InputDate" element={<InputDate/>} />
