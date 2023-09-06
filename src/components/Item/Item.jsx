@@ -1,15 +1,15 @@
 import { Card } from 'bootstrap-4-react';
 
-const Item = () => {
+const Item = ({item}) => {
 
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '18rem' }} className="m-3">
         <Card.Header>Feature</Card.Header>
-        <Card.Image src={""} />
+        <Card.Image src={item.img} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Subtitle mb="2" text="muted">Card subtitle</Card.Subtitle>
-          <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+          <Card.Title>{item.ciudad}</Card.Title>
+          <Card.Subtitle mb="2" text="muted">{item.facilidades}</Card.Subtitle>
+          <Card.Text>Alguna explicación sobre el aeropuerto.</Card.Text>
         </Card.Body>
         <Card.Footer>
           <Card.Link href="#">Card Link</Card.Link>

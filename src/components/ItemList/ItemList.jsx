@@ -1,13 +1,16 @@
 import Item from "../Item/Item";
+import { Container } from "bootstrap-4-react";
 
 
-const ItemList = () => {
+const ItemList = ({items}) => {
 
     return (
-        <div>
-            <h1>ItemList</h1>
-            <Item/>
-        </div>
+        <Container className="m-3">
+            {items.map(item => {
+                return(
+                <Item key={item.id} item={item} /> )
+            })}
+        </Container>
     )
 }
 
