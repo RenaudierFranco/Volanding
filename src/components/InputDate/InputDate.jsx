@@ -24,7 +24,7 @@ S
                             <Form.Input type="text" placeholder="Destino" />
                         </InputGroup>
                         </Col>
-                    </Row>
+                    </Row>x
 
                     <Row>
                         <Col></Col>
