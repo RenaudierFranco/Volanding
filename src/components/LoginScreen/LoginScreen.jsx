@@ -1,22 +1,20 @@
+import { Button } from 'bootstrap-4-react'
+
+
 const LoginScreen = () => {
-
     return(
-        <div class="container text-center login-back-img"style={{ 
-        backgroundImage: `url("https://images.hdqwalls.com/download/ultimate-freedom-4k-5n-1920x1080.jpg")`
-        }}>
-            <div class="row align-items-end">
-                <button type="button" class="btn btn-outline-info">Log In</button>
-            </div>
+        <container>
+            <row></row>
 
-            <div class="row align-items-end">
-                <button type="button" class="btn btn-outline-info">Sign Up</button>
-            </div>
+            <row>
+                <colum><Button info outline>Log In</Button></colum>
+                <colum><Button info outline>Sign Up</Button></colum>
+                <colum><Button info outline>Skip</Button></colum>
+            </row>
 
-            <div class="row align-items-end">
-                <button type="button" class="btn btn-outline-info">Skip</button>
-            </div>
-        </div>   
+            <row></row>
+        </container>
     )
 }
 
-export default LoginScreen;
+export default LoginScreen
