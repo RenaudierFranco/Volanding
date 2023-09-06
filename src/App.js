@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar/>
+
         <Routes>
           <Route exact path="LoginScreen" element={<LoginScreen/>} />
           <Route exact path="FormLogin" element={<FormLogin/>} />
@@ -27,4 +27,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
