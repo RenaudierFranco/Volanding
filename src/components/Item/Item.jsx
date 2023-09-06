@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { Card } from 'bootstrap-4-react';
 
 const Item = () => {
