@@ -1,69 +1,68 @@
-import { Form, Button } from 'bootstrap-4-react'
+import { Form, Button } from 'bootstrap-4-react';
+import { useState } from 'react';
 
 const FormRegister = () => {
+
+  const [form, setForm] = useState()
+
+  const getForm = (e) => {
+    console.log('Form!')
+  }
+
     return(
-        <Form>
+      <Form>
         <Form.Group>
-            <label htmlFor="exampleInputUser1">User</label>
-            <Form.Input type="user" id="exampleInputUser" placeholder="User" />
+            <label htmlFor="exampleInputName1">Nombre</label>
+            <Form.Input type="text" name="name" id="exampleInputName" placeholder="User" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <Form.Input type="password" id="exampleInputPassword1" placeholder="Password" />
+            <label htmlFor="exampleInputLastName1">Apellido</label>
+            <Form.Input type="text" id="exampleInputLastName" placeholder="User" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <Form.Input type="email" id="exampleInputEmail1" placeholder="Email" />
+          <label htmlFor="exampleInputPassword1">Contraseña</label>
+          <Form.Input type="password" id="exampleInputPassword1" placeholder="Password" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputDNI1">DNI</label>
-          <Form.Input type="number" id="exampleInputEmail1" placeholder="DNI" />
+          <label htmlFor="exampleInputEmail1">correo electrónico</label>
+          <Form.Input type="email" id="exampleInputEmail1" placeholder="Email" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputPasaport1">Pasaport</label>
-          <Form.Input type="number" id="exampleInputPasaport1" placeholder="Pasaport" />
+          <label htmlFor="exampleInputPassport1">DNI / Pasaporte</label>
+          <Form.Input type="number" id="exampleInpPassport" placeholder="DNI" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputBirthDate1">Birth Date </label>
-          <Form.Input type="Date" id="exampleInputBirthDtae1" placeholder="Birth Date" />
+          <label htmlFor="exampleInputBirthDate1">Fecha de nacimiento</label>
+          <Form.Input type="date" id="exampleInputBirthDate1" placeholder="Birth Date" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputNacionality1">Nacionality</label>
-          <Form.CustomSelect sm mb="3">
-          <option selected>Select your country</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </Form.CustomSelect>
+          <label htmlFor="exampleInputNacionality1">Nacionalidad</label>
+          <Form.Input type="text" id="exampleInputNacionality1" placeholder="Nacionalidad" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-          <label htmlFor="exampleInputPhoneNumber1">Phone Number</label>
-          <Form.Input type="number" id="exampleInputPhoneNumber1" placeholder="Phone Number" />
+          <label htmlFor="exampleInputPhoneNumber1">Número telefónico</label>
+          <Form.Input type="number" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
-            <label htmlFor="exampleInputGender1">Select your gender</label>
-            <Form.CustomRadio id="customRadio1" name="customRadio">
-                Masculine
+            <label htmlFor="exampleInputGender1">Seleccione su género</label>
+            <Form.CustomRadio id="customRadio1" name="customRadio" onChange={getForm}>
+                Masculino
             </Form.CustomRadio>
 
-            <Form.CustomRadio id="customRadio2" name="customRadio">
-                Female
-            </Form.CustomRadio>
-
-            <Form.CustomRadio id="customRadio3" name="customRadio" mb="3">
-                Other
+            <Form.CustomRadio id="customRadio2" name="customRadio" onChange={getForm}>
+                Femenino
             </Form.CustomRadio>
         </Form.Group>
 
-        <Button primary type="submit">Submit</Button>
+        <Button primary type="submit">Enviar</Button>
       </Form>
     )
 }

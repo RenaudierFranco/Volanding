@@ -3,6 +3,7 @@ import ItemList from "../ItemList/ItemList";
 import NavBar from "../NavBar/NavBar";
 import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from 'firebase/firestore'
+import { Container } from 'bootstrap-4-react';
 
 
 
@@ -20,12 +21,14 @@ useEffect(()=> {
           console.log(items)
     })
 
-}, [])
+}, [items])
 
     return (
         <div>
             <NavBar/>
-            <ItemList items={items}/>
+            <Container className="m-3 d-flex d-inline">
+                    <ItemList items={items}/>
+            </Container>          
         </div>
         
     )
