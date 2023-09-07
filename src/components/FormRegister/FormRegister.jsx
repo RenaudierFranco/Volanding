@@ -33,7 +33,7 @@ const FormRegister = () => {
 
         <Form.Group>
           <label htmlFor="exampleInputPassport1">DNI / Pasaporte</label>
-          <Form.Input type="number" id="exampleInpPassport" placeholder="DNI" onChange={getForm}/>
+          <Form.Input type="text" id="exampleInpPassport" placeholder="DNI" onChange={getForm}/>
         </Form.Group>
 
         <Form.Group>
