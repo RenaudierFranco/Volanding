@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
-// Logica
+
 
 const ItemDetailContainer = () => {
 
