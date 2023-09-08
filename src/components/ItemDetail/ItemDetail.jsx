@@ -1,4 +1,5 @@
 import { Card } from 'bootstrap-4-react';
+import ItemCount from '../ItemCount/ItemCount';
 
 const ItemDetail = ({item}) => {
 
@@ -12,6 +13,7 @@ const ItemDetail = ({item}) => {
           <Card.Subtitle mb="2" text="muted">Salida: 08-09-2023</Card.Subtitle>
           <Card.Subtitle mb="2" text="muted">Horario: 12:30 am</Card.Subtitle>
           <Card.Text>Valor: U$S 100,00</Card.Text>
+          <ItemCount/>
           <Card.Subtitle mb="2" text="muted">Avión: C208B</Card.Subtitle>
         <Card.Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSidb5ujE1GdPF_wHDHXaiEsXcVWdYUFWQgcA&usqp=CAU"}/>
         </Card.Body>

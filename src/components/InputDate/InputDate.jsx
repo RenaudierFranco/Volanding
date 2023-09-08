@@ -7,8 +7,8 @@ const InputDate = () => {
     return (
 
             <div>
-S
-                <Card>
+
+                <Card className="m-5">
                 <Card.Body>
                 <Container>
                     <Row>
@@ -24,7 +24,7 @@ S
                             <Form.Input type="text" placeholder="Destino" />
                         </InputGroup>
                         </Col>
-                    </Row>x
+                    </Row>
 
                     <Row>
                         <Col></Col>

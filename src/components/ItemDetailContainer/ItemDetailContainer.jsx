@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
+import NavBar from "../NavBar/NavBar";
 
 
 const ItemDetailContainer = () => {
@@ -25,7 +26,7 @@ const ItemDetailContainer = () => {
 
     return (
         <>
-        
+            <NavBar/>
             {item.id === undefined?
             <button className="btn btn-primary" type="button" disabled>
                 <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
