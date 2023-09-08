@@ -4,6 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from 'firebase/firestore'
 import { Container } from 'bootstrap-4-react';
+import InputDate from "../InputDate/InputDate";
 
 
 
@@ -26,6 +27,7 @@ useEffect(()=> {
     return (
         <div>
             <NavBar/>
+            <InputDate/>
             <Container className="m-3 d-flex d-inline">
                     <ItemList items={items}/>
             </Container>          
