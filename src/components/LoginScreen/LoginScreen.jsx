@@ -7,9 +7,9 @@ const LoginScreen = () => {
 
         <Container className=" d-flex flex-column text-center align-items-center" style={{"height" : "100%", "width" : "auto"}}>
 
-            <Card.Body style={{"margin-top" : "auto"}}>
+            <Card.Body style={{"marginTop" : "auto"}}>
                 <Card.Body className="m-3">
-                <Card.Title className="text-center" style={{"color" : "#000000", "font-size" : "2em"}}>Volanding</Card.Title>
+                <Card.Title className="text-center" style={{"color" : "#000000", "fontSize" : "2em"}}>Volanding</Card.Title>
                 </Card.Body>
                 <Card.Body className="d-flex flex-column mb-3">
                     <Card.Text className="text-center">

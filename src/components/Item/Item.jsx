@@ -1,19 +1,22 @@
 import { Card } from 'bootstrap-4-react';
+import { Button } from 'bootstrap-4-react/lib/components';
+import { NavLink } from 'react-router-dom';
 
 const Item = ({item}) => {
 
     return (
-        <Card style={{ width: '18rem' }} className="m-3">
-        <Card.Header>Feature</Card.Header>
+      <Card style={{ width: '18rem' }}>
+        <Card.Header>Origen - Destino</Card.Header>
         <Card.Image src={item.img} />
         <Card.Body>
-          <Card.Title>{item.ciudad}</Card.Title>
-          <Card.Subtitle mb="2" text="muted">{item.facilidades}</Card.Subtitle>
-          <Card.Text>Alguna explicación sobre el aeropuerto.</Card.Text>
+            <Card.Title>Fecha</Card.Title>
+            <Card.Title>Horario</Card.Title>
+            <Card.Title>Duración</Card.Title>
+            <Card.Subtitle mb="2" text="muted">U$S 100.00</Card.Subtitle>
+            <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
         </Card.Body>
         <Card.Footer>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+            <Button><NavLink to='/item/D4o11AYWlHzD6zx1TuTs'>Ver detalle</NavLink></Button>
         </Card.Footer>
       </Card>
     )

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
@@ -6,29 +7,36 @@ import { db } from "../../Services/Firebase/Firebase";
 
 const ItemDetailContainer = () => {
 
-    const [items, setItems] = useState([])
+    const { itemId } = useParams();
+    const [item, setItem] = useState({});
+
 
 
     useEffect(() => {
-        getDocs(collection(db, 'Aeronave')).then((snapshot)=> {
-            const aeronaves = snapshot.docs.map(doc => {
+        getDocs(collection(db, 'Vuelo')).then((snapshot)=> {
+            const items = snapshot.docs.map(doc => {
                 return {id: doc.id, ...doc.data()}
             })
-            console.log('aeronaves', aeronaves)
-            setItems(aeronaves)
+            setItem(items.find(item => item.id === itemId))
+            console.log('item encontrado', item)
+
         })
-    }, [])  
+    }, [itemId]);  
 
     return (
+        <>
+        
+            {item.id === undefined?
+            <button className="btn btn-primary" type="button" disabled>
+                <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span role="status">Loading...</span>
+            </button>
+            :
 
-        <div>
-            {items.map((item) => {
-                return ( <ItemDetail key={item.id} item={item}/>)
-            })
+            <ItemDetail key={itemId} item={item} itemId={itemId}/>
             }
-   
-        </div>
-
+        
+        </>
     )
 }
 

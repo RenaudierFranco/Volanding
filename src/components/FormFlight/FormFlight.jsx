@@ -7,8 +7,6 @@ import { collection, addDoc } from 'firebase/firestore';
 const FormFlight = () => {
     const [form, setForm] = useState({origen:'', destino:'', horario:'', duracion:0, avion:'', lugaresDisponibles:0})
 
-    const [user, setUser] = useState({})
-
     const getForm = (e) => {
         const {name, value } = e.target
         setForm({...form, [name]: value});

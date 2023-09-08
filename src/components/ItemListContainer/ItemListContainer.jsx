@@ -12,7 +12,7 @@ const ItemListContainer = () => {
 const [items, setItems] = useState([])
 
 useEffect(()=> {
-    getDocs(collection(db, 'Destino')).then((snapshot)=>{
+    getDocs(collection(db, 'Vuelo')).then((snapshot)=>{
         const Destino = snapshot.docs.map(doc =>{
             return {id: doc.id, ...doc.data()}
           })
