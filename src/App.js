@@ -27,7 +27,7 @@ function App() {
           <Route exat path='/FormRegister' element={<FormRegister/>} /> 
           <Route exat path='/home' element={<ItemListContainer/>} />
           <Route exat path='/InputDate' element={<InputDate/>} />
-          <Route exat path='/ItemDetailContainer' element={<ItemDetailContainer/>} />
+          <Route exat path='/item/:itemId' element={<ItemDetailContainer/>} />
           <Route exat path='/FormFlight' element={<FormFlight/>} />
         </Routes>  
       </BrowserRouter>
