@@ -26,8 +26,12 @@ useEffect(()=> {
 
     return (
         <div>
-            <NavBar/>
-            <InputDate/>
+            <Container>
+                <NavBar/>
+            </Container>
+            <Container>
+                <InputDate/>
+            </Container>
             <Container className="m-3 d-flex d-inline">
                     <ItemList items={items}/>
             </Container>          
