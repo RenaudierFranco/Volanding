@@ -41,7 +41,7 @@ useEffect(()=> {
 
             <Container className="m-3 d-flex d-inline">
                 <InputDate/>
-                <ItemList items={items} style='justifycontent=end'/>
+                <ItemList items={items} Style='justifycontent=end'/>
                 <ItemList items={items}/>
                 <ItemList items={items}/>
             </Container>          
