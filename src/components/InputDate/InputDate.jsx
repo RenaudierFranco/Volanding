@@ -11,7 +11,7 @@ const InputDate = () => {
                 <Card className="m-5">
                 <Card.Body>
                 <Container>
-                    <Row>
+                    <Row className='m-4'>
                         <Col>
                             <InputGroup mb="2">
                                 <InputGroup.Prepend><InputGroup.Text>Origen</InputGroup.Text></InputGroup.Prepend>
@@ -25,20 +25,7 @@ const InputDate = () => {
                         </InputGroup>
                         </Col>
                     </Row>
-
-                    <Row>
-                        <Col></Col>
-                        <Col>
-                            <Form.CustomCheckbox id="customCheck1" m="2">
-                                Solo ida
-                            </Form.CustomCheckbox>
-                        </Col>
-                        <Col></Col>
-                    </Row>
-
-
-
-                    <Row>
+                    <Row className='m-4'>
                         <Col>
                             <InputGroup mb="2">
                                 <InputGroup.Prepend><InputGroup.Text>Fecha de partida</InputGroup.Text></InputGroup.Prepend>
@@ -55,8 +42,6 @@ const InputDate = () => {
                 </Container>
                 </Card.Body>
                 </Card>
-
-
             </div>
 
     )

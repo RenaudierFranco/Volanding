@@ -27,6 +27,7 @@ const ItemDetailContainer = () => {
     return (
         <>
             <NavBar/>
+            <div className="mt-5">
             {item.id === undefined?
             <button className="btn btn-primary" type="button" disabled>
                 <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
@@ -36,7 +37,7 @@ const ItemDetailContainer = () => {
 
             <ItemDetail key={itemId} item={item} itemId={itemId}/>
             }
-        
+            </div>
         </>
     )
 }

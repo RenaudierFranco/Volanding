@@ -5,16 +5,13 @@ import {Navbar} from 'bootstrap-4-react'
 const NavBar = () => {
   return (
     <div>
-      <Navbar light bg="dark">
+      <Navbar light bg="light">
         <nav class="navbar bg-body-tertiary fixed-top">
         <div class="container-fluid">
-
           <a class="navbar-brand" href="#">
             <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="30" height="30" style={{"borderRadius" : "50%"}} className="mr-3 d-inline-block align-text-top"></img>
             Volanding
           </a>
-
-
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
