@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navbar ,BImg, Nav, Collapse } from 'bootstrap-4-react'
+import {Navbar} from 'bootstrap-4-react'
 
 
 const NavBar = () => {
