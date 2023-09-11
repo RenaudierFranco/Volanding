@@ -1,4 +1,4 @@
-import { Button, Container, Col, Row } from "bootstrap-4-react/lib/components";
+import { Button, Col, Row, Card } from "bootstrap-4-react/lib/components";
 import { useState } from "react";
 
 
@@ -17,26 +17,21 @@ const ItemCount = () => {
         }
     }
 
-    return(
-        <div>
-            <Container>
-                <Row>
-                    <Col></Col>
-                    <Col>
-                        <div direction="horizontal" gap={3}>
-                            <Button variant="primary" onClick={increment}> + </Button>{' '}
-                            <span> <h1>{count}</h1></span>
-                            <Button variant="primary" onClick={decrement}> - </Button>{' '} 
-                        </div>
-                    </Col>
-                    <Col></Col>    
-                </Row> 
-            </Container>
 
-            <Container>
-                <Button variant="primary">Add to cart</Button>{' '}
-            </Container>
-        </div>
+    return(
+
+        <Card text="center" h="100" w="100" shadow="sm" p="3" mb="5" bg="light">
+        <Card.Header>Selecconá tus asientos💺</Card.Header>
+        <Card.Body>
+            <Row className="m-2">
+                <Col className="text-center"><Button dark outline onClick={increment}> + </Button>{' '}</Col>
+                <Col className="text-center"><span> <h1>{count}</h1></span></Col>
+                <Col className="text-center"><Button dark outline onClick={decrement}> - </Button>{' '} </Col>    
+            </Row> 
+          <Button primary className="w-100">Reservar</Button>
+        </Card.Body>
+        <Card.Footer text="muted">Estás a un paso!</Card.Footer>
+      </Card>
     )
 }
 

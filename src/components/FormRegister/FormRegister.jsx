@@ -32,7 +32,7 @@ const FormRegister = () => {
         
         <Jumbotron>
 
-        <Alert className='w-100 mb-5' success>Acá inicia tu viaje 🏖️</Alert>
+        <Alert className='w-100 mb-5' primary>Acá inicia tu viaje 🏖️</Alert>
     
         <Progress mb="5">
         <Progress.Bar striped animated min="0" max="100" now="80" bg='success'/><p>🚀</p>
@@ -106,7 +106,7 @@ const FormRegister = () => {
                 </Form.Group>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <Button className="mt-3" success outline type="submit" onClick={createUser} >Enviar</Button>
+                <Button className="mt-3" primary outline type="submit" onClick={createUser} >Enviar</Button>
               </Col>
             </Row>
           </Form>

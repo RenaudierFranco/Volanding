@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const Item = ({item}) => {
 
     return (
-      <Card style={{ width: '18rem' }}>
+      <Card text="center" w="50" h="100" shadow p="3" mb="5" bg="light" rounded>
         <Card.Header>Origen - Destino</Card.Header>
         <Card.Image src={item.img} />
         <Card.Body>

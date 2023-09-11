@@ -16,8 +16,8 @@ const FormLogin = () => {
             <label htmlFor="exampleInputPassword1">Contraseña</label>
             <Form.Input type="password" id="exampleInputPassword1" placeholder="Password" />
           </Form.Group>
-          <Button className="m-3" success outline type="submit">Iniciar sesión</Button>
-          <Button className="m-3" success outline type="submit">Nuevo usuario</Button>
+          <Button className="m-3" primary outline type="submit">Iniciar sesión</Button>
+          <Button className="m-3" primary outline type="submit">Nuevo usuario</Button>
         </Form>
         <Card.Text className="text-center mt-3" style={{"color" : "#000000"}}><BSmall text="">Llegá donde querés estar, siempre Ⓡ</BSmall></Card.Text>
       </Jumbotron>
