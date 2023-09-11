@@ -1,4 +1,4 @@
-import { Form, Button, Jumbotron, Card, BSmall, Alert } from 'bootstrap-4-react'
+import { Form, Button, Jumbotron, Card, BSmall } from 'bootstrap-4-react'
 import { Container } from 'bootstrap-4-react/lib/components/layout'
 
 const FormLogin = () => {
@@ -6,7 +6,7 @@ const FormLogin = () => {
   return(
     <Container className=" d-flex flex-column text-center align-items-center mt-5">
       
-      <Jumbotron>
+      <Jumbotron text="center" w="50" h="100" shadow p="3" mb="5" bg="light" rounded>
         <Form className="">
           <Form.Group>
             <label htmlFor="exampleInputEmail1">Email</label>

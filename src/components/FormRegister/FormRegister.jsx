@@ -9,8 +9,6 @@ const FormRegister = () => {
   const [form, setForm] = useState({nombre:'', apellido:'', contrasena:'', mail:'', 
     pasaporte:'', fechaNacimiento:'', nacionalidad:'', celular:0, genero:''})
 
-  const [user, setUser] = useState({})
-
   const getForm = (e) => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
@@ -27,15 +25,23 @@ const FormRegister = () => {
     addDoc(clientCollection, newClient)
   }
 
+  const [progressValue, setProgressValue] = useState(0);
+  const incrementProgress = () => {
+    if (progressValue < 100) {
+      setProgressValue(progressValue + 10);
+    }
+  };
+
+
     return(
       <Container className=" d-flex flex-column text-center align-items-center mt-5" style={{"height" : "vh100", "width" : "auto"}}>
         
-        <Jumbotron>
+        <Jumbotron text="center" w="75" h="100" shadow p="3" mb="5" bg="light" rounded>
 
         <Alert className='w-100 mb-5' primary>Acá inicia tu viaje 🏖️</Alert>
     
         <Progress mb="5">
-        <Progress.Bar striped animated min="0" max="100" now="80" bg='success'/><p>🚀</p>
+        <Progress.Bar striped animated min="0" max="100" now={progressValue} bg='success'/><p>🚀</p>
         </Progress>
 
           <Form className="w-100">
@@ -43,7 +49,7 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                     <label htmlFor="exampleInputName1">Nombre</label>
-                    <Form.Input type="text" name="nombre" id="exampleInputName" placeholder="Nombre" onChange={getForm}/>
+                    <Form.Input type="text" name="nombre" id="exampleInputName" placeholder="Nombre" onChange={(e) => {getForm(e); incrementProgress();}}/>
                 </Form.Group>
               </Col>
               <Col>

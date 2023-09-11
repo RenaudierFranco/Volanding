@@ -1,5 +1,4 @@
 import Item from "../Item/Item";
-import { Container } from "bootstrap-4-react";
 
 
 const ItemList = ({items}) => {

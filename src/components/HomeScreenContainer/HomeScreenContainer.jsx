@@ -1,6 +1,5 @@
 import NavBar from "../NavBar/NavBar";
-import { 
-Container, 
+import {  
 Row, 
 Col, 
 Carousel, 
@@ -15,7 +14,7 @@ const HomeScreenContainer = () => {
         <>
             <NavBar/>
         
-            <Carousel w="100" id="carouselExampleIndicators">
+            <Carousel w="100" id="carouselExampleIndicators" text="center" h="50" shadow p="3" mb="5" bg="light" rounded>
                 <Carousel.Indicators>
                 <Carousel.Indicator target="#carouselExampleIndicators" to="0" active />
                 <Carousel.Indicator target="#carouselExampleIndicators" to="1" />
