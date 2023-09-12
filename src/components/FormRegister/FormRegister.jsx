@@ -3,21 +3,16 @@ import { useState } from 'react';
 import { db } from '../../Services/Firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
+import React from 'react';
 
 
 const FormRegister = () => {
   
-  const navigate = useNavigate();  
-  const handleNavigate = () => {
+  const navigate = useNavigate();
+  const redirect = () => {
     navigate('/FormLogin');
   };
-
-  const handleButtonClick = () => {
-    createUser();
-    handleNavigate();
-  };
-
+    
   const [form, setForm] = useState({nombre:'', apellido:'', contrasena:'', mail:'', 
     pasaporte:'', fechaNacimiento:'', nacionalidad:'', celular:'', genero:''})
 
@@ -180,7 +175,8 @@ const FormRegister = () => {
                 </Form.Group>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <Button className="mt-3" primary outline type="submit" onClick={handleButtonClick}>Enviar</Button>
+                <Button className="mt-3" primary outline type="submit" onClick={createUser}>Enviar</Button>
+                <Button className="mt-3 ml-5" primary outline type="submit" onClick={redirect}>Iniciar sesión</Button>              
               </Col>
             </Row>
           </Form>
