@@ -38,16 +38,12 @@ const HomeScreenContainer = () => {
                 <Carousel.Next.Icon />
                 </Carousel.Next>
             </Carousel>
-
-            <Row>
-                <Col col="sm-4" >
-                        <InputDate/>
-                </Col>
-                <Col col="sm-8">
-                        <ItemListContainer/>
-                </Col>
+            <Row className="d-flex justify-content-center">
+                <InputDate/>
             </Row>
-
+            <Row className="m-3">
+                <ItemListContainer/> 
+            </Row>
         </>
     )
 }

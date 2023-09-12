@@ -9,7 +9,7 @@ const ItemListContainer = () => {
 const [items, setItems] = useState([])
 
 useEffect(()=> {
-    getDocs(collection(db, 'Vuelo')).then((snapshot)=>{
+    getDocs(collection(db, 'flight')).then((snapshot)=>{
         const Destino = snapshot.docs.map(doc =>{
             return {id: doc.id, ...doc.data()}
           })
@@ -20,14 +20,19 @@ useEffect(()=> {
 
 }, [items])
 
+console.log('iteeems', items)
+
     return (
         <>
-            {
-                items === undefined ?
-                <h1>Cargando contenido...</h1>
-                :
-                <ItemList items={items}/>
-            }
+        {items.length == 0?
+        <div class="d-flex justify-content-center mb-5">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        :
+        <ItemList items={items}/>
+        }
         </>
     )
 }
