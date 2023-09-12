@@ -21,7 +21,7 @@ const FormRegister = () => {
 
     const newClient = form
 
-    const clientCollection = collection(db, 'Cliente')
+    const clientCollection = collection(db, 'user')
     addDoc(clientCollection, newClient)
   }
 
