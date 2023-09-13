@@ -3,31 +3,29 @@ import ItemList from "../ItemList/ItemList";
 import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from 'firebase/firestore'
 
+const ItemListContainer = ({data}) => {
 
-const ItemListContainer = () => {
-
-const [items, setItems] = useState([])
+const [items, setItems] = useState([]);
 
 useEffect(()=> {
     getDocs(collection(db, 'flight')).then((snapshot)=>{
-        const Destino = snapshot.docs.map(doc =>{
+        const docs = snapshot.docs.map(doc =>{
             return {id: doc.id, ...doc.data()}
           })
-          console.log(`Productos Firebase: ${Destino}`)
-          setItems(Destino)
-          console.log(items)
+          if (data === undefined){
+            setItems(docs)
+          } else {
+            setItems(data)
+          }
     })
-
-}, [items])
-
-console.log('iteeems', items)
+}, [data])
 
     return (
         <>
-        {items.length == 0?
-        <div class="d-flex justify-content-center mb-5">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+        {items.length === 0?
+        <div className="d-flex justify-content-center mb-5">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
             </div>
         </div>
         :

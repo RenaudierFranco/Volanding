@@ -11,15 +11,16 @@ const ItemDetailContainer = () => {
     const { itemId } = useParams();
     const [item, setItem] = useState({});
 
-
-
     useEffect(() => {
-        getDocs(collection(db, 'Vuelo')).then((snapshot)=> {
+        getDocs(collection(db, 'flight')).then((snapshot)=> {
             const items = snapshot.docs.map(doc => {
                 return {id: doc.id, ...doc.data()}
             })
-            setItem(items.find(item => item.id === itemId))
-            console.log('item encontrado', item)
+            const findItem = items.find(item => item.id === itemId)
+            console.log(findItem);
+            if (findItem){
+                setItem(findItem)
+            }
 
         })
     }, [itemId]);  

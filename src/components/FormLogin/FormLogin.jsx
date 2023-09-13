@@ -35,13 +35,12 @@ const FormLogin = () => {
   }
 
   return(
-    <Container className=" d-flex flex-column text-center align-items-center mt-5">
-      
-      <Jumbotron text="center" w="50" h="100" shadow p="3" mb="5" bg="light" rounded>
+    <Container className=" d-flex flex-column text-center align-items-center" w="100">
+      <Jumbotron text="center" h="100" shadow p="3" mb="5" bg="light" rounded>
         <Form className="">
           <Form.Group>
             <label htmlFor="exampleInputEmail1">Email</label>
-            <Form.Input name="email" type="email" id="exampleInputEmail1" placeholder="Enter email" onChange={getForm} />
+            <Form.Input name="email" type="email" id="exampleInputEmail1" placeholder="Enter email" onChange={getForm}/>
           </Form.Group>
           <Form.Group>
             <label htmlFor="exampleInputPassword1">Contraseña</label>

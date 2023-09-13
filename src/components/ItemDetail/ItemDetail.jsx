@@ -8,7 +8,8 @@ const ItemDetail = ({item}) => {
       <>
       <Card w="50" shadow p="3" mb="5" bg="light" rounded>
         <Card.Header>El detalle de tu vuelo✈️</Card.Header>
-        <Card.Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN4w4bZB7xBsHiZkFBNdZCyxCqvs9cC0QVQA&usqp=CAU"}/>
+        <Card.Image 
+        src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN4w4bZB7xBsHiZkFBNdZCyxCqvs9cC0QVQA&usqp=CAU"}/>
             <Card.Body>
               <Row>
                 <Col>

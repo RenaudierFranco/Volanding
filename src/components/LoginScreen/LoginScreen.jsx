@@ -20,7 +20,7 @@ const LoginScreen = () => {
                 </Card.Body>
                 <Card.Body className="d-flex flex-column mb-3">
                     <Card.Text className="text-center">
-                        <NavLink to='/FormLogin'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
+                        <NavLink to='/FormLoginContainer'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
                     </Card.Text>
                     <Card.Text className="text-center">
                         <NavLink to='/FormRegister'><Button primary style={{"width" : "300px"}}>Sign up</Button></NavLink>
