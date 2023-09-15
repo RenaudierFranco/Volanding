@@ -1,5 +1,5 @@
-import React from 'react'
-import {Navbar} from 'bootstrap-4-react'
+import {React} from 'react'
+import {Navbar, Modal, Button} from 'bootstrap-4-react'
 import { NavLink } from 'react-router-dom';
 
 
@@ -48,6 +48,31 @@ const NavBar = () => {
 
                 <li className="nav-item">
                   <a className="nav-link" href="#">Iniciar Sesion</a>
+                </li>
+
+                <li className="nav-item">
+                  <div>
+                    <Button primary data-toggle="modal" data-target="#exampleModal">Mis Vuelos</Button>
+                    <Modal id="exampleModal" fade>
+                      <Modal.Dialog centered>
+                        <Modal.Content>
+                          <Modal.Header>
+                            <Modal.Title>Estos son tus vuelos</Modal.Title>
+                            <Modal.Close>
+                              <span aria-hidden="true">&times;</span>
+                            </Modal.Close>
+                          </Modal.Header>
+                          <Modal.Body>
+                            Modal body text goes here.
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button secondary data-dismiss="modal">Close</Button>
+                            <Button primary>Save changes</Button>
+                          </Modal.Footer>
+                        </Modal.Content>
+                      </Modal.Dialog>
+                    </Modal>
+                  </div>
                 </li>
               </ul>
             </div>

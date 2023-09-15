@@ -1,9 +1,8 @@
 import { Form, Button, Container, Row, Col, Alert, Progress, Jumbotron } from 'bootstrap-4-react';
-import { useState } from 'react';
 import { db } from '../../Services/Firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 const FormRegister = () => {
@@ -12,7 +11,7 @@ const FormRegister = () => {
   const redirect = () => {
     navigate('/FormLogin');
   };
-    
+  
   const [form, setForm] = useState({nombre:'', apellido:'', contrasena:'', mail:'', 
     pasaporte:'', fechaNacimiento:'', nacionalidad:'', celular:'', genero:''})
 
@@ -20,72 +19,45 @@ const FormRegister = () => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
 
+    incrementProgress();
     console.log(form)
   }
 
   const createUser = (e) => {
     e.preventDefault()
 
+    console.log(form)
     const newClient = form
 
     const clientCollection = collection(db, 'user')
     addDoc(clientCollection, newClient)
+
+
   }
 
 
   const [progressValue, setProgressValue] = useState(0);
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [mail, setMail] = useState('');
-  const [contrasena, setContrasena] = useState('');
-  const [pasaporte, setPasaporte] = useState('');
-  const [nacionalidad, setNacionalidad] = useState('');
-  const [fechaNacimiento, setNaciemiento] = useState('');
-  const [genero, setGenero] = useState('');
-  const [celular, setCelular] = useState('');
-
-
   const incrementProgress = () => {
     let newProgressValue = 0;
 
-    if (nombre) {
-      newProgressValue += 11.1;
-    }
+    for (let dato in form) {
+      if (form.hasOwnProperty(dato)) {
+        console.log('dato', dato);
+        console.log('form', form);
 
-    if (apellido) {
-      newProgressValue += 11.1;
-    }
-
-    if (mail) {
-      newProgressValue += 11.1;
-    }
-
-    if (contrasena) {
-      newProgressValue += 11.1;
-    }
-
-    if (pasaporte) {
-      newProgressValue += 11.1;
-    }
-
-    if (nacionalidad) {
-      newProgressValue += 11.1;
-    }
-
-    if (fechaNacimiento) {
-      newProgressValue += 11.1;
-    }
-
-    if (genero) {
-      newProgressValue += 11.1;
-    }
-
-    if (celular) {
-      newProgressValue += 11.1;
+        if (form[dato] !== "" && typeof form[dato] === 'string' && form[dato].length === 1) {
+          newProgressValue += 11.1;
+        }
+      }
     }
 
     setProgressValue(newProgressValue);
-  };
+  }
+
+  useEffect(() => {
+    console.log('progressValue', progressValue);
+  }, [progressValue]);
+
 
     const handleBlur = (e) => {
       const { value } = e.target;
@@ -112,12 +84,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                     <label htmlFor="exampleInputName1">Nombre</label>
-                    <Form.Input type="text" name="nombre" id="exampleInputName" placeholder="Nombre" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setNombre(value); incrementProgress(); }}/>                </Form.Group>
+                    <Form.Input type="text" name="nombre" id="exampleInputName" placeholder="Nombre" onBlur={handleBlur} onChange={getForm}/>                
+                </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                     <label htmlFor="exampleInputLastName1">Apellido</label>
-                    <Form.Input type="text" name="apellido" id="exampleInputLastName" placeholder="Apellido" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setApellido(value); incrementProgress();}}/>
+                    <Form.Input type="text" name="apellido" id="exampleInputLastName" placeholder="Apellido" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -125,13 +98,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputEmail1">Correo Electrónico</label>
-                  <Form.Input type="email" name="mail" id="exampleInputEmail1" placeholder="Mail" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setMail(value); incrementProgress();}}/>
+                  <Form.Input type="email" name="mail" id="exampleInputEmail1" placeholder="Mail" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputPassword1">Contraseña</label>
-                  <Form.Input type="password" name="contrasena" id="exampleInputPassword1" placeholder="Contraseña" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setContrasena(value); incrementProgress();}}/>
+                  <Form.Input type="password" name="contrasena" id="exampleInputPassword1" placeholder="Contraseña" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -139,13 +112,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputPassport1">DNI / Pasaporte</label>
-                  <Form.Input type="string" name="pasaporte" id="exampleInpPassport" placeholder="Pasaporte" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setPasaporte(value); incrementProgress();}}/>
+                  <Form.Input type="string" name="pasaporte" id="exampleInpPassport" placeholder="Pasaporte" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputNacionality1">Nacionalidad</label>
-                  <Form.Input type="text" name="nacionalidad" id="exampleInputNacionality1" placeholder="Nacionalidad" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setNacionalidad(value); incrementProgress();}}/>
+                  <Form.Input type="text" name="nacionalidad" id="exampleInputNacionality1" placeholder="Nacionalidad" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -153,13 +126,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputBirthDate1">Fecha de nacimiento</label>
-                  <Form.Input type="date" name="fechaNacimiento" id="exampleInputBirthDate1" placeholder="Fecha de nacimiento" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setNaciemiento(value); incrementProgress();}}/>
+                  <Form.Input type="date" name="fechaNacimiento" id="exampleInputBirthDate1" placeholder="Fecha de nacimiento" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
-                  <label htmlFor="exampleInputgender1">Seleccione un genero</label>
-                  <Form.CustomSelect mb="3" name="genero" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setGenero(value); incrementProgress();}}>
+                  <label htmlFor="exampleInputgender1">Genero</label>
+                  <Form.CustomSelect mb="3" name="genero" onBlur={handleBlur} onChange={getForm}>
                     <option value="Opciones">Opciones</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
@@ -171,12 +144,11 @@ const FormRegister = () => {
               <Col>
               <Form.Group>
                   <label htmlFor="exampleInputPhoneNumber1">Número telefónico</label>
-                  <Form.Input type="string" name="celular" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={(e) => { const value = e.target.value; setCelular(value); incrementProgress();}}/>
+                  <Form.Input type="string" name="celular" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <Button className="mt-3" primary outline type="submit" onClick={createUser}>Enviar</Button>
-                <Button className="mt-3 ml-5" primary outline type="submit" onClick={redirect}>Iniciar sesión</Button>              
+                <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">Enviar</Button>             
               </Col>
             </Row>
           </Form>
