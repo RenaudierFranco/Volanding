@@ -1,4 +1,4 @@
-import { Button, Col, Row, Card } from "bootstrap-4-react/lib/components";
+import { Button, Col, Row, Card, Alert } from "bootstrap-4-react/lib/components";
 import { useState } from "react";
 
 
@@ -21,16 +21,16 @@ const ItemCount = () => {
     return(
 
         <Card text="center" h="100" w="100" shadow="sm" p="3" mb="5" bg="light">
-        <Card.Header>Selecconá tus asientos💺</Card.Header>
+        <Alert primary>Selecconá tus asientos💺</Alert>
         <Card.Body>
-            <Row className="m-2">
-                <Col className="text-center"><Button dark outline onClick={increment}> + </Button>{' '}</Col>
-                <Col className="text-center"><span> <h1>{count}</h1></span></Col>
-                <Col className="text-center"><Button dark outline onClick={decrement}> - </Button>{' '} </Col>    
+            <Row mt="5">
+                <Col col="4" className="text-center"><Button dark outline onClick={increment}> + </Button>{' '}</Col>
+                <Col col="4" className="text-center"><span> <h1>{count}</h1></span></Col>
+                <Col col="4" className="text-center"><Button dark outline onClick={decrement}> - </Button>{' '} </Col>    
             </Row> 
           <Button primary className="w-100">Reservar</Button>
         </Card.Body>
-        <Card.Footer text="muted">Estás a un paso!</Card.Footer>
+        <Alert dark text="muted">Estás a un paso!</Alert>
       </Card>
     )
 }
