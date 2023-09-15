@@ -1,8 +1,7 @@
-import React from 'react'
 import {Navbar} from 'bootstrap-4-react'
 import { NavLink } from 'react-router-dom';
-import FormLogin from '../FormLogin/FormLogin';
-
+import { useState } from 'react';
+import React, { Component } from 'react';
 
 
 const NavBar = () => {
@@ -49,15 +48,9 @@ const NavBar = () => {
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
-                {
-                  // Renderizado condicional del boton Mis Vuelos
-                  log?
-                  <li className="nav-item">
-                    <a className="nav-link" href="/home">Mis vuelos</a>
-                  </li>
-                :
-                  <></>
-                }
+                <li className="nav-item">
+                  <a className="nav-link" href="/MyFlights">Mis vuelos(No funciona el redirect)</a>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Sobre Nosotros</a>
                 </li>

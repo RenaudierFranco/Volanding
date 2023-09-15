@@ -9,7 +9,7 @@ const FormRegister = () => {
   
   const navigate = useNavigate();
   const redirect = () => {
-    navigate('/FormLogin');
+    navigate('/FormLoginContainer');
   };
   
   const [form, setForm] = useState({nombre:'', apellido:'', contrasena:'', mail:'', 
@@ -32,7 +32,7 @@ const FormRegister = () => {
     const clientCollection = collection(db, 'user')
     addDoc(clientCollection, newClient)
 
-
+    redirect()
   }
 
 
@@ -45,7 +45,7 @@ const FormRegister = () => {
         console.log('dato', dato);
         console.log('form', form);
 
-        if (form[dato] !== "" && typeof form[dato] === 'string' && form[dato].length === 1) {
+        if (form[dato] !== "" && typeof form[dato] === 'string') {
           newProgressValue += 11.1;
         }
       }
@@ -70,7 +70,7 @@ const FormRegister = () => {
 
     return(
       <Container className=" d-flex flex-column text-center align-items-center mt-5" style={{
-        "align-self": "center", "max-width":"650px", "margin-right":"auto", "margin-left":"auto"
+        "alignSelf": "center", "maxWidth":"650px", "marginRight":"auto", "marginLeft":"auto"
         }}>
         
         <Jumbotron text="center" w="100" h="100" shadow p="3" mb="5" bg="light" rounded>
@@ -133,11 +133,8 @@ const FormRegister = () => {
               </Col>
               <Col>
                 <Form.Group>
-                  <label htmlFor="exampleInputgender1">Seleccione un genero</label>
-                  <Form.CustomSelect mb="3" name="genero" onChange={getForm}>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                  </Form.CustomSelect>
+                  <label htmlFor="exampleInputgender1">Genero</label>
+                  <Form.Input type="string" name="genero" id="exampleInputGender1" placeholder="Genero" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -149,7 +146,7 @@ const FormRegister = () => {
                 </Form.Group>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">Enviar</Button>             
+                <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal" >Enviar</Button>             
               </Col>
             </Row>
           </Form>
