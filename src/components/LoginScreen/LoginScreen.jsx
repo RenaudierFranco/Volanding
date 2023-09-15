@@ -16,12 +16,12 @@ const LoginScreen = () => {
           }}>
             
             <Card.Body style= {{"marginTop" : "10%"}}>
-                <Card.Body className="m-3">
-                <Card.Title className="text-center" style={{"color" : "#000000", "fontSize" : "2em"}}>Volanding</Card.Title>
-                </Card.Body>
                 <Card.Body className="d-flex flex-column mb-3">
+                    <Card.Title className="text-center" style={{"color" : "#000000", "fontSize" : "2em"}}>
+                        <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="100" height="100" style={{"borderRadius" : "35%"}} className="d-inline-block"/>
+                    </Card.Title>
                     <Card.Text className="text-center">
-                        <NavLink to='/FormLogin'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
+                        <NavLink to='/FormLoginContainer'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
                     </Card.Text>
                     <Card.Text className="text-center">
                         <NavLink to='/FormRegister'><Button primary style={{"width" : "300px"}}>Sign up</Button></NavLink>

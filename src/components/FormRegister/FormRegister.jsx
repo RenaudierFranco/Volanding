@@ -69,9 +69,11 @@ const FormRegister = () => {
 
 
     return(
-      <Container className=" d-flex flex-column text-center align-items-center mt-5" style={{"height" : "vh100", "width" : "auto"}}>
+      <Container className=" d-flex flex-column text-center align-items-center mt-5" style={{
+        "align-self": "center", "max-width":"650px", "margin-right":"auto", "margin-left":"auto"
+        }}>
         
-        <Jumbotron text="center" w="75" h="100" shadow p="3" mb="5" bg="light" rounded>
+        <Jumbotron text="center" w="100" h="100" shadow p="3" mb="5" bg="light" rounded>
 
         <Alert className='w-100 mb-5' primary>Acá inicia tu viaje 🏖️</Alert>
     
@@ -131,9 +133,8 @@ const FormRegister = () => {
               </Col>
               <Col>
                 <Form.Group>
-                  <label htmlFor="exampleInputgender1">Genero</label>
-                  <Form.CustomSelect mb="3" name="genero" onBlur={handleBlur} onChange={getForm}>
-                    <option value="Opciones">Opciones</option>
+                  <label htmlFor="exampleInputgender1">Seleccione un genero</label>
+                  <Form.CustomSelect mb="3" name="genero" onChange={getForm}>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
                   </Form.CustomSelect>

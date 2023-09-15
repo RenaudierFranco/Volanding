@@ -1,11 +1,27 @@
-import {React} from 'react'
-import {Navbar, Modal, Button} from 'bootstrap-4-react'
+import React from 'react'
+import {Navbar} from 'bootstrap-4-react'
 import { NavLink } from 'react-router-dom';
+import FormLogin from '../FormLogin/FormLogin';
+
 
 
 const NavBar = () => {
+
+  const [log, setLog] = useState(true);
+  const [logForm, setLogForm] = useState(false);
+
+  const logIn = () => {
+    logForm?
+      setLogForm(false)
+    :
+      setLogForm(true)
+  }
+
+  const logOut = () => {
+    setLog(false)
+  }
+
   return (
-    <div>
       <Navbar shadow p="3" mb="5" bg="light" rounded>
         <nav className="navbar bg-body-tertiary fixed-top">
         <div className="container-fluid">
@@ -31,15 +47,22 @@ const NavBar = () => {
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
-
+                {
+                  // Renderizado condicional del boton Mis Vuelos
+                  log?
+                  <li className="nav-item">
+                    <a className="nav-link" href="/home">Mis vuelos</a>
+                  </li>
+                :
+                  <></>
+                }
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Sobre Nosotros</a>
+                  <a className="nav-link" href="/home">Sobre Nosotros</a>
                 </li>
-
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Contacto</a>
+                  <a className="nav-link" href="/home">Contacto</a>
                 </li>
 
                 <li className="nav-item">
@@ -49,38 +72,12 @@ const NavBar = () => {
                 <li className="nav-item">
                   <a className="nav-link" href="#">Iniciar Sesion</a>
                 </li>
-
-                <li className="nav-item">
-                  <div>
-                    <Button primary data-toggle="modal" data-target="#exampleModal">Mis Vuelos</Button>
-                    <Modal id="exampleModal" fade>
-                      <Modal.Dialog centered>
-                        <Modal.Content>
-                          <Modal.Header>
-                            <Modal.Title>Estos son tus vuelos</Modal.Title>
-                            <Modal.Close>
-                              <span aria-hidden="true">&times;</span>
-                            </Modal.Close>
-                          </Modal.Header>
-                          <Modal.Body>
-                            Modal body text goes here.
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button secondary data-dismiss="modal">Close</Button>
-                            <Button primary>Save changes</Button>
-                          </Modal.Footer>
-                        </Modal.Content>
-                      </Modal.Dialog>
-                    </Modal>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
         </div>
       </nav>
       </Navbar>
-    </div>
   )
 }
 
