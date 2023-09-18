@@ -35,7 +35,7 @@ const FormRegister = () => {
 
     return(
       <Container className=" d-flex flex-column text-center align-items-center mt-5" style={{
-        "align-self": "center", "max-width":"650px", "margin-right":"auto", "margin-left":"auto"
+        "alignSelf": "center", "maxWidth":"650px", "marginRight":"auto", "marginLeft":"auto"
         }}>
         
         <Jumbotron text="center" w="100" h="100" shadow p="3" mb="5" bg="light" rounded>

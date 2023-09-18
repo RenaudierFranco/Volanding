@@ -1,8 +1,24 @@
-import { Card, ListGroup, Alert } from 'bootstrap-4-react';
+import { Card, ListGroup, Alert, Button } from 'bootstrap-4-react';
 import ItemCount from '../ItemCount/ItemCount';
 import { Row, Col } from 'bootstrap-4-react/lib/components/layout';
+import { useState } from 'react';
 
-const ItemDetail = ({item}) => {
+const ItemDetail = ({item, orderPurchase}) => {
+
+    const [count, setCount] = useState(1);
+    const [buy, setBuy] = useState(true);
+
+    const increment = ()=> {
+      if (count < item.seat) {
+          setCount (count + 1) 
+      }
+  }
+
+    const decrement = ()=> {
+      if (count > 1) {
+      setCount (count -1) 
+      }
+  }
 
     return(
       <>
@@ -27,8 +43,18 @@ const ItemDetail = ({item}) => {
                     </ListGroup>
                   </Card>
                 </Col>
-                <Col col="12" mt="3" mb="3">              
-                  <ItemCount/>
+                <Col col="12" mt="3" mb="3">
+                  {
+                  buy?              
+                  <ItemCount increment={increment} decrement={decrement} onConfirm={orderPurchase} count={count}/>
+                  :
+                  <div className="text-center">
+                    <Alert success>¡Confirmá tu lugar!
+                    <Button success m="3" onClick={orderPurchase}>Confirmar</Button>
+                    <Button danger onClick={()=> {setBuy(true)}}>Cancelar</Button>
+                    </Alert>
+                  </div>
+                  }
                 </Col>
                 <Col col="12">
                   <Card.Subtitle  text="muted" mb="3" mt="3">Avión: {item.plane}</Card.Subtitle>
