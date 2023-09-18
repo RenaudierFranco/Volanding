@@ -1,7 +1,6 @@
 import {Navbar} from 'bootstrap-4-react'
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import React, { Component } from 'react';
 
 
 const NavBar = () => {
@@ -17,6 +16,21 @@ const NavBar = () => {
   }
 
   const logOut = () => {
+    localStorage.removeItem('log');
+    setLog(false)
+  }
+
+  const userlog = localStorage.getItem('log');
+  console.log("log", log)
+  if (userlog === true) 
+  {
+    console.log('nice', log)
+    setLog(true)
+  }
+  else if (log === null)
+  {
+    console.log('tenes vacio el tambo de leche', log)
+    localStorage.removeItem("log")
     setLog(false)
   }
 
@@ -49,7 +63,7 @@ const NavBar = () => {
                   <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/MyFlights">Mis vuelos(No funciona el redirect)</a>
+                  <a className="nav-link" href="/home">Mis Vuelos</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Sobre Nosotros</a>

@@ -16,6 +16,7 @@ const FormLogin = () => {
   const getForm = (e) => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
+      console.log('formLogin', form)
   }
 
   const logUser = (e) => {
@@ -25,8 +26,9 @@ const FormLogin = () => {
           return {id: doc.id, ...doc.data()}
       })
       setUser(users.find(user => user.email === form.email))
+      console.log('formUser', user)
       if(user.password === form.password && user.email===form.email){
-        navigate('/home');
+        //navigate('/home');
       } else {
         alert('Credenciales incorrectas')
       }

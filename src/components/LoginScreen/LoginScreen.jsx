@@ -2,7 +2,20 @@ import { Button, Card, BSmall} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 
 
-const LoginScreen = () => { 
+const LoginScreen = () => {
+
+    const log = localStorage.getItem('log')
+    console.log("log", log)
+    if (log === true)
+        {
+            console.log('user recuperado del LS', log)
+            return <NavLink to = "/home"></NavLink>
+        }
+    else if (log === null) 
+        {
+            console.log('no hay una bosta en LS', log)
+        } 
+
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
              style={{
@@ -38,4 +51,4 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen
+export default LoginScreen;
