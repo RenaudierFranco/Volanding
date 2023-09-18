@@ -2,6 +2,7 @@ import {Navbar} from 'bootstrap-4-react'
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import React, { Component } from 'react';
+import MyFlights from '../MyFlights/MyFlights';
 
 
 const NavBar = () => {
