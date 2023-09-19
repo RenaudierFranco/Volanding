@@ -1,8 +1,8 @@
-import {Navbar} from 'bootstrap-4-react'
 import React, { useState, useEffect } from 'react';
 import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import FormLogin from '../FormLogin/FormLogin';
+
 
 
 const NavBar = () => {
@@ -26,21 +26,6 @@ const NavBar = () => {
   }
 
   const logOut = () => {
-    localStorage.removeItem('log');
-    setLog(false)
-  }
-
-  const userlog = localStorage.getItem('log');
-  console.log("log", log)
-  if (userlog === true) 
-  {
-    console.log('nice', log)
-    setLog(true)
-  }
-  else if (log === null)
-  {
-    console.log('tenes vacio el tambo de leche', log)
-    localStorage.removeItem("log")
     setLog(false)
     localStorage.setItem('log', false)
     console.log('LS log false')
@@ -81,23 +66,41 @@ const NavBar = () => {
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/home">Mis Vuelos</a>
-                </li>
+                {
+                  // Renderizado condicional del boton Mis Vuelos
+                  log?
+                  <li className="nav-item">
+                    <a className="nav-link" href="/home">Mis vuelos</a>
+                  </li>
+                :
+                  <></>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Sobre Nosotros</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Contacto</a>
                 </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Cerrar Sesion</a>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Iniciar Sesion</a>
-                </li>
+                {
+                  // Renderizado condicional Login - Logout
+                  log?
+                  <li className="nav-item">
+                    <a className="nav-link" href="#" onClick={logOut}>Salir</a>
+                  </li>
+                :
+                  <li className="nav-item">
+                  <a className="nav-link" href="#" onClick={logIn}>Loguerase</a>
+                  </li>
+                }
+                {
+                  // Renderizado condicional Formulario Login
+                  logForm === true?
+                  <li className="nav-item" w="100">
+                    <FormLogin onLoginSuccess={handleLoginSuccess}/>
+                  </li>
+                  :
+                  <></>
+                }              
               </ul>
             </div>
           </div>

@@ -1,0 +1,31 @@
+{
+    "Flight": [
+        {
+            "departure":"San Fernando",
+            "arrival":"Cordoba",
+            "date":"21-11-23",
+            "plane":"C208",
+            "price":"100",
+            "seat":"8",
+            "time":"11:00"
+        },        
+        {
+            "departure":"San Fernando",
+            "arrival":"Punta del Este",
+            "date":"21-09-23",
+            "plane":"BE90",
+            "price":"200",
+            "seat":"6",
+            "time":"09:00"
+        },        
+        {
+            "departure":"Bariloche",
+            "arrival":"Parana",
+            "date":"11-09-23",
+            "plane":"LJ45",
+            "price":"300",
+            "seat":"6",
+            "time":"12:00"
+        }
+    ]
+}

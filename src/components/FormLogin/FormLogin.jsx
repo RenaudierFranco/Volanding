@@ -16,19 +16,10 @@ const FormLogin = ({ onLoginSuccess }) => {
   const getForm = (e) => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
-      console.log('formLogin', form)
   }
 
   const logUser = (e) => {
     e.preventDefault()
-    getDocs(collection(db, 'user')).then((snapshot)=> {
-      const users = snapshot.docs.map(doc => {
-          return {id: doc.id, ...doc.data()}
-      })
-      setUser(users.find(user => user.email === form.email))
-      console.log('formUser', user)
-      if(user.password === form.password && user.email===form.email){
-        //navigate('/home');
 
     getDocs(collection(db, 'user')).then((snapshot) => {
       const users = snapshot.docs.map((doc) => {
@@ -38,12 +29,12 @@ const FormLogin = ({ onLoginSuccess }) => {
       const findUser = users.find((user) => user.email === form.email);
       if (findUser) {
         setUser(findUser);
-        console.log('user logueado', findUser); // Cambiado a findUser
+        console.log('user logueado', findUser);
         if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas'); // Cambiado a 'Credenciales correctas'
+          console.log('Credenciales correctas');
           localStorage.setItem('log', true)
           navigate('/home');
-          onLoginSuccess(); // Llama a la función proporcionada para manejar el inicio de sesión exitoso
+          onLoginSuccess();
         } else {
           console.log('Credenciales incorrectas');
         }
