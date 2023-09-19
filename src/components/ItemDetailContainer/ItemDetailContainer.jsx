@@ -17,13 +17,27 @@ const ItemDetailContainer = () => {
                 return {id: doc.id, ...doc.data()}
             })
             const findItem = items.find(item => item.id === itemId)
-            console.log(findItem);
             if (findItem){
                 setItem(findItem)
             }
-
         })
-    }, [itemId]);  
+    }, [itemId]);
+    
+    const orderPurchase = (e) => {
+        e.preventDefault()
+        localStorage.getItem('user') === null ?
+        console.log('user no encontrado')
+        :
+        console.log('user encontrado');
+          //get user from localStorage const user = localStorage.getItem('user');
+          /*generar newOrder
+          const newOrder = {
+            buyer: user,
+            item: item,
+            date: new Date(),
+          }*/
+        }
+
 
     return (
         <>
@@ -36,7 +50,7 @@ const ItemDetailContainer = () => {
             </button>
             :
 
-            <ItemDetail key={itemId} item={item} itemId={itemId}/>
+            <ItemDetail key={itemId} item={item} itemId={itemId} orderPurchase={orderPurchase}/>
             }
             </div>
         </>

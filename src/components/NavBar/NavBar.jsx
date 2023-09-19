@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 import FormLogin from '../FormLogin/FormLogin';
+import { UserContext } from './UserContext';
 
 
 
 const NavBar = () => {
 
-  const [log, setLog] = useState(true);
-  const [logForm, setLogForm] = useState(false);
+  const { logIn, logOut, log, logForm, setLog} = useContext(UserContext)
 
-  const logIn = () => {
-    logForm?
-      setLogForm(false)
-    :
-      setLogForm(true)
-  }
-
-  const logOut = () => {
-    setLog(false)
-  }
+  // Leer el valor de localStorage al cargar el componente
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      setLog(true);
+    }
+  }, []);
 
   return (
       <Navbar shadow p="3" mb="5" bg="light" rounded>
