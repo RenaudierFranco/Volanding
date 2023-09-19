@@ -1,14 +1,22 @@
-import {Navbar} from 'bootstrap-4-react'
+import React, { useState, useEffect } from 'react';
+import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import React, { Component } from 'react';
-import MyFlights from '../MyFlights/MyFlights';
 
 
 const NavBar = () => {
 
-  const [log, setLog] = useState(true);
+  const [log, setLog] = useState(false);
   const [logForm, setLogForm] = useState(false);
+  
+  useEffect(() => {
+      console.log('que devuelve nav',localStorage.getItem('log'))
+      if(localStorage.getItem('log')){
+        setLogForm(false)
+        setLog(true)
+      }
+  }, []);
 
   const logIn = () => {
     logForm?
@@ -19,7 +27,16 @@ const NavBar = () => {
 
   const logOut = () => {
     setLog(false)
+    localStorage.setItem('log', false)
+    console.log('LS log false')
   }
+
+  // Función para manejar el inicio de sesión exitoso
+  const handleLoginSuccess = () => {
+    setLog(true);
+    setLogForm(false); // Oculta el formulario después del inicio de sesión exitoso
+    localStorage.setItem('log', 'true'); // Actualiza el estado de autenticación en el almacenamiento local
+  };
 
   return (
       <Navbar shadow p="3" mb="5" bg="light" rounded>
@@ -49,23 +66,41 @@ const NavBar = () => {
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/MyFlights">Mis vuelos(No funciona el redirect)</a>
-                </li>
+                {
+                  // Renderizado condicional del boton Mis Vuelos
+                  log?
+                  <li className="nav-item">
+                    <a className="nav-link" href="/home">Mis vuelos</a>
+                  </li>
+                :
+                  <></>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Sobre Nosotros</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/home">Contacto</a>
                 </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Cerrar Sesion</a>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Iniciar Sesion</a>
-                </li>
+                {
+                  // Renderizado condicional Login - Logout
+                  log?
+                  <li className="nav-item">
+                    <a className="nav-link" href="#" onClick={logOut}>Salir</a>
+                  </li>
+                :
+                  <li className="nav-item">
+                  <a className="nav-link" href="#" onClick={logIn}>Loguerase</a>
+                  </li>
+                }
+                {
+                  // Renderizado condicional Formulario Login
+                  logForm === true?
+                  <li className="nav-item" w="100">
+                    <FormLogin onLoginSuccess={handleLoginSuccess}/>
+                  </li>
+                  :
+                  <></>
+                }              
               </ul>
             </div>
           </div>
