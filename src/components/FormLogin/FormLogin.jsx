@@ -8,7 +8,11 @@ import { UserContext } from '../../Context/UserContext';
 
 const FormLogin = ( ) => {
 
+<<<<<<< HEAD
   const { handleLoginSuccess, setUser, onLoginSuccess } = useContext(UserContext)
+=======
+  const { handleLoginSuccess } = useContext(UserContext)
+>>>>>>> 14e9ec3ccf073fd25836d9edcc790f92ba158b72
   const [form, setForm] = useState({email: "", password: ""}) ;
 
   const getForm = (e) => {
@@ -25,11 +29,17 @@ const FormLogin = ( ) => {
       });
       const findUser = users.find((user) => user.email === form.email);
       if (findUser) {
+<<<<<<< HEAD
         setUser(findUser);
         console.log('user logueado', findUser); // Cambiado a findUser
         if (findUser.password === form.password && findUser.email === form.email) {
           console.log('Credenciales correctas'); // Cambiado a 'Credenciales correctas'
           onLoginSuccess(); // Llama a la función proporcionada para manejar el inicio de sesión exitoso
+=======
+        if (findUser.password === form.password && findUser.email === form.email) {
+          console.log('Credenciales correctas');
+          handleLoginSuccess()
+>>>>>>> 14e9ec3ccf073fd25836d9edcc790f92ba158b72
         } else {
           console.log('Credenciales incorrectas');
         }

@@ -3,7 +3,10 @@ import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 import FormLogin from '../FormLogin/FormLogin';
 import { UserContext } from '../../Context/UserContext';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14e9ec3ccf073fd25836d9edcc790f92ba158b72
 
 
 const NavBar = () => {
