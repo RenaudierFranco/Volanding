@@ -1,16 +1,14 @@
 import { Form, Button, Jumbotron, Card, BSmall, Alert } from 'bootstrap-4-react'
 import { Container } from 'bootstrap-4-react/lib/components/layout'
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
 
-const FormLogin = ({ onLoginSuccess }) => {
+const FormLogin = ( ) => {
 
-  const navigate = useNavigate();
-
-  const [user, setUser] = useState();
+  const { handleLoginSuccess } = useContext(UserContext)
   const [form, setForm] = useState({email: "", password: ""}) ;
 
   const getForm = (e) => {
@@ -25,16 +23,11 @@ const FormLogin = ({ onLoginSuccess }) => {
       const users = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
       });
-      console.log("datos del form", form);
       const findUser = users.find((user) => user.email === form.email);
       if (findUser) {
-        setUser(findUser);
-        console.log('user logueado', findUser); // Cambiado a findUser
         if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas'); // Cambiado a 'Credenciales correctas'
-          localStorage.setItem('log', true)
-          navigate('/home');
-          onLoginSuccess(); // Llama a la función proporcionada para manejar el inicio de sesión exitoso
+          console.log('Credenciales correctas');
+          handleLoginSuccess()
         } else {
           console.log('Credenciales incorrectas');
         }
@@ -44,7 +37,6 @@ const FormLogin = ({ onLoginSuccess }) => {
     });
 
   }
-    
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">
