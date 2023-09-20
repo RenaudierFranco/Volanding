@@ -1,5 +1,9 @@
 [
     {
+<<<<<<< HEAD
+=======
+        "id": "maBqoVbIvmsRgyr0vjob",
+>>>>>>> ignacio
         "name": "Pepe",
         "surname": "Apellido",
         "mail": "pepe@gmail.com",
@@ -11,6 +15,10 @@
         "cellphone": "1142647755"
     },
     {
+<<<<<<< HEAD
+=======
+        "id": "9ZIGMCxLeEOi4btNmhfT",
+>>>>>>> ignacio
         "name": "Ignacio",
         "surname": "Soria",
         "mail": "isoria@gmail.com",
@@ -21,4 +29,8 @@
         "gender": "Masculino",
         "cellphone": "1169957849"
     }
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> ignacio

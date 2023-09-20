@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'bootstrap-4-react';
+<<<<<<< HEAD
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -29,6 +30,38 @@ function MyFlights() {
       });
       setFlights(flightData);
     });
+=======
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../Services/Firebase/Firebase";
+
+
+function MyFlights() {
+  const [flight, setFlight] = useState([]);
+
+  useEffect(() => {
+    console.log(localStorage.getItem('newOrder'))
+
+    
+    if(localStorage.getItem('newOrder')){
+      console.log('Nueva orden encontrada')
+
+      const newFlight = localStorage.getItem('newOrder')
+      console.log('flight item', newFlight)
+    }else {
+      console.log('No hay nuevas ordenes')
+    }
+
+    
+
+    /*
+    getDocs(collection(db, 'flightOrder')).then((snapshot)=> {
+      const flightData = snapshot.docs.map(doc => {
+          return {id: doc.id, ...doc.data()}
+      })
+      setFlights(flightData);
+    });
+    */
+>>>>>>> ignacio
   }, []);
 
 
@@ -38,6 +71,7 @@ function MyFlights() {
         <div>
         <h1>Mis Vuelos</h1>
         <ul>
+<<<<<<< HEAD
             {flights.map((flight) => (
             <li key={flight.id}>
                 <strong>Salida:</strong> {flight.departure}<br />
@@ -48,6 +82,13 @@ function MyFlights() {
                 <strong>Avion:</strong> {flight.plane}<br />
             </li>
             ))}
+=======
+            {
+            <li key={flight.id}>
+                <strong>Salida:</strong> {flight.item}<br />
+            </li>
+            }
+>>>>>>> ignacio
         </ul>
         </div>
         </Card.Body>

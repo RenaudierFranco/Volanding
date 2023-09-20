@@ -1,6 +1,10 @@
 import { Button, Card, BSmall} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
+import {  useContext } from "react";
 
+
+<<<<<<< HEAD
 
 const LoginScreen = () => {
 
@@ -15,6 +19,13 @@ const LoginScreen = () => {
         {
             console.log('no hay una bosta en LS', log)
         } 
+=======
+const LoginScreen = () => { 
+
+    const { logOut } = useContext(UserContext)
+    localStorage.removeItem('log')
+    logOut();
+>>>>>>> ignacio
 
     return( 
         <div className=" d-flex flex-column text-center align-items-center"

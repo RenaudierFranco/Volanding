@@ -1,42 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 import FormLogin from '../FormLogin/FormLogin';
-
-
+import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
 
-  const [log, setLog] = useState(false);
-  const [logForm, setLogForm] = useState(false);
-  
+  const { logIn, logOut, log, logForm, setLog} = useContext(UserContext)
+
+  // Leer el valor de localStorage al cargar el componente
   useEffect(() => {
-      console.log('que devuelve nav',localStorage.getItem('log'))
-      if(localStorage.getItem('log')){
-        setLogForm(false)
-        setLog(true)
-      }
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      setLog(true);
+    }
   }, []);
-
-  const logIn = () => {
-    logForm?
-      setLogForm(false)
-    :
-      setLogForm(true)
-  }
-
-  const logOut = () => {
-    setLog(false)
-    localStorage.setItem('log', false)
-    console.log('LS log false')
-  }
-
-  // Función para manejar el inicio de sesión exitoso
-  const handleLoginSuccess = () => {
-    setLog(true);
-    setLogForm(false); // Oculta el formulario después del inicio de sesión exitoso
-    localStorage.setItem('log', 'true'); // Actualiza el estado de autenticación en el almacenamiento local
-  };
 
   return (
       <Navbar shadow p="3" mb="5" bg="light" rounded>
@@ -96,7 +74,7 @@ const NavBar = () => {
                   // Renderizado condicional Formulario Login
                   logForm === true?
                   <li className="nav-item" w="100">
-                    <FormLogin onLoginSuccess={handleLoginSuccess}/>
+                    <FormLogin/>
                   </li>
                   :
                   <></>
