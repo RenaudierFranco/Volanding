@@ -5,15 +5,31 @@ import { db } from "../../Services/Firebase/Firebase";
 
 
 function MyFlights() {
-  const [flights, setFlights] = useState([]);
+  const [flight, setFlight] = useState([]);
 
   useEffect(() => {
+    console.log(localStorage.getItem('newOrder'))
+
+    
+    if(localStorage.getItem('newOrder')){
+      console.log('Nueva orden encontrada')
+
+      const newFlight = localStorage.getItem('newOrder')
+      console.log('flight item', newFlight)
+    }else {
+      console.log('No hay nuevas ordenes')
+    }
+
+    
+
+    /*
     getDocs(collection(db, 'flightOrder')).then((snapshot)=> {
       const flightData = snapshot.docs.map(doc => {
           return {id: doc.id, ...doc.data()}
       })
       setFlights(flightData);
     });
+    */
   }, []);
 
 
@@ -23,16 +39,11 @@ function MyFlights() {
         <div>
         <h1>Mis Vuelos</h1>
         <ul>
-            {flights.map((flight) => (
+            {
             <li key={flight.id}>
-                <strong>Salida:</strong> {flight.departure}<br />
-                <strong>Destino:</strong> {flight.arrival}<br />
-                <strong>Fecha:</strong> {flight.date}<br />
-                <strong>Hora:</strong> {flight.time}<br />
-                <strong>Asiento:</strong> {flight.seat}<br />
-                <strong>Avion:</strong> {flight.plane}<br />
+                <strong>Salida:</strong> {flight.item}<br />
             </li>
-            ))}
+            }
         </ul>
         </div>
         </Card.Body>

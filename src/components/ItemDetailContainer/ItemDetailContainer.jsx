@@ -25,17 +25,19 @@ const ItemDetailContainer = () => {
     
     const orderPurchase = (e) => {
         e.preventDefault()
-        localStorage.getItem('user') === null ?
-        console.log('user no encontrado')
+        localStorage.getItem('isLoggedIn') === true ?
+        console.log('user encontrado')
         :
-        console.log('user encontrado');
-          //get user from localStorage const user = localStorage.getItem('user');
-          /*generar newOrder
+        console.log('user no encontrado');
+        
           const newOrder = {
-            buyer: user,
+            buyer: localStorage.getItem('user'),
             item: item,
             date: new Date(),
-          }*/
+          }
+          localStorage.setItem('newOrder', newOrder)
+          
+
         }
 
 

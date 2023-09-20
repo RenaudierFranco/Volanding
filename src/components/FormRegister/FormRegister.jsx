@@ -12,8 +12,8 @@ const FormRegister = () => {
     navigate('/FormLoginContainer');
   };
   
-  const [form, setForm] = useState({nombre:'', apellido:'', contrasena:'', mail:'', 
-    pasaporte:'', fechaNacimiento:'', nacionalidad:'', celular:'', genero:''})
+  const [form, setForm] = useState({name:'', lastName:'', password:'', email:'', 
+    passport:'', birthDate:'', nacionality:'', phone:'', gender:''})
 
   const getForm = (e) => {
     const {name, value } = e.target
@@ -86,13 +86,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                     <label htmlFor="exampleInputName1">Nombre</label>
-                    <Form.Input type="text" name="nombre" id="exampleInputName" placeholder="Nombre" onBlur={handleBlur} onChange={getForm}/>                
+                    <Form.Input type="text" name="name" id="exampleInputName" placeholder="Nombre" onBlur={handleBlur} onChange={getForm}/>                
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                     <label htmlFor="exampleInputLastName1">Apellido</label>
-                    <Form.Input type="text" name="apellido" id="exampleInputLastName" placeholder="Apellido" onBlur={handleBlur} onChange={getForm}/>
+                    <Form.Input type="text" name="lastName" id="exampleInputLastName" placeholder="Apellido" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -100,13 +100,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputEmail1">Correo Electrónico</label>
-                  <Form.Input type="email" name="mail" id="exampleInputEmail1" placeholder="Mail" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="email" name="email" id="exampleInputEmail1" placeholder="Mail" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputPassword1">Contraseña</label>
-                  <Form.Input type="password" name="contrasena" id="exampleInputPassword1" placeholder="Contraseña" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="password" name="password" id="exampleInputPassword1" placeholder="Contraseña" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -114,13 +114,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputPassport1">DNI / Pasaporte</label>
-                  <Form.Input type="string" name="pasaporte" id="exampleInpPassport" placeholder="Pasaporte" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="string" name="passport" id="exampleInpPassport" placeholder="Pasaporte" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputNacionality1">Nacionalidad</label>
-                  <Form.Input type="text" name="nacionalidad" id="exampleInputNacionality1" placeholder="Nacionalidad" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="text" name="nacinality" id="exampleInputNacionality1" placeholder="Nacionalidad" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -128,13 +128,13 @@ const FormRegister = () => {
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputBirthDate1">Fecha de nacimiento</label>
-                  <Form.Input type="date" name="fechaNacimiento" id="exampleInputBirthDate1" placeholder="Fecha de nacimiento" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="date" name="birthDate" id="exampleInputBirthDate1" placeholder="Fecha de nacimiento" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <label htmlFor="exampleInputgender1">Genero</label>
-                  <Form.Input type="string" name="genero" id="exampleInputGender1" placeholder="Genero" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="string" name="gender" id="exampleInputGender1" placeholder="Genero" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
             </Row>
@@ -142,7 +142,7 @@ const FormRegister = () => {
               <Col>
               <Form.Group>
                   <label htmlFor="exampleInputPhoneNumber1">Número telefónico</label>
-                  <Form.Input type="string" name="celular" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={getForm}/>
+                  <Form.Input type="string" name="phone" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={getForm}/>
                 </Form.Group>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">

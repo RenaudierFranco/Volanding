@@ -8,28 +8,43 @@ import { UserContext } from '../../Context/UserContext';
 
 const FormLogin = ( ) => {
 
-  const { handleLoginSuccess, setUser, onLoginSuccess } = useContext(UserContext)
-  const [form, setForm] = useState({email: "", password: ""}) ;
+  const { handleLoginSuccess } = useContext(UserContext)
+
+  const [form, setForm] = useState({email: "", password: ""});
+  const [ user, setUser ] = useState({});
 
   const getForm = (e) => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
+      console.log('form', form)
   }
 
   const logUser = (e) => {
     e.preventDefault()
 
+    console.log('datos del usuario ',form)
+
     getDocs(collection(db, 'user')).then((snapshot) => {
       const users = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
       });
-      const findUser = users.find((user) => user.email === form.email);
+      console.log('users?', users)
+      console.log('form.email', form.email)
+      console.log('form.email', form.email)
+      users.forEach(user => {
+        console.log('useeers', user.email)
+      });
+      const findUser = users.find(user => user.email === form.email);
+      console.warn(users.find((user) => user.email == form.email));
+      console.log('findUser', findUser)
       if (findUser) {
         setUser(findUser);
-        console.log('user logueado', findUser); // Cambiado a findUser
+
         if (findUser.password === form.password && findUser.email === form.email) {
           console.log('Credenciales correctas'); // Cambiado a 'Credenciales correctas'
-          onLoginSuccess(); // Llama a la función proporcionada para manejar el inicio de sesión exitoso
+          localStorage.setItem('user', findUser);
+          handleLoginSuccess();
+          // redirect a /home
         } else {
           console.log('Credenciales incorrectas');
         }

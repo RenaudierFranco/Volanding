@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { db } from "../../Services/Firebase/Firebase";
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs } from "firebase/firestore";
+
 
 const ItemListContainer = ({data}) => {
 
 const [items, setItems] = useState([]);
 
+
 useEffect(()=> {
+
     getDocs(collection(db, 'flight')).then((snapshot)=>{
         const docs = snapshot.docs.map(doc =>{
             return {id: doc.id, ...doc.data()}
@@ -18,6 +21,7 @@ useEffect(()=> {
             setItems(data)
           }
     })
+
 }, [data])
 
     return (

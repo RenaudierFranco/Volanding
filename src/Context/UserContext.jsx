@@ -18,6 +18,7 @@ export const UserContext = createContext();
   const logOut = () => {
     setLog(false)
     localStorage.setItem('isLoggedIn', 'false'); // Almacenar en localStorage
+    localStorage.removeItem('user');
   }
 
   const handleLoginSuccess = () => {
