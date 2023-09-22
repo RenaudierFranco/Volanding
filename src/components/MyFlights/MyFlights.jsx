@@ -1,98 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import { Card } from 'bootstrap-4-react';
-<<<<<<< HEAD
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
-
-function MyFlights() {
-  const [flights, setFlights] = useState([]);
-
-  useEffect(() => {
-    const firebaseConfig = {
-        apiKey: "AIzaSyAYBS7ExXp-d2ZsTMd715i-RhrRUzaABm0",
-        authDomain: "practicaprofesional3-63b76.firebaseapp.com",   
-        projectId: "practicaprofesional3-63b76"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-
-
-    const db = firebase.firestore();
-    const flightCollection = db.collection('flight');
-
-    flightCollection.onSnapshot((snapshot) => {
-      const flightData = [];
-      snapshot.forEach((doc) => {
-        flightData.push({ id: doc.id, ...doc.data() });
-      });
-      setFlights(flightData);
-    });
-=======
+import React from 'react';
+import { Card, Col, Row } from 'bootstrap-4-react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
+import { useState } from 'react';
 
 
-function MyFlights() {
-  const [flight, setFlight] = useState([]);
+const MyFlights = ({data}) => {
 
-  useEffect(() => {
-    console.log(localStorage.getItem('newOrder'))
-
-    
-    if(localStorage.getItem('newOrder')){
-      console.log('Nueva orden encontrada')
-
-      const newFlight = localStorage.getItem('newOrder')
-      console.log('flight item', newFlight)
-    }else {
-      console.log('No hay nuevas ordenes')
+const [items, setItems] = useState([]);
+getDocs(collection(db, 'flight')).then((snapshot)=>{
+  const docs = snapshot.docs.map(doc =>{
+      return {id: doc.id, ...doc.data()}
+    })
+    if (data === undefined){
+      setItems(docs)
+    } else {
+      setItems(data)
     }
-
-    
-
-    /*
-    getDocs(collection(db, 'flightOrder')).then((snapshot)=> {
-      const flightData = snapshot.docs.map(doc => {
-          return {id: doc.id, ...doc.data()}
-      })
-      setFlights(flightData);
-    });
-    */
->>>>>>> ignacio
-  }, []);
+})
 
 
   return (
-    <Card style={{ width: '18rem' }}>
-        <Card.Body>
-        <div>
-        <h1>Mis Vuelos</h1>
-        <ul>
-<<<<<<< HEAD
-            {flights.map((flight) => (
-            <li key={flight.id}>
-                <strong>Salida:</strong> {flight.departure}<br />
-                <strong>Destino:</strong> {flight.arrival}<br />
-                <strong>Fecha:</strong> {flight.date}<br />
-                <strong>Hora:</strong> {flight.time}<br />
-                <strong>Asiento:</strong> {flight.seat}<br />
-                <strong>Avion:</strong> {flight.plane}<br />
-            </li>
-            ))}
-=======
-            {
-            <li key={flight.id}>
-                <strong>Salida:</strong> {flight.item}<br />
-            </li>
-            }
->>>>>>> ignacio
-        </ul>
-        </div>
+    <div>
+    <Col>
+      <Row></Row>
+      <Row></Row>
+      <Row></Row>
+    </Col>
+
+    <Col col="lg-4 md-6 sm-12">
+    <Row></Row>
+    <Row>
+      <Card text="center" h="100" shadow p="3" bg="light" rounded>
+          <Card.Header>
+            <Card.Title>
+            🛫Mis Vuleos🛬
+            </Card.Title>
+          </Card.Header>
+          <Card.Body>
+          <Card.Title>Partida: {items.departure}</Card.Title>
+          <Card.Title>Destino: {items.arrive}</Card.Title>
+            <Card.Title>Fecha: {items.date}</Card.Title>
+            <Card.Title>Horario: {items.time}</Card.Title>
         </Card.Body>
-    </Card>
+      </Card>
+    </Row>
+    <Row></Row>
+  </Col>
+
+  <Col>
+      <Row></Row>
+      <Row></Row>
+      <Row></Row>
+    </Col>
+  </div>
   );
 }
 

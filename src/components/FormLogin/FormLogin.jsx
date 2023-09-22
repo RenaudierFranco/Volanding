@@ -5,8 +5,15 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const FormLogin = ( ) => {
+  
+  const Navigate = useNavigate();
+  const redirect = () => {
+    Navigate('/home');
+  };
 
   const { handleLoginSuccess } = useContext(UserContext)
 
@@ -30,7 +37,6 @@ const FormLogin = ( ) => {
       });
       console.log('users?', users)
       console.log('form.email', form.email)
-      console.log('form.email', form.email)
       users.forEach(user => {
         console.log('useeers', user.email)
       });
@@ -39,21 +45,13 @@ const FormLogin = ( ) => {
       console.log('findUser', findUser)
       if (findUser) {
         setUser(findUser);
-<<<<<<< HEAD
-        console.log('user logueado', findUser);
-        if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas');
-          localStorage.setItem('log', true)
-          navigate('/home');
-          onLoginSuccess();
-=======
 
         if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas'); // Cambiado a 'Credenciales correctas'
+          console.log('Credenciales correctas');
           localStorage.setItem('user', findUser);
           handleLoginSuccess();
-          // redirect a /home
->>>>>>> ignacio
+          
+          redirect()
         } else {
           console.log('Credenciales incorrectas');
         }
@@ -61,8 +59,8 @@ const FormLogin = ( ) => {
         console.log('Usuario no encontrado');
       }
     });
-
   }
+
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">

@@ -4,28 +4,11 @@ import { UserContext } from '../../Context/UserContext';
 import {  useContext } from "react";
 
 
-<<<<<<< HEAD
-
-const LoginScreen = () => {
-
-    const log = localStorage.getItem('log')
-    console.log("log", log)
-    if (log === true)
-        {
-            console.log('user recuperado del LS', log)
-            return <NavLink to = "/home"></NavLink>
-        }
-    else if (log === null) 
-        {
-            console.log('no hay una bosta en LS', log)
-        } 
-=======
 const LoginScreen = () => { 
 
     const { logOut } = useContext(UserContext)
     localStorage.removeItem('log')
     logOut();
->>>>>>> ignacio
 
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
