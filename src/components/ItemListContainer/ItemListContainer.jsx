@@ -4,6 +4,7 @@ import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 
+
 const ItemListContainer = ({data}) => {
 
 const [items, setItems] = useState([]);
@@ -24,9 +25,10 @@ useEffect(()=> {
 
 }, [data])
 
-    return (
-        <>
-        {items.length === 0?
+
+  return (
+    <>
+      {items.length === 0?
         <div className="d-flex justify-content-center mb-5">
             <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
@@ -34,9 +36,9 @@ useEffect(()=> {
         </div>
         :
         <ItemList items={items}/>
-        }
-        </>
-    )
-}
+      }
+    </>
+  )
+};
 
 export default ItemListContainer;

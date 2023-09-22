@@ -1,8 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
+<<<<<<< HEAD
+import { useState } from 'react';
+import React, { Component } from 'react';
+
+=======
 import FormLogin from '../FormLogin/FormLogin';
 import { UserContext } from '../../Context/UserContext';
+>>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
 
 const NavBar = () => {
 

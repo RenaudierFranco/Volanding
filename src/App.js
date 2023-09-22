@@ -7,12 +7,28 @@ import HomeScreenContainer from './components/HomeScreenContainer/HomeScreenCont
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import FormFlight from './components/FormFlight/FormFlight';
 import MyFlights from './components/MyFlights/MyFlights';
+<<<<<<< HEAD
+=======
 import UserContextProvider from './Context/UserContext';
+>>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
 
 
 function App() {
   return (
     <>
+<<<<<<< HEAD
+      <BrowserRouter>
+        <Routes>
+          <Route exat path='/' element={<LoginScreen/>} />
+          <Route exat path='/FormLoginContainer' element={<FormLoginContainer/>} />
+          <Route exat path='/FormRegister' element={<FormRegister/>} /> 
+          <Route exat path='/home' element={<HomeScreenContainer/>} />
+          <Route exat path='/item/:itemId' element={<ItemDetailContainer/>} />
+          <Route exat path='/FormFlight' element={<FormFlight/>} />
+          <Route exat path='/MyFlights' element={<MyFlights/>} />
+        </Routes>  
+      </BrowserRouter>
+=======
       <UserContextProvider>
         <BrowserRouter>
           <Routes>
@@ -26,6 +42,7 @@ function App() {
           </Routes>  
         </BrowserRouter>
       </UserContextProvider>
+>>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
     </>
   )
 }

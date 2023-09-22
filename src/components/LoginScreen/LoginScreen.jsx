@@ -5,11 +5,14 @@ import {  useContext } from "react";
 
 
 const LoginScreen = () => { 
+<<<<<<< HEAD
+=======
 
     const { logOut } = useContext(UserContext)
     localStorage.removeItem('log')
     logOut();
 
+>>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
              style={{
