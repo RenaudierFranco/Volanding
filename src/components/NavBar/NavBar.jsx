@@ -20,11 +20,10 @@ const NavBar = () => {
       <Navbar shadow p="3" mb="5" bg="light" rounded>
         <nav className="navbar bg-body-tertiary fixed-top">
         <div className="container-fluid">
-          <a className="navbar-brand">
-            <NavLink><img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="30" height="30" style={{"borderRadius" : "50%"}} className="mr-3 d-inline-block align-text-top"></img>
-            </NavLink>
-            Volanding
-          </a>
+        <NavLink className="navbar-brand">
+          <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="30" height="30" style={{"borderRadius" : "50%"}} className="mr-3 d-inline-block align-text-top"></img>
+          Volanding
+        </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
