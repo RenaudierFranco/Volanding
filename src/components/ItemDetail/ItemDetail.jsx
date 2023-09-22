@@ -6,7 +6,7 @@ import { useState } from 'react';
 const ItemDetail = ({item, orderPurchase}) => {
 
     const [count, setCount] = useState(1);
-    const [buy, setBuy] = useState(true);
+    const [buy, setBuy] = useState(false);
 
     const increment = ()=> {
       if (count < item.seat) {
@@ -20,10 +20,14 @@ const ItemDetail = ({item, orderPurchase}) => {
       }
   }
 
+    const orderConfirm = ()=> {
+      setBuy(true)
+    }
+
     return(
       <>
       <Card w="100" shadow p="1" mb="5" bg="light" rounded mr="auto" style={{
-        "align-self": "center", "max-width":"700px", "margin-right":"auto", "margin-left":"auto"
+        "alignSelf": "center", "maxWidth":"700px", "marginRight":"auto", "marginLeft":"auto"
         }}>
         <Alert primary>El detalle de tu vuelo✈️</Alert>
             <Card.Body p="3">
@@ -46,14 +50,14 @@ const ItemDetail = ({item, orderPurchase}) => {
                 <Col col="12" mt="3" mb="3">
                   {
                   buy?              
-                  <ItemCount increment={increment} decrement={decrement} onConfirm={orderPurchase} count={count}/>
-                  :
                   <div className="text-center">
                     <Alert success>¡Confirmá tu lugar!
-                    <Button success m="3" onClick={orderPurchase}>Confirmar</Button>
-                    <Button danger onClick={()=> {setBuy(true)}}>Cancelar</Button>
+                      <Button success m="3" onClick={orderPurchase}>Confirmar</Button>
+                      <Button danger onClick={()=> {setBuy(false)}}>Cancelar</Button>
                     </Alert>
                   </div>
+                  :
+                  <ItemCount increment={increment} decrement={decrement} onConfirm={orderConfirm} count={count}/>
                   }
                 </Col>
                 <Col col="12">

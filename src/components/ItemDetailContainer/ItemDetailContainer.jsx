@@ -25,18 +25,24 @@ const ItemDetailContainer = () => {
     
     const orderPurchase = (e) => {
         e.preventDefault()
-        localStorage.getItem('isLoggedIn') === true ?
-        console.log('user encontrado')
-        :
-        console.log('user no encontrado');
+        console.log('orderPurchase')
+        console.log('localStorage isLoggedIn ', localStorage.getItem('isLoggedIn'))
         
-          const newOrder = {
-            buyer: localStorage.getItem('user'),
-            item: item,
-            date: new Date(),
-          }
-          localStorage.setItem('newOrder', newOrder)
-          
+        if( localStorage.getItem('isLoggedIn') === true){
+            const newOrder = {
+                buyer: localStorage.getItem('user'),
+                item: item,
+                date: new Date(),
+              }
+            localStorage.setItem('newOrder', newOrder)
+            console.log('new Order', newOrder)
+        }else{
+            console.log('user no encontrado');
+        }
+        
+    
+
+        
 
         }
 
