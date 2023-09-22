@@ -28,23 +28,24 @@ const ItemDetailContainer = () => {
         console.log('orderPurchase')
         console.log('localStorage isLoggedIn ', localStorage.getItem('isLoggedIn'))
         
-        if( localStorage.getItem('isLoggedIn') === true){
+        if( localStorage.getItem('isLoggedIn') === 'true'){
+            const buyer = localStorage.getItem('user')
+            console.log(buyer)
             const newOrder = {
-                buyer: localStorage.getItem('user'),
+                buyer: buyer,
                 item: item,
+                seat: localStorage.getItem('count'),
                 date: new Date(),
               }
             localStorage.setItem('newOrder', newOrder)
             console.log('new Order', newOrder)
+/*
+        ====== Modificar el stock en firebase, guardar el Id del vuelo generado ======
+*/
         }else{
             console.log('user no encontrado');
-        }
-        
-    
-
-        
-
-        }
+        } 
+    }
 
 
     return (
@@ -57,7 +58,6 @@ const ItemDetailContainer = () => {
                 <span role="status">Loading...</span>
             </button>
             :
-
             <ItemDetail key={itemId} item={item} itemId={itemId} orderPurchase={orderPurchase}/>
             }
             </div>

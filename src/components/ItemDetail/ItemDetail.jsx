@@ -22,6 +22,7 @@ const ItemDetail = ({item, orderPurchase}) => {
 
     const orderConfirm = ()=> {
       setBuy(true)
+      localStorage.setItem('count', count)
     }
 
     return(
