@@ -34,7 +34,7 @@ getDocs(collection(db, 'flight')).then((snapshot)=>{
       <Card text="center" h="100" shadow p="3" bg="light" rounded>
           <Card.Header>
             <Card.Title>
-            🛫Mis Vuleos🛬
+            🛫Estos son tus Vuleos🛬
             </Card.Title>
           </Card.Header>
           <Card.Body>
