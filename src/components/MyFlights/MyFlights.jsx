@@ -1,29 +1,12 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import { Card } from 'bootstrap-4-react';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../Services/Firebase/Firebase";
-=======
 import React from 'react';
 import { Card, Col, Row } from 'bootstrap-4-react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 import { useState } from 'react';
->>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
 
 
 const MyFlights = ({data}) => {
 
-<<<<<<< HEAD
-  useEffect(() => {
-    getDocs(collection(db, 'flightOrder')).then((snapshot)=> {
-      const flightData = snapshot.docs.map(doc => {
-          return {id: doc.id, ...doc.data()}
-      })
-      setFlights(flightData);
-    });
-  }, []);
-=======
 const [items, setItems] = useState([]);
 getDocs(collection(db, 'flight')).then((snapshot)=>{
   const docs = snapshot.docs.map(doc =>{
@@ -35,7 +18,6 @@ getDocs(collection(db, 'flight')).then((snapshot)=>{
       setItems(data)
     }
 })
->>>>>>> 27a6053b472ffa53783666e9b0a7a27014425fa9
 
 
   return (
