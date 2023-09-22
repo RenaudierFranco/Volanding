@@ -1,40 +1,57 @@
 import { Form, Button, Jumbotron, Card, BSmall, Alert } from 'bootstrap-4-react'
 import { Container } from 'bootstrap-4-react/lib/components/layout'
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-const FormLogin = ({ onLoginSuccess }) => {
 
-  const navigate = useNavigate();
+const FormLogin = ( ) => {
+  
+  const Navigate = useNavigate();
+  const redirect = () => {
+    Navigate('/home');
+  };
 
-  const [user, setUser] = useState();
-  const [form, setForm] = useState({email: "", password: ""}) ;
+  const { handleLoginSuccess } = useContext(UserContext)
+
+  const [form, setForm] = useState({email: "", password: ""});
+  const [ user, setUser ] = useState({});
 
   const getForm = (e) => {
     const {name, value } = e.target
       setForm({...form, [name]: value});
+      console.log('form', form)
   }
 
   const logUser = (e) => {
     e.preventDefault()
 
+    console.log('datos del usuario ',form)
+
     getDocs(collection(db, 'user')).then((snapshot) => {
       const users = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
       });
-      console.log("datos del form", form);
-      const findUser = users.find((user) => user.email === form.email);
+      console.log('users?', users)
+      console.log('form.email', form.email)
+      users.forEach(user => {
+        console.log('useeers', user.email)
+      });
+      const findUser = users.find(user => user.email === form.email);
+      console.warn(users.find((user) => user.email == form.email));
+      console.log('findUser', findUser)
       if (findUser) {
         setUser(findUser);
-        console.log('user logueado', findUser);
+
         if (findUser.password === form.password && findUser.email === form.email) {
           console.log('Credenciales correctas');
-          localStorage.setItem('log', true)
-          navigate('/home');
-          onLoginSuccess();
+          localStorage.setItem('user', findUser);
+          handleLoginSuccess();
+          
+          redirect()
         } else {
           console.log('Credenciales incorrectas');
         }
@@ -42,9 +59,8 @@ const FormLogin = ({ onLoginSuccess }) => {
         console.log('Usuario no encontrado');
       }
     });
-
   }
-    
+
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">
