@@ -77,12 +77,14 @@ const FormLogin = ( ) => {
               <Alert dark>*******</Alert>
               :
               <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getForm}/>
-            }
-            
+            }          
           </Form.Group>
           <Button className="m-3" primary outline type="submit" onClick={logUser}>Iniciar sesión</Button>
           <Button className="m-3" primary outline type="submit"><NavLink to='/FormRegister'
           style={{'textDecoration': 'none'}}>Nuevo usuario</NavLink></Button>
+          <div>
+            <a href="https://youtu.be/dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
+          </div>
         </Form>
         <Card.Text className="text-center mt-3" style={{"color" : "#000000"}}><BSmall text="">Llegá donde querés estar, siempre Ⓡ</BSmall></Card.Text>
       </Jumbotron>

@@ -29,7 +29,7 @@ const ItemDetailContainer = () => {
         console.log('localStorage isLoggedIn ', localStorage.getItem('isLoggedIn'))
         
         if( localStorage.getItem('isLoggedIn') === 'true'){
-            const buyer = localStorage.getItem('user')
+            const buyer = JSON.parse(localStorage.getItem('user'))
             console.log(buyer)
             const newOrder = {
                 buyer: buyer,
@@ -37,8 +37,8 @@ const ItemDetailContainer = () => {
                 seat: localStorage.getItem('count'),
                 date: new Date(),
               }
-            localStorage.setItem('newOrder', newOrder)
-            console.log('new Order', newOrder)
+            localStorage.setItem('newOrder', JSON.stringify(newOrder))
+            console.log('new Order', newOrder) 
 /*
         ====== Modificar el stock en firebase, guardar el Id del vuelo generado ======
 */

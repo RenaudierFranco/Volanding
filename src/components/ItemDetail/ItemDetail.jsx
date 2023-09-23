@@ -53,8 +53,10 @@ const ItemDetail = ({item, orderPurchase}) => {
                   buy?              
                   <div className="text-center">
                     <Alert success>¡Confirmá tu lugar!
+                    <div>
                       <Button success m="3" onClick={orderPurchase}>Confirmar</Button>
                       <Button danger onClick={()=> {setBuy(false)}}>Cancelar</Button>
+                    </div>
                     </Alert>
                   </div>
                   :

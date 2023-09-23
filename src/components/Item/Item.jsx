@@ -1,5 +1,4 @@
-import { Card } from 'bootstrap-4-react';
-import { Button } from 'bootstrap-4-react/lib/components';
+import { Card, Alert } from 'bootstrap-4-react';
 import { Col } from 'bootstrap-4-react/lib/components/layout';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
@@ -32,9 +31,10 @@ const Item = ({ item }) => {
           <Card.Text>Avión: {item.plane} / Plazas disponibles: {item.seat}</Card.Text>
           <Card.Image mb="3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OQXO2Y5Wg3-wavb5rXZTgI71ukhEft_zdg&usqp=CAU" />
           {log === true ?
-            <Button><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Button>
+            <Alert info><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Alert>
            : 
-            <span style={{"margin":"5%"}}>Iniciá sesión para ver los detalles</span>
+           <Alert info mt="3">Iniciá sesión para ver los detalles</Alert>
+
           }
         </Card.Body>
       </Card>
