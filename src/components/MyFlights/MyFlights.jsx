@@ -7,12 +7,11 @@ import { db } from '../../Services/Firebase/Firebase';
 
 const MyFlights = ({ data }) => {
   
-  //Mapeo de los vuelos disponibles (discutir que bd vamos a utilizar para esto.)
   const [items, setItems] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const snapshot = await getDocs(collection(db, 'flight'));
+        const snapshot = await getDocs(collection(db, 'flightOrder'));
         const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
         if (data === undefined) {
@@ -28,15 +27,18 @@ const MyFlights = ({ data }) => {
     fetchData();
   }, [data]);
 
-  //Para dar de baja el vuelo(No lo probe por miedo a arruinar el Firebase xD)
+
   const handleDeleteFlight = async (flightId) => {
+    /*
     try {
-      await deleteDoc(doc(db, 'flight', flightId));
+      await deleteDoc(doc(db, 'flightOrder', flightId));
 
       setItems((prevItems) => prevItems.filter((item) => item.id !== flightId));
     } catch (error) {
       console.error('Error al dar de baja el vuelo:', error);
     }
+    */
+    console.log("Borra esto:", flightId)
   };
 
   
