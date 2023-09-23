@@ -49,7 +49,7 @@ const MyFlights = ({ data }) => {
             <Card.Body>
               <Card.Title mb="3"><strong>{item.departure} - {item.arrival}</strong></Card.Title>
               <Card.Title>Fecha: {item.date}  Horario: {item.time}</Card.Title>
-              <Button variant="danger" onClick={() => handleDeleteFlight(item.id)}>Dar de baja</Button>
+              <Button danger outline variant="danger" mt="3" onClick={() => handleDeleteFlight(item.id)}>Dar de Baja</Button>
             </Card.Body>
           </Card>
         ))}
