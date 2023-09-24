@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, addDoc, doc, getDocs, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 import NavBar from "../NavBar/NavBar";
 
@@ -10,6 +10,12 @@ const ItemDetailContainer = () => {
 
     const { itemId } = useParams();
     const [item, setItem] = useState({});
+    const [ orderId, setOrderId ] = useState('')
+
+    const Navigate = useNavigate();
+    const redirect = () => {
+      Navigate('/home');
+    };
 
     useEffect(() => {
         getDocs(collection(db, 'flight')).then((snapshot)=> {
@@ -38,14 +44,31 @@ const ItemDetailContainer = () => {
                 date: new Date(),
               }
             localStorage.setItem('newOrder', JSON.stringify(newOrder))
-            console.log('new Order', newOrder) 
-/*
-        ====== Modificar el stock en firebase, guardar el Id del vuelo generado ======
-*/
+            console.log('new Order', newOrder)
+            // Añade la newOrder a la coleccion de Firebase
+            const flightOrderCollection = collection(db, 'flightOrder')
+            addDoc(flightOrderCollection, newOrder).then(({id})=> setOrderId(id)).then(console.log(`Id de reserva: ${orderId}`))
+            
+            // Devuelve el Id de la orden para el usuario.
+            alert(`¡Ya tenes tus asientos reservados! Tu código de reservas es: ${orderId}`)
+
+            updateSeat(); 
+            redirect();
+
         }else{
             console.log('user no encontrado');
         } 
     }
+
+    // Actualiza el stock del item en Firebase
+    const updateSeat = () => {
+        getDoc(doc(db, 'flight', itemId)).then((documentSnapshot) => {
+            const newStock = doc(db, 'flight', itemId);
+            updateDoc(newStock, {seat: documentSnapshot.data().seat - localStorage.getItem('count')})
+
+        });
+      };
+      
 
 
     return (
