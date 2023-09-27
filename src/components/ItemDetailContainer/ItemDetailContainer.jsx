@@ -45,11 +45,11 @@ const ItemDetailContainer = () => {
               }
             localStorage.setItem('newOrder', JSON.stringify(newOrder))
             console.log('new Order', newOrder)
-            // Añade la newOrder a la coleccion de Firebase
+
             const flightOrderCollection = collection(db, 'flightOrder')
             addDoc(flightOrderCollection, newOrder).then(({id})=> setOrderId(id)).then(console.log(`Id de reserva: ${orderId}`))
-            
-            // Devuelve el Id de la orden para el usuario.
+           
+            //no da el orederId cuando el usuario reserva el vuelo.
             alert(`¡Ya tenes tus asientos reservados! Tu código de reservas es: ${orderId}`)
 
             updateSeat(); 
@@ -60,7 +60,6 @@ const ItemDetailContainer = () => {
         } 
     }
 
-    // Actualiza el stock del item en Firebase
     const updateSeat = () => {
         getDoc(doc(db, 'flight', itemId)).then((documentSnapshot) => {
             const newStock = doc(db, 'flight', itemId);

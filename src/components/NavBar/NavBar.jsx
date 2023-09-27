@@ -47,7 +47,7 @@ const NavBar = () => {
                   // Renderizado condicional del boton Mis Vuelos
                   log?
                   <li className="nav-item">
-                    <a className="nav-link" href="/home">Mis vuelos</a>
+                    <a className="nav-link" href="/MyFlights/rpcYrvDWfdNqHoMZw5Fj">Mis vuelos</a>
                   </li>
                 :
                   <></>

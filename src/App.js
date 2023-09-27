@@ -22,7 +22,7 @@ function App() {
             <Route exat path='/home' element={<HomeScreenContainer/>} />
             <Route exat path='/item/:itemId' element={<ItemDetailContainer/>} />
             <Route exat path='/FormFlight' element={<FormFlight/>} />
-            <Route exat path='/MyFlights' element={<MyFlights/>} />
+            <Route exat path='/MyFlights/:userId' element={<MyFlights/>} />
           </Routes>  
         </BrowserRouter>
       </UserContextProvider>

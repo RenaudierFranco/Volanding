@@ -21,7 +21,10 @@ const Item = ({ item }) => {
       <Card text="center" h="100" shadow p="3" bg="light" rounded>
         <Card.Header>
           <Card.Title>
-            {item.departure} - {item.arrival}
+            Origen: {item.departure} 
+          </Card.Title>
+          <Card.Title>
+            Destino: {item.arrival}
           </Card.Title>
         </Card.Header>
         <Card.Body>
