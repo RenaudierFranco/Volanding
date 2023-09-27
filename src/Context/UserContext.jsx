@@ -7,6 +7,7 @@ export const UserContext = createContext();
 
   const [log, setLog] = useState(false);
   const [logForm, setLogForm] = useState(false);
+  const [ userId, setUserId ] = useState(null)
   
   const logIn = () => {
     logForm?
@@ -21,15 +22,16 @@ export const UserContext = createContext();
     localStorage.removeItem('user');
   }
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (user) => {
         setLog(true);
         setLogForm(false); // Oculta el formulario después del inicio de sesión exitoso
         localStorage.setItem('isLoggedIn', 'true'); // Almacenar en localStorage
+        setUserId(user.id)
   };
 
   return (
         <>
-          <UserContext.Provider value= {{handleLoginSuccess, logIn, logOut, log, logForm, setLog}}>
+          <UserContext.Provider value= {{handleLoginSuccess, logIn, logOut, log, logForm, setLog, userId}}>
               {children}
           </UserContext.Provider>
         </>

@@ -5,8 +5,8 @@ import FormLogin from '../FormLogin/FormLogin';
 import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
-  const [ userId, setUserId ] = useState(null)
-  const { logIn, logOut, log, logForm, setLog} = useContext(UserContext)
+
+  const { logIn, logOut, log, logForm, setLog, userId} = useContext(UserContext)
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -16,13 +16,7 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
-      const getUser = JSON.parse(localStorage.getItem('user'))
-      if(getUser){
-        setUserId(getUser.id)
-      }
-    }
+  
   }, [userId])
 
   return (
@@ -55,7 +49,7 @@ const NavBar = () => {
                 {
                   log?
                   <li className="nav-item">
-                    <a className="nav-link" href="/MyFlights/rpcYrvDWfdNqHoMZw5Fj">Mis vuelos</a>
+                    <NavLink className="nav-link" to={`/MyFlights/${userId}`}>Mis vuelos</NavLink>
                   </li>
                 :
                   <></>
