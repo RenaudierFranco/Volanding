@@ -18,14 +18,15 @@ export const UserContext = createContext();
 
   const logOut = () => {
     setLog(false)
-    localStorage.setItem('isLoggedIn', 'false'); // Almacenar en localStorage
+    localStorage.setItem('isLoggedIn', 'false'); 
     localStorage.removeItem('user');
+    localStorage.removeItem('newOrder');
   }
 
   const handleLoginSuccess = (user) => {
         setLog(true);
-        setLogForm(false); // Oculta el formulario después del inicio de sesión exitoso
-        localStorage.setItem('isLoggedIn', 'true'); // Almacenar en localStorage
+        setLogForm(false);
+        localStorage.setItem('isLoggedIn', 'true'); 
         setUserId(user.id)
   };
 

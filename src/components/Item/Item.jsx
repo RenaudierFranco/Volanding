@@ -17,7 +17,7 @@ const Item = ({ item }) => {
 
   
   return (
-    <Col col="lg-4 md-6 sm-12">
+    <Col col="lg-4 md-6 sm-12" mt="3">
       <Card text="center" h="100" shadow p="3" bg="light" rounded>
         <Card.Header>
           <Card.Title>

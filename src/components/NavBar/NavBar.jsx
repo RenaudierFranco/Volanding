@@ -23,7 +23,7 @@ const NavBar = () => {
       <Navbar shadow p="3" mb="5" bg="light" rounded>
         <nav className="navbar bg-body-tertiary fixed-top">
         <div className="container-fluid">
-        <NavLink className="navbar-brand">
+        <NavLink className="navbar-brand" to="/home">
           <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="30" height="30" style={{"borderRadius" : "50%"}} className="mr-3 d-inline-block align-text-top"></img>
           Volanding
         </NavLink>

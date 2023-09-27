@@ -34,8 +34,13 @@ const InputDate = (props) => {
     const searchFlight = (e) => {
         e.preventDefault()
         const newItems = items.filter(
-            item => item.arrival.toUpperCase() === form.arrival.toUpperCase() && form.departure.toUpperCase())
-        props.sendData(newItems);
+            item => item.arrival.toUpperCase() === form.arrival.toUpperCase())
+        if(newItems.length === 0){
+            props.sendData(items);
+        }else{
+            props.sendData(newItems);
+        }
+
     }
 
     return (
