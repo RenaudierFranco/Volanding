@@ -23,13 +23,10 @@ const FormRegister = () => {
     gender: '',
   });
 
-  const [selectedGender, setSelectedGender] = useState(""); // Nuevo estado para el campo de género
-
   const getForm = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
 
-    // Actualiza la barra de progreso cuando se cambian los valores de los campos
     incrementProgress();
     console.log(form);
   };
@@ -62,11 +59,6 @@ const FormRegister = () => {
       }
     }
 
-    // Si se ha seleccionado un género, incrementa el progreso
-    if (selectedGender !== "") {
-      newProgressValue += 11.1;
-    }
-
     setProgressValue(newProgressValue);
   };
 
@@ -80,15 +72,7 @@ const FormRegister = () => {
       setProgressValue((prevProgress) => prevProgress - 11.1);
     }
   };
-
-  // Maneja el cambio de opción en el campo de género
-  const handleGenderChange = (e) => {
-    const { value } = e.target;
-    setSelectedGender(value);
-
-    // Actualiza la barra de progreso cuando se selecciona una opción en el campo de género
-    incrementProgress();
-  };
+  
 
   return (
     <Container
