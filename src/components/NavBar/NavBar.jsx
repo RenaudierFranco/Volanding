@@ -1,20 +1,29 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Navbar} from 'bootstrap-4-react';
 import { NavLink } from 'react-router-dom';
 import FormLogin from '../FormLogin/FormLogin';
 import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
-
+  const [ userId, setUserId ] = useState(null)
   const { logIn, logOut, log, logForm, setLog} = useContext(UserContext)
 
-  // Leer el valor de localStorage al cargar el componente
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
       setLog(true);
     }
   }, []);
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      const getUser = JSON.parse(localStorage.getItem('user'))
+      if(getUser){
+        setUserId(getUser.id)
+      }
+    }
+  }, [userId])
 
   return (
       <Navbar shadow p="3" mb="5" bg="light" rounded>
@@ -44,7 +53,6 @@ const NavBar = () => {
                   <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
                 {
-                  // Renderizado condicional del boton Mis Vuelos
                   log?
                   <li className="nav-item">
                     <a className="nav-link" href="/MyFlights/rpcYrvDWfdNqHoMZw5Fj">Mis vuelos</a>
