@@ -32,7 +32,7 @@ export const UserContext = createContext();
 
   return (
         <>
-          <UserContext.Provider value= {{handleLoginSuccess, logIn, logOut, log, logForm, setLog, userId}}>
+          <UserContext.Provider value= {{handleLoginSuccess, logIn, logOut, log, logForm, setLog, userId, setUserId}}>
               {children}
           </UserContext.Provider>
         </>
