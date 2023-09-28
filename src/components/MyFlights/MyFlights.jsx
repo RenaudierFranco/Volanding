@@ -46,16 +46,7 @@ const MyFlights = () => {
   return (
     <>
     <NavBar/>
-    <div className=" d-flex flex-column text-center align-items-center"
-             style={{
-            "backgroundImage": "url('https://megaricos.com/wp-content/uploads/2020/09/iStock-1155490698.jpg')",
-            "backgroundPosition": "center",
-            "backgroundRepeat": "no-repeat",
-            "backgroundAttachment": "fixed",
-            "backgroundSize": "cover",
-            "height": "100vh",
-            "width": "100vw",
-          }}>
+    <div className=" d-flex flex-column text-center align-items-center">
 
     <React.Fragment>
       {items.length === 0?
@@ -85,8 +76,8 @@ const MyFlights = () => {
                   <div><Card.Title>Precio: U$S {item.item.price}</Card.Title></div>
                 </div>
                 <div>
-                  <Button info variant="primary" mt="3" ml="3" onClick={() => toggleContent(item.id)}>{visibleContent[item.id]} Detalles del vuelo</Button>
-                  <Button danger variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Dar de Baja</Button>
+                  <Button info outline variant="primary" mt="3" ml="3" onClick={() => toggleContent(item.id)}>{visibleContent[item.id]} Detalles del vuelo</Button>
+                  <Button danger outline variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Dar de Baja</Button>
                 </div>
               </Card.Body>
             </Card>
