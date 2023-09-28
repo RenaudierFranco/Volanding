@@ -37,6 +37,11 @@ const Footer = () => {
             </form>
           </div>
 
+          <div style={{"color":"#bdbdbd"}}>
+            <div><span align="bottom">Copyright 2023 Volanding, llegá donde querés estar siempre . All rights reserved ©️</span></div>         
+            <div><span align="bottom">Ignacio Soria - Franco Renaudier - IFTS Nro 18</span></div>
+          </div>
+
         </div>
       </div>
     </footer>
