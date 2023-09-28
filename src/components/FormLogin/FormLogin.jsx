@@ -49,14 +49,17 @@ const FormLogin = ( ) => {
         if (findUser.password === form.password && findUser.email === form.email) {
           console.log('Credenciales correctas');
           localStorage.setItem('user', JSON.stringify(findUser));
+          console.log('find User ', findUser)
           handleLoginSuccess(findUser);
           
           redirect()
         } else {
           console.log('Credenciales incorrectas', 'Usuario = ', user);
+          alert('Credenciales incorrectas')
         }
       } else {
         console.log('Usuario no encontrado');
+        alert('Usuario no encontrado')
       }
     });
   }

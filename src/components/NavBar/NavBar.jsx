@@ -6,7 +6,7 @@ import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
 
-  const { logIn, logOut, log, logForm, setLog, userId} = useContext(UserContext)
+  const { logIn, logOut, log, logForm, setLog, userId, setUserId} = useContext(UserContext)
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -16,7 +16,12 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-  
+    console.log('user id ',userId)
+    if(localStorage.getItem('user')){
+      const getUserId = JSON.parse(localStorage.getItem('user'))
+      setUserId(getUserId.id)
+      console.log('get User Id', getUserId.id)
+    }
   }, [userId])
 
   return (
@@ -44,7 +49,7 @@ const NavBar = () => {
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/home">Home</a>
+                  <a className="nav-link" aria-current="page" href="/home">Home</a>
                 </li>
                 {
                   log?
@@ -55,10 +60,10 @@ const NavBar = () => {
                   <></>
                 }
                 <li className="nav-item">
-                  <a className="nav-link" href="/home">Sobre Nosotros</a>
+                  <a className="nav-link" href="https://www.youtube.com/watch?v=Emp7ntPJm2w">Sobre Nosotros</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/home">Contacto</a>
+                  <a className="nav-link" href="https://www.youtube.com/watch?v=bolIZGtKOfw">Contacto</a>
                 </li>
                 {
                   // Renderizado condicional Login - Logout
