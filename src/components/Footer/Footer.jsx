@@ -1,3 +1,4 @@
+import { Container } from 'bootstrap-4-react/lib/components/layout';
 import React from 'react';
 
 const Footer = () => {
@@ -5,7 +6,6 @@ const Footer = () => {
     <footer className="text-white py-5" style={{"backgroundColor":"#8f82f6"}}>
       <div className="container">
         <div className="row">
-
           <div className="col-md-4">
             <h5>Enlaces rápidos</h5>
             <ul className="list-unstyled">
@@ -14,7 +14,6 @@ const Footer = () => {
               <li><a>Contacto</a></li>
             </ul>
           </div>
-          
           <div className="col-md-4">
             <h5>Nuestras redes sociales</h5>
             <ul className="list-unstyled">
@@ -23,7 +22,6 @@ const Footer = () => {
               <li><a><i className="fab fa-instagram"></i> Instagram</a></li>
             </ul>
           </div>
-
           <div className="col-md-4">
             <h5>Boletín de noticias</h5>
             <p>Suscríbite a nuestro boletín para recibir noticias y ofertas especiales.</p>
@@ -36,12 +34,10 @@ const Footer = () => {
               </div>
             </form>
           </div>
-
-          <div style={{"color":"#bdbdbd"}}>
+          <Container style={{"color":"#bdbdbd"}} mt="4" text="center">
             <div><span align="bottom">Copyright 2023 Volanding, llegá donde querés estar siempre . All rights reserved ©️</span></div>         
             <div><span align="bottom">Ignacio Soria - Franco Renaudier - IFTS Nro 18</span></div>
-          </div>
-
+          </Container>
         </div>
       </div>
     </footer>

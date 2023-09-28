@@ -29,9 +29,7 @@ const HomeScreenContainer = () => {
             <Row className="m-3">
                 <ItemListContainer data={data}/> 
             </Row>
-            <Row>
-                <Footer/>
-            </Row>
+            <Footer/>
         </>
     )
 }
