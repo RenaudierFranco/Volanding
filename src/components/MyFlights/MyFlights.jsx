@@ -4,6 +4,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../Services/Firebase/Firebase';
 import { useParams, NavLink } from "react-router-dom";
 import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
 
 
 const MyFlights = () => {
@@ -86,6 +87,7 @@ const MyFlights = () => {
 
 
     </React.Fragment>
+    <Footer/>
     </>
   );
 }

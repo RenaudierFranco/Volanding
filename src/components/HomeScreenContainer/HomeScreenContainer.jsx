@@ -3,7 +3,8 @@ import SlickTrack from "../SlickTrack/SlickTrack";
 import { Row } from 'bootstrap-4-react';
 import InputDate from "../InputDate/InputDate";
 import ItemListContainer from "../ItemListContainer/ItemListContainer";
-import { useState } from "react";
+import React, { useState } from "react";
+import Footer from "../Footer/Footer";
 
 const HomeScreenContainer = () => {
 
@@ -28,6 +29,7 @@ const HomeScreenContainer = () => {
             <Row className="m-3">
                 <ItemListContainer data={data}/> 
             </Row>
+            <Footer/>
         </>
     )
 }
