@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Jumbotron, Display4, Lead } from 'bootstrap-4-react';
+import { Card, Button, Jumbotron, Display4, Lead, Nav} from 'bootstrap-4-react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../Services/Firebase/Firebase';
 import { useParams, NavLink } from "react-router-dom";
 import NavBar from '../NavBar/NavBar';
 
 
+
 const MyFlights = () => {
   const [items, setItems] = useState([]);
   const { userId } = useParams();
-  const [visibleContent, setVisibleContent] = useState({});
+  const [visibleContent, setVisibleContent] = useState(false);
 
   useEffect(() => {
     getDocs(collection(db, 'flightOrder')).then((snapshot) => {
@@ -35,57 +36,63 @@ const MyFlights = () => {
     }
   };
 
-  const toggleContent = (flightId) => {
-    setVisibleContent((prevState) => ({
-      ...prevState,
-      [flightId]: !prevState[flightId],
-    }));
+  const toggleContent = (e) => {
+    console.log('toggleContent')
+    e.preventDefault()
+    if(visibleContent){
+      setVisibleContent(false)
+    }else{
+        setVisibleContent(true)
+    }
   };
+
 
   return (
     <>
     <NavBar/>
-    <React.Fragment>
-      <h2 className="text-center m-5">🛫 Estos son tus vuelos 🛬</h2>
+    <div className=" d-flex flex-column text-center align-items-center">
 
       {items.length === 0?
-          <>
-            <Jumbotron className="text-center m-5" h="100" shadow p="3" bg="light" rounded>
-              <Display4>¡Lo siento!</Display4>
-              <Lead>No pudimos encontrar ningún vuelo en esta sección</Lead>
-              <hr className="my-4" />
-              <p>Asegurate de haber realizado alguna reserva</p>
-              <NavLink to='/home'><Button primary style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
-            </Jumbotron>
-          </>
-          :
-          <Card.Deck className="text-center">
-            {items.map((item) => (
-              <Card key={item.id} shadow p="3" mb="3" bg="light" rounded>
-                <Card.Body>
-                  <div>
-                    <Card.Title mb="3">
-                      <strong>{item.item.departure} - {item.item.arrival}</strong>
-                    </Card.Title>
-                  </div>
-                  <div style={{ display: visibleContent[item.id] ? 'block' : 'none' }}>
-                    <div><Card.Title>Fecha: {item.item.date}</Card.Title></div>
-                    <div><Card.Title>Horario: {item.item.time}</Card.Title></div>
-                    <div><Card.Title>Avion: {item.item.plane}</Card.Title></div>
-                    <div><Card.Title>Precio: U$S {item.item.price}</Card.Title></div>
-                  </div>
-                  <div>
-                    <Button info outline variant="primary" mt="3" ml="3" onClick={() => toggleContent(item.id)}>{visibleContent[item.id]} Detalles del vuelo</Button>
-                    <Button danger outline variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Dar de Baja</Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            ))}
-          </Card.Deck>
+        <>
+          <Jumbotron className="text-center m-5" h="100" shadow p="3" bg="light" rounded>
+            <Display4>¡Lo siento!</Display4>
+            <Lead>No pudimos encontrar ningún vuelo en esta sección</Lead>
+            <hr className="my-4" />
+            <p>Asegurate de haber realizado alguna reserva</p>
+            <NavLink to='/home'><Button info outline style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
+          </Jumbotron>
+        </>
+        :
+        <>
+          {items.map((item) => (
+            <Card text="center" mb="5" style={{ width : '30rem', textDecoration : 'none' }}>
+              <Card.Header>
+                <Nav cardHeaderPills>
+                  <Nav.ItemLink active onClick={ toggleContent }>Detalle</Nav.ItemLink>
+                </Nav>
+              </Card.Header>
+              <Card.Body>
+                {
+                  visibleContent ?
+                  <>
+                    <Card.Title>{item.item.departure} - {item.item.arrival}</Card.Title>
+                    <Card.Text>Fecha: {item.item.date}</Card.Text>
+                    <Card.Text>Horario: {item.item.time}</Card.Text>
+                    <Card.Text>Avion: {item.item.plane}</Card.Text>
+                    <Card.Text>Precio: U$S {item.item.price}</Card.Text>
+
+                    <Button danger outline variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Eliminar</Button>
+                  </>
+                  :
+                  <Card.Title>{item.item.departure} - {item.item.arrival}</Card.Title>
+                }
+              </Card.Body>
+            </Card>
+          ))}
+        </>
       }
+    </div>
 
-
-    </React.Fragment>
     </>
   );
 }
