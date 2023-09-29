@@ -87,7 +87,7 @@ const NavBar = () => {
                   </li>
                 :
                   <li className="nav-item">
-                  <NavLink className="nav-link" onClick={logIn}>Loguerase</NavLink>
+                  <NavLink className="nav-link" onClick={logIn}>Loguearse</NavLink>
                   </li>
                 }
                 {

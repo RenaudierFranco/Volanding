@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 const FormRegister = () => {
+
   const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [progressValue, setProgressValue] = useState(0);
 
   const redirect = () => {
     navigate('/FormLoginContainer');
@@ -31,19 +34,45 @@ const FormRegister = () => {
     console.log(form);
   };
 
-  const createUser = (e) => {
+  const createUser = async (e) => {
     e.preventDefault();
+  
+    if (isFormIncomplete(form)) {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
 
-    console.log(form);
-    const newClient = form;
+    if (form.password !== confirmPassword) {
+      alert('Las contraseñas no coinciden. Por favor, intentalo de nuevo.');
+      return;
+    }
 
-    const clientCollection = collection(db, 'user');
-    addDoc(clientCollection, newClient);
+    try {
+      console.log(form);
+      const newClient = form;
+  
+      const clientCollection = collection(db, 'user');
+      await addDoc(clientCollection, newClient);
+  
+      redirect();
+    } catch (error) {
+      console.error('Error al crear el usuario:', error.message);
+      alert('Ocurrió un error al crear el usuario. Por favor, intentalo nuevamente.');
+    }
+  }
 
-    redirect();
+  const isFormIncomplete = (form) => {
+    for (const key in form) {
+        if (!form[key]) {
+            return true;
+        }
+    }
+    return false;
+};
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
   };
-
-  const [progressValue, setProgressValue] = useState(0);
 
   const incrementProgress = () => {
     let newProgressValue = 0;
@@ -113,9 +142,23 @@ const FormRegister = () => {
             </Col>
             <Col>
               <Form.Group>
+                <label htmlFor="exampleInputPhoneNumber1">Número telefónico</label>
+                <Form.Input type="string" name="phone" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={getForm} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group>
                 <label htmlFor="exampleInputPassword1">Contraseña</label>
                 <Form.Input type="password" name="password" id="exampleInputPassword1" placeholder="Contraseña" onBlur={handleBlur} onChange={getForm} />
               </Form.Group>
+            </Col>
+            <Col> 
+                <Form.Group>
+                    <label htmlFor="exampleInputConfirmPassword1">Confirmar Contraseña</label>
+                    <Form.Input type="password" name="confirmPassword" id="exampleInputConfirmPassword2" placeholder="Confirmar Contraseña" onChange={handleConfirmPasswordChange}/>
+                </Form.Group>
             </Col>
           </Row>
           <Row>
@@ -151,14 +194,8 @@ const FormRegister = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <Form.Group>
-                <label htmlFor="exampleInputPhoneNumber1">Número telefónico</label>
-                <Form.Input type="string" name="phone" id="exampleInputPhoneNumber1" placeholder="Número telefónico" onBlur={handleBlur} onChange={getForm} />
-              </Form.Group>
-            </Col>
             <Col className="d-flex align-items-center justify-content-center">
-              <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">Enviar</Button>
+              <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">  Enviar  </Button>
             </Col>
           </Row>
         </Form>

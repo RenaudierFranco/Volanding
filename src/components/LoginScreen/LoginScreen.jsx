@@ -13,7 +13,6 @@ const LoginScreen = () => {
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
              style={{
-            "backgroundImage": "url('https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/05/aviones.jpg')",
             "backgroundPosition": "center",
             "backgroundRepeat": "no-repeat",
             "backgroundAttachment": "fixed",

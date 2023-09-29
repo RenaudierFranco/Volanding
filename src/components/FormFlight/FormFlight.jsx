@@ -14,15 +14,35 @@ const FormFlight = () => {
         console.log(form)
     }
 
-    const createFlight = (e) => {
-        e.preventDefault()
+    const createFlight = async (e) => {
+        e.preventDefault();
 
-        const newFlight = form
+        if (isFormIncomplete(form)) {
+        alert('Por favor, completá todos los campos.');
+        return;
+        }
+        
+        try {
+            const newFlight = form;
+    
+            const flightCollection = collection(db, 'flight');
+            await addDoc(flightCollection, newFlight);
+    
+            alert('¡El vuelo se generó correctamente!');
+        } catch (error) {
+            console.error('Error al crear el vuelo:', error);
+            alert('Hubo un error al generar el vuelo. Por favor, intentalo de nuevo.');
+        }
+    };
 
-        const flightCollection = collection(db, 'flight')
-        addDoc(flightCollection, newFlight)
-        alert('¡El vuelo se generó correctamente!')
-    }
+    const isFormIncomplete = (form) => {
+        for (const key in form) {
+            if (!form[key]) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     return(
         <Container
