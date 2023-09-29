@@ -5,7 +5,6 @@ import { collection, addDoc, doc, getDocs, getDoc, updateDoc } from "firebase/fi
 import { db } from "../../Services/Firebase/Firebase";
 import NavBar from "../NavBar/NavBar";
 
-
 const ItemDetailContainer = () => {
 
     const { itemId } = useParams();
@@ -18,58 +17,89 @@ const ItemDetailContainer = () => {
     };
 
     useEffect(() => {
-        getDocs(collection(db, 'flight')).then((snapshot)=> {
+        const fetchItem = async () => {
+          try {
+            const snapshot = await getDocs(collection(db, 'flight'));
             const items = snapshot.docs.map(doc => {
-                return {id: doc.id, ...doc.data()}
-            })
-            const findItem = items.find(item => item.id === itemId)
-            if (findItem){
-                setItem(findItem)
-            }
-        })
-    }, [itemId]);
-    
-    const orderPurchase = (e) => {
-        e.preventDefault()
-        console.log('orderPurchase')
-        console.log('localStorage isLoggedIn ', localStorage.getItem('isLoggedIn'))
-        
-        if( localStorage.getItem('isLoggedIn') === 'true'){
-            const buyer = JSON.parse(localStorage.getItem('user'))
-            console.log(buyer)
-            const newOrder = {
-                buyer: buyer,
-                item: item,
-                seat: localStorage.getItem('count'),
-                date: new Date(),
-              }
-            localStorage.setItem('newOrder', JSON.stringify(newOrder))
-            console.log('new Order', newOrder)
-
-            const flightOrderCollection = collection(db, 'flightOrder')
-            addDoc(flightOrderCollection, newOrder).then(({id})=> setOrderId(id)).then(console.log(`Id de reserva: ${orderId}`))
-           
-            //no da el orederId cuando el usuario reserva el vuelo.
-            alert(`¡Ya tenes tus asientos reservados! Tu código de reservas es: ${orderId}`)
-
-            updateSeat(); 
-            redirect();
-
-        }else{
-            console.log('user no encontrado');
-        } 
-    }
-
-    const updateSeat = () => {
-        getDoc(doc(db, 'flight', itemId)).then((documentSnapshot) => {
-            const newStock = doc(db, 'flight', itemId);
-            updateDoc(newStock, {seat: documentSnapshot.data().seat - localStorage.getItem('count')})
-
-        });
-      };
+              return { id: doc.id, ...doc.data() };
+            });
       
+            const findItem = items.find(item => item.id === itemId);
+            if (findItem) {
+              setItem(findItem);
+            }
+          } catch (error) {
+            console.error('Error al obtener documentos:', error);
+          }
+        };
+      
+        fetchItem();
+      }, [itemId]);
 
+    
+      const orderPurchase = (e) => {
+        e.preventDefault();
+    
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      
+        if (isLoggedIn) {
+          const buyer = JSON.parse(localStorage.getItem('user'));
+          const seatCount = localStorage.getItem('count');
+      
+          if (!buyer) {
+            console.log('Usuario no encontrado en el almacenamiento local');
+            return;
+          }
+      
+          const newOrder = {
+            buyer: buyer,
+            item: item,
+            seat: seatCount,
+            date: new Date(),
+          };
+      
+          localStorage.setItem('newOrder', JSON.stringify(newOrder));
+          console.log('Nueva Orden:', newOrder);
+      
+          const flightOrderCollection = collection(db, 'flightOrder');
+          addDoc(flightOrderCollection, newOrder)
+            .then(({ id }) => {
+              console.log(`Id de reserva: ${id}`);
+              setOrderId(id);
+              alert(`¡Tus asientos han sido reservados! Tu código de reserva es: ${id}`);
+            })
+            .catch(error => {
+              console.error('Error al guardar la orden en Firestore:', error);
+            });
+      
+          updateSeat();
+          redirect();
+        } else {
+          console.log('El usuario no ha iniciado sesión');
+        }
+      };
 
+const updateSeat = async () => {
+  try {
+    const flightRef = doc(db, 'flight', itemId);
+    const documentSnapshot = await getDoc(flightRef);
+
+    if (documentSnapshot.exists()) {
+      const currentData = documentSnapshot.data();
+      const currentSeatCount = currentData.seat;
+      const bookedSeatCount = parseInt(localStorage.getItem('count'), 10);
+
+      await updateDoc(flightRef, { seat: currentSeatCount - bookedSeatCount });
+
+      console.log('Asientos actualizados en Firestore');
+    } else {
+      console.log('El documento del vuelo no existe');
+    }
+  } catch (error) {
+    console.error('Error al actualizar los asientos:', error);
+  }
+};
+      
     return (
         <>
             <NavBar/>
