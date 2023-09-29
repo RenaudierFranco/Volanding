@@ -44,7 +44,7 @@ const ItemDetailContainer = () => {
       
         if (isLoggedIn) {
           const buyer = JSON.parse(localStorage.getItem('user'));
-          const seatCount = localStorage.getItem('count');
+          const seatCount = parseInt(localStorage.getItem('count'), 10);
       
           if (!buyer) {
             console.log('Usuario no encontrado en el almacenamiento local');
@@ -67,6 +67,7 @@ const ItemDetailContainer = () => {
               console.log(`Id de reserva: ${id}`);
               setOrderId(id);
               alert(`¡Tus asientos han sido reservados! Tu código de reserva es: ${id}`);
+              console.log('OrderId: ',orderId)
             })
             .catch(error => {
               console.error('Error al guardar la orden en Firestore:', error);
