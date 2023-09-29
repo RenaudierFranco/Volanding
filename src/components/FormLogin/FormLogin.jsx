@@ -26,44 +26,45 @@ const FormLogin = ( ) => {
       console.log('form', form)
   }
 
-  const logUser = (e) => {
-    e.preventDefault()
+  const logUser = async (e) => {
+    e.preventDefault();
 
-    console.log('datos del usuario ',form)
+    try {
+        const snapshot = await getDocs(collection(db, 'user'));
+        const users = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+        });
 
-    getDocs(collection(db, 'user')).then((snapshot) => {
-      const users = snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      console.log('users?', users)
-      console.log('form.email', form.email)
-      users.forEach(user => {
-        console.log('useeers', user.email)
-      });
-      const findUser = users.find(user => user.email === form.email);
-      console.warn(users.find((user) => user.email === form.email));
-      console.log('findUser', findUser)
-      if (findUser) {
-        setUser(findUser);
+        console.log('users: ', users);
+        console.log('form.email: ', form.email);
 
-        if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas');
-          localStorage.setItem('user', JSON.stringify(findUser));
-          console.log('find User ', findUser)
-          handleLoginSuccess(findUser);
-          
-          redirect()
+        const findUser = users.find((user) => user.email === form.email);
+        console.warn(users.find((user) => user.email === form.email));
+        console.log('findUser: ', findUser);
+
+        if (findUser) {
+            setUser(findUser);
+
+            if (findUser.password === form.password && findUser.email === form.email) {
+                console.log('Credenciales correctas');
+                localStorage.setItem('user', JSON.stringify(findUser));
+                console.log('findUser: ', findUser);
+                handleLoginSuccess(findUser);
+
+                redirect();
+            } else {
+                console.log('Credenciales incorrectas', 'User: ', user);
+                alert('Credenciales incorrectas');
+            }
         } else {
-          console.log('Credenciales incorrectas', 'Usuario = ', user);
-          alert('Credenciales incorrectas')
+            console.log('Usuario no encontrado');
+            alert('Usuario no encontrado');
         }
-      } else {
-        console.log('Usuario no encontrado');
-        alert('Usuario no encontrado')
-      }
-    });
-  }
-
+    } catch (error) {
+        console.error('Error al intentar iniciar sesión:', error.message);
+        alert('Ha ocurrido un error al intentar iniciar sesión. Por favor, intentalo de nuevo más tarde.');
+    }
+  };
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">

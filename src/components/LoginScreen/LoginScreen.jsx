@@ -13,7 +13,6 @@ const LoginScreen = () => {
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
              style={{
-            "backgroundImage": "url('https://get.wallhere.com/photo/digital-art-artwork-illustration-environment-pink-violet-pink-background-concept-art-freedom-sky-skyscape-city-cityscape-tower-skyscraper-building-clouds-mountains-landscape-birds-women-outdoors-aircraft-airplane-1820887.jpg')",
             "backgroundPosition": "center",
             "backgroundRepeat": "no-repeat",
             "backgroundAttachment": "fixed",
@@ -38,7 +37,7 @@ const LoginScreen = () => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Body className="m-3">
-                    <Card.Text className="text-center" style={{"color" : "#000000"}}><BSmall text="">Llegá donde querés estar, siempre Ⓡ</BSmall></Card.Text>
+                    <Card.Text className="text-center" style={{"color" : "white"}}><BSmall text="">Llegá donde querés estar, siempre Ⓡ</BSmall></Card.Text>
                 </Card.Body>
             </Card.Body>
         </div>

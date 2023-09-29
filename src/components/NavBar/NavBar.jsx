@@ -6,7 +6,7 @@ import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
 
-  const { logIn, logOut, log, logForm, setLog, userId, setUserId} = useContext(UserContext)
+  const { logIn, logOut, log, logForm, setLog, userId, setUserId, userName} = useContext(UserContext)
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -39,13 +39,27 @@ const NavBar = () => {
             </svg>
             </span>
           </button>
-
           <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Otras Opciones</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div className="offcanvas-header justify-content-between">
+              {
+                userName !== ''?
+                <>
+                <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-fill mr-2" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+                  {userName.charAt(0).toUpperCase() + userName.slice(1)}
+                </h5>
+                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </>
+                :
+                <>
+                <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </>
+              }
             </div>
-
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
@@ -69,11 +83,11 @@ const NavBar = () => {
                   // Renderizado condicional Login - Logout
                   log?
                   <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={logOut}>Salir</a>
+                    <NavLink className="nav-link" onClick={logOut}>Salir</NavLink>
                   </li>
                 :
                   <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={logIn}>Loguerase</a>
+                  <NavLink className="nav-link" onClick={logIn}>Loguearse</NavLink>
                   </li>
                 }
                 {

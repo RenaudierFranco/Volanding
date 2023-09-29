@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Jumbotron, Display4, Lead, Nav} from 'bootstrap-4-react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { Card, Button, Jumbotron, Display4, Lead } from 'bootstrap-4-react';
+import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../Services/Firebase/Firebase';
 import { useParams, NavLink } from "react-router-dom";
 import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
 
 
 
@@ -13,13 +14,21 @@ const MyFlights = () => {
   const [visibleContent, setVisibleContent] = useState(false);
 
   useEffect(() => {
-    getDocs(collection(db, 'flightOrder')).then((snapshot) => {
-      console.log(snapshot);
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      const userFlights = data.filter(item => item.buyer.id === userId);
-      console.log(userFlights);
-      setItems(userFlights);
-    });
+    try {
+      getDocs(collection(db, 'flightOrder'))
+        .then((snapshot) => {
+          console.log(snapshot);
+          const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          const userFlights = data.filter((item) => item.buyer.id === userId);
+          console.log(userFlights);
+          setItems(userFlights);
+        })
+        .catch((error) => {
+          console.error('Error al obtener documentos:', error);
+        });
+    } catch (error) {
+      console.error('Error en el efecto de useEffect:', error);
+    }
   }, [userId]);
 
   const deleteFlight = async (flightId) => {
@@ -27,6 +36,7 @@ const MyFlights = () => {
 
     if (confirmDelete) {
       try {
+        await updateSeat(flightId);
         await deleteDoc(doc(db, 'flightOrder', flightId));
 
         setItems((prevItems) => prevItems.filter((item) => item.id !== flightId));
@@ -36,14 +46,45 @@ const MyFlights = () => {
     }
   };
 
-  const toggleContent = (e) => {
-    console.log('toggleContent')
-    e.preventDefault()
-    if(visibleContent){
-      setVisibleContent(false)
-    }else{
-        setVisibleContent(true)
+  const updateSeat = async (flightOrderId) => {
+    try {
+      const flightOrderRef = doc(db, 'flightOrder', flightOrderId);
+      const flightOrderSnapshot = await getDoc(flightOrderRef);
+  
+      if (flightOrderSnapshot.exists()) {
+        const flightOrderData = flightOrderSnapshot.data();
+        const bookedSeatCount = parseInt(flightOrderData.seat, 10);
+  
+        const flightId = flightOrderData.item.id;
+        const flightRef = doc(db, 'flight', flightId);
+        const flightSnapshot = await getDoc(flightRef);
+  
+        if (flightSnapshot.exists()) {
+          const flightData = flightSnapshot.data();
+          const currentSeatCount = parseInt(flightData.seat, 10);
+  
+          const newSeatCount = currentSeatCount + bookedSeatCount;
+          await updateDoc(flightRef, { seat: newSeatCount });
+  
+          await deleteDoc(flightOrderRef);
+  
+          console.log('Asientos actualizados en Firestore y flightOrder eliminada.');
+        } else {
+          console.log('El documento del vuelo no existe');
+        }
+      } else {
+        console.log('El documento de la flightOrder no existe');
+      }
+    } catch (error) {
+      console.error('Error al actualizar los asientos o eliminar la flightOrder:', error);
     }
+  };
+
+  const toggleContent = (flightId) => {
+    setVisibleContent((prevState) => ({
+      ...prevState,
+      [flightId]: !prevState[flightId],
+    }));
   };
 
 
@@ -92,7 +133,7 @@ const MyFlights = () => {
         </>
       }
     </div>
-
+    <Footer/>
     </>
   );
 }
