@@ -29,6 +29,11 @@ const FormLogin = ( ) => {
   const logUser = async (e) => {
     e.preventDefault();
 
+    if (isFormIncomplete(form)) {
+      alert('Por favor, completá todos los campos.');
+      return;
+  }
+
     try {
         const snapshot = await getDocs(collection(db, 'user'));
         const users = snapshot.docs.map((doc) => {
@@ -65,6 +70,15 @@ const FormLogin = ( ) => {
         alert('Ha ocurrido un error al intentar iniciar sesión. Por favor, intentalo de nuevo más tarde.');
     }
   };
+
+  const isFormIncomplete = (form) => {
+    for (const key in form) {
+        if (!form[key]) {
+            return true;
+        }
+    }
+    return false;
+};
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">

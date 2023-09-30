@@ -1,14 +1,25 @@
-import { Form, Button, Container, Row, Col, Jumbotron, Alert, Card, BSmall } from 'bootstrap-4-react';
+import { Form, 
+    Button, 
+    Container, 
+    Row, 
+    Col, 
+    Jumbotron, 
+    Alert, 
+    Card, 
+    BSmall, 
+    Navbar, 
+    BImg } from 'bootstrap-4-react';
 import { useState } from 'react';
 import { db } from '../../Services/Firebase/Firebase'
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const FormOperator = () => {
-    const [logForm, setLogForm] = useState({email: "", password: ""});
-    const [ register, setRegister ] = useState(false)
-    const [form, setForm] = useState({})
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [ logForm, setLogForm ] = useState({email: "", password: ""});
+    const [ register, setRegister ] = useState(true)
+    const [ form, setForm] = useState({})
+    const [ confirmPassword, setConfirmPassword ] = useState('');
     const navigate = useNavigate();
 
     const redirect = () => {
@@ -21,8 +32,49 @@ const FormOperator = () => {
 
     const getLogForm = (e) => {
         const {name, value } = e.target
-        setLogForm({...form, [name]: value});
-        console.log(form)
+        setLogForm({...logForm, [name]: value});
+        console.log(logForm)
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        if (isFormIncomplete(logForm)) {
+            alert('Por favor, completá todos los campos.');
+            return;
+        }
+
+        try {
+            const snapshot = await getDocs(collection(db, 'operator'));
+            const users = snapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
+    
+            console.log('users: ', users);
+            console.log('form.email: ', form.email);
+    
+            const findUser = users.find((user) => user.email === form.email);
+            console.warn(users.find((user) => user.email === form.email));
+            console.log('findUser: ', findUser);
+    
+            if (findUser) {
+                if (findUser.password === form.password && findUser.email === form.email) {
+                    console.log('Credenciales correctas');
+                    localStorage.setItem('operator', JSON.stringify(findUser));
+                    console.log('findUser: ', findUser);
+                    redirect();
+                } else {
+                    console.log('Credenciales incorrectas', 'operator: ');
+                    alert('Credenciales incorrectas');
+                }
+            } else {
+                console.log('Usuario no encontrado');
+                alert('Usuario no encontrado');
+            }
+        } catch (error) {
+            console.error('Error al intentar iniciar sesión:', error.message);
+            alert('Ha ocurrido un error al intentar iniciar sesión. Por favor, intentalo de nuevo más tarde.');
+        }
     }
 
     const handleRegister = (e) => {
@@ -77,6 +129,19 @@ const FormOperator = () => {
     
     return(
         <>
+            <Navbar light bg="light">
+                <Navbar.Brand href="#">
+                <BImg
+                    src={"https://i.ibb.co/TwdYpf5/unnamed.png"}
+                    width="30"
+                    height="30"
+                    display="inline-block"
+                    align="top"
+                    mr="1"
+                />
+                Volanding
+                </Navbar.Brand>
+            </Navbar>
             {
             register?
             <Container className=" d-flex flex-column text-center align-items-center" w="100" mt="5">
@@ -92,10 +157,10 @@ const FormOperator = () => {
                     logForm.email.length < 5?
                     <Alert dark>*******</Alert>
                     :
-                    <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getForm}/>
+                    <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getLogForm}/>
                     }          
                     </Form.Group>
-                    <Button className="m-3" primary outline type="submit">Iniciar sesión</Button>
+                    <Button className="m-3" primary outline type="submit" onClick={handleLogin}>Iniciar sesión</Button>
                     <Button className="m-3" primary outline type="submit" onClick={handleRegister}>Registrarse</Button>
                     <div>
                         <a href="https://youtu.be/dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
@@ -180,6 +245,7 @@ const FormOperator = () => {
                 </Jumbotron>
             </Container>
             }
+            <Footer/>
         </>
     )
 }
