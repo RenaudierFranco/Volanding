@@ -18,7 +18,7 @@ import Footer from '../Footer/Footer';
 const FormOperator = () => {
     const [ logForm, setLogForm ] = useState({email: "", password: ""});
     const [ register, setRegister ] = useState(true)
-    const [ form, setForm] = useState({})
+    const [ form, setForm] = useState({email:'', password:''})
     const [ confirmPassword, setConfirmPassword ] = useState('');
     const navigate = useNavigate();
 
@@ -51,14 +51,15 @@ const FormOperator = () => {
             });
     
             console.log('users: ', users);
-            console.log('form.email: ', form.email);
+            console.log('form: ', logForm)
+            console.log('form.email: ', logForm.email);
     
-            const findUser = users.find((user) => user.email === form.email);
-            console.warn(users.find((user) => user.email === form.email));
+            const findUser = users.find((user) => user.email === logForm.email);
+            console.warn(users.find((user) => user.email === logForm.email));
             console.log('findUser: ', findUser);
     
             if (findUser) {
-                if (findUser.password === form.password && findUser.email === form.email) {
+                if (findUser.password === logForm.password && findUser.email === logForm.email) {
                     console.log('Credenciales correctas');
                     localStorage.setItem('operator', JSON.stringify(findUser));
                     console.log('findUser: ', findUser);
