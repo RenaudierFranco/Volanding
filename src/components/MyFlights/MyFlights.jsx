@@ -14,22 +14,30 @@ const MyFlights = () => {
 
   useEffect(() => {
     try {
-      getDocs(collection(db, 'flightOrder'))
-        .then((snapshot) => {
-          console.log(snapshot);
-          const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-          const userFlights = data.filter((item) => item.buyer.id === userId);
-          console.log(userFlights);
-          setItems(userFlights);
-        })
-        .catch((error) => {
-          console.error('Error al obtener documentos:', error);
-        });
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  
+      if (isLoggedIn) {
+        getDocs(collection(db, 'flightOrder'))
+          .then((snapshot) => {
+            console.log(snapshot);
+            const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            const userFlights = data.filter((item) => item.buyer.id === userId);
+            console.log(userFlights);
+            setItems(userFlights);
+          })
+          .catch((error) => {
+            console.error('Error al obtener documentos:', error);
+          });
+      } else {
+        console.log('El usuario no está autenticado');
+      }
     } catch (error) {
       console.error('Error en el efecto de useEffect:', error);
     }
   }, [userId]);
+  
 
+  
   const deleteFlight = async (flightId) => {
     const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este vuelo?');
 
@@ -96,18 +104,18 @@ const MyFlights = () => {
 
       {items.length === 0?
         <>
-          <Jumbotron className="text-center m-5" h="100" shadow p="3" bg="light" rounded>
+          <Jumbotron className="text-center m-3" h="100" shadow p="3" bg="light" rounded>
             <Display4>¡Lo siento!</Display4>
             <Lead>No pudimos encontrar ningún vuelo en esta sección</Lead>
             <hr className="my-4" />
             <p>Asegurate de haber realizado alguna reserva</p>
-            <NavLink to='/home'><Button info outline style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
+            <NavLink to='/home'><Button info style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
           </Jumbotron>
         </>
         :
         <>
           {items.map((item) => (
-            <Card text="center" mb="5" style={{ width : '30rem'}}>
+            <Card text="center" mb="5" style={{ width : '80%'}}>
               <Card.Header>
                 <Nav cardHeaderPills>
                   <Button info onClick={ toggleContent }>Detalle</Button>
@@ -123,7 +131,7 @@ const MyFlights = () => {
                     <Card.Text>Avion: {item.item.plane}</Card.Text>
                     <Card.Text>Precio: U$S {item.item.price}</Card.Text>
 
-                    <Button danger outline variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Eliminar</Button>
+                    <Button danger variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Eliminar</Button>
                   </>
                   :
                   <Card.Title>{item.item.departure} - {item.item.arrival}</Card.Title>

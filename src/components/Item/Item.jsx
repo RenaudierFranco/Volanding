@@ -34,9 +34,9 @@ const Item = ({ item }) => {
           <Card.Text m="2">Avión: {item.plane} / Plazas disponibles: {item.seat}</Card.Text>
           <Card.Image m="auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OQXO2Y5Wg3-wavb5rXZTgI71ukhEft_zdg&usqp=CAU" />
           {log === true ?
-            <Alert info><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Alert>
+            <Alert primary mt="3"><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Alert>
            : 
-           <Alert info mt="3">Iniciá sesión para ver los detalles</Alert>
+           <Alert primary mt="3">Iniciá sesión para ver los detalles</Alert>
 
           }
         </Card.Body>
