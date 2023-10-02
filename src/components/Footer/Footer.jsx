@@ -1,5 +1,6 @@
 import { Container } from 'bootstrap-4-react/lib/components/layout';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -9,7 +10,20 @@ const Footer = () => {
           <div className="col-md-4">
             <h5>Enlaces rápidos</h5>
             <ul className="list-unstyled">
-              <li><a>Productos</a></li>
+              <li>
+                <NavLink 
+                  to="/home"
+                  style={{textDecoration:"none", color:"#FFFFFF"}}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                to="/FormOperator"
+                style={{textDecoration:"none", color:"#FFFFFF"}}>
+                Operadores
+                </NavLink>
+              </li>
               <li><a>Nosotros</a></li>
               <li><a>Contacto</a></li>
             </ul>
@@ -24,7 +38,7 @@ const Footer = () => {
           </div>
           <div className="col-md-4">
             <h5>Boletín de noticias</h5>
-            <p>Suscríbite a nuestro boletín para recibir noticias y ofertas especiales.</p>
+            <p>Suscribite a nuestro boletín para recibir noticias y ofertas especiales.</p>
             <form>
               <div className="input-group mb-3">
                 <input type="email" className="form-control" placeholder="Correo electrónico" />

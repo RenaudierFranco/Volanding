@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../Context/UserContext';
 import {  useContext } from "react";
 
-
 const LoginScreen = () => { 
 
     const { logOut } = useContext(UserContext)
@@ -13,15 +12,12 @@ const LoginScreen = () => {
     return( 
         <div className=" d-flex flex-column text-center align-items-center"
              style={{
-            "backgroundPosition": "center",
-            "backgroundRepeat": "no-repeat",
-            "backgroundAttachment": "fixed",
-            "backgroundSize": "cover",
-            "height": "100vh",
-            "width": "100vw",
-          }}>
-            
-            <Card.Body style= {{"marginTop" : "10%"}}>
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                }}>
+            <Card.Body>
                 <Card.Body className="d-flex flex-column mb-3">
                     <Card.Title className="text-center" style={{"color" : "#000000", "fontSize" : "2em"}}>
                         <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="100" height="100" style={{"borderRadius" : "35%"}} className="d-inline-block"/>

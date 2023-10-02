@@ -29,6 +29,11 @@ const FormLogin = ( ) => {
   const logUser = async (e) => {
     e.preventDefault();
 
+    if (isFormIncomplete(form)) {
+      alert('Por favor, completá todos los campos.');
+      return;
+  }
+
     try {
         const snapshot = await getDocs(collection(db, 'user'));
         const users = snapshot.docs.map((doc) => {
@@ -66,6 +71,15 @@ const FormLogin = ( ) => {
     }
   };
 
+  const isFormIncomplete = (form) => {
+    for (const key in form) {
+        if (!form[key]) {
+            return true;
+        }
+    }
+    return false;
+};
+
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">
       <Jumbotron text="center" h="100" shadow p="3" mb="5" bg="light" rounded>
@@ -83,9 +97,9 @@ const FormLogin = ( ) => {
               <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getForm}/>
             }          
           </Form.Group>
-          <Button className="m-3" primary outline type="submit" onClick={logUser}>Iniciar sesión</Button>
-          <Button className="m-3" primary outline type="submit"><NavLink to='/FormRegister'
-          style={{'textDecoration': 'none'}}>Nuevo usuario</NavLink></Button>
+          <Button className="m-3" primary type="submit" onClick={logUser}>Iniciar sesión</Button>
+          <Button className="m-3" primary type="submit"><NavLink to='/FormRegister'
+          style={{'textDecoration': 'none', 'color': '#FFFFFF'}}>Nuevo usuario</NavLink></Button>
           <div>
             <a href="https://youtu.be/dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
           </div>

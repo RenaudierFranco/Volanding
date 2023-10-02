@@ -3,6 +3,8 @@ import { db } from '../../Services/Firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import Footer from '../Footer/Footer';
+import NavBar from '../NavBar/NavBar';
 
 const FormRegister = () => {
 
@@ -104,6 +106,8 @@ const FormRegister = () => {
   
 
   return (
+    <>
+    <NavBar/>
     <Container
       className=" d-flex flex-column text-center align-items-center mt-5"
       style={{
@@ -113,8 +117,8 @@ const FormRegister = () => {
         marginLeft: "auto",
       }}
     >
-      <Jumbotron text="center" w="100" h="100" shadow p="3" mb="5" bg="light" rounded>
-        <Alert className="w-100 mb-5" primary>Acá inicia tu viaje 🏖️</Alert>
+      <Jumbotron text="left" w="100" h="100" shadow p="3" mb="5" bg="light" rounded>
+        <Alert primary className="w-100 mb-5 text-center">Acá inicia tu viaje 🏖️</Alert>
         <Progress mb="5">
           <Progress.Bar striped animated min="0" max="100" now={progressValue} bg='success' />
         </Progress>
@@ -195,12 +199,14 @@ const FormRegister = () => {
           </Row>
           <Row>
             <Col className="d-flex align-items-center justify-content-center">
-              <Button className="mt-3" primary outline type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">  Enviar  </Button>
+              <Button className="mt-3" primary type="submit" onClick={createUser} data-toggle="modal" data-target="#exampleModal">  Enviar  </Button>
             </Col>
           </Row>
         </Form>
       </Jumbotron>
     </Container>
+    <Footer/>
+    </>
   );
 };
 
