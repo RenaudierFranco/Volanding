@@ -9,13 +9,16 @@ import { Form,
     BSmall, 
     Navbar, 
     BImg } from 'bootstrap-4-react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { db } from '../../Services/Firebase/Firebase'
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import { UserContext } from '../../Context/UserContext';
 
+  
 const FormOperator = () => {
+    const { setOperator } = useContext(UserContext)
     const [ logForm, setLogForm ] = useState({email: "", password: ""});
     const [ register, setRegister ] = useState(true)
     const [ form, setForm] = useState({email:'', password:''})
@@ -61,6 +64,7 @@ const FormOperator = () => {
             if (findUser) {
                 if (findUser.password === logForm.password && findUser.email === logForm.email) {
                     console.log('Credenciales correctas');
+                    setOperator(findUser)
                     localStorage.setItem('operator', JSON.stringify(findUser));
                     console.log('findUser: ', findUser);
                     redirect();
@@ -112,10 +116,10 @@ const FormOperator = () => {
         try {
             await addDoc(operatorCollection, newOperator);
             alert('¡El usuario se generó correctamente!');
+            redirect();
         } catch (error) {
             console.error('Error al agregar el documento:', error);
             alert('Hubo un error al generar el ususario. Por favor, intentalo de nuevo.');
-            redirect();
         }
     };
 

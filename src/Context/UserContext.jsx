@@ -9,6 +9,7 @@ export const UserContext = createContext();
   const [logForm, setLogForm] = useState(false);
   const [ userId, setUserId ] = useState(null)
   const [ userName, setUserName] = useState('');
+  const [ operator, setOperator] = useState({})
   
   const logIn = () => {
     logForm?
@@ -37,7 +38,20 @@ export const UserContext = createContext();
 
   return (
         <>
-          <UserContext.Provider value= {{handleLoginSuccess, logIn, logOut, log, logForm, setLog, userId, setUserId, userName,setUserName}}>
+          <UserContext.Provider value= {{
+            handleLoginSuccess,
+            logIn,  
+            logOut, 
+            log, 
+            logForm, 
+            setLog, 
+            userId, 
+            setUserId, 
+            userName,
+            setUserName,
+            operator,
+            setOperator
+            }}>
               {children}
           </UserContext.Provider>
         </>

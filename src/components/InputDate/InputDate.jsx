@@ -44,8 +44,8 @@ const InputDate = (props) => {
     }
 
     return (
-        <Card w="75" h="100" shadow p="3" mt="5" mb="5" bg="light" rounded>
-                <Alert primary className="text-center">Buscar vuelo✈️</Alert>
+        <Card w="75" h="100" shadow p="3" mt="3" mb="3" bg="light" rounded>
+                <Alert primary className="text-center" mt="3" mb="3">Buscar vuelo✈️</Alert>
                 <Row>
                     <Col col="lg-3 md-12 sm-12" mt="3" mb="3">
                         <InputGroup className="input-group input-group-lg">

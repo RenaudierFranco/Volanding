@@ -20,19 +20,19 @@ const Item = ({ item }) => {
     <Col col="lg-4 md-6 sm-12" mt="3">
       <Card text="center" h="100" shadow p="3" bg="light" rounded>
         <Card.Header>
-          <Card.Title>
+          <Card.Title m="2">
             Origen: {item.departure} 
           </Card.Title>
-          <Card.Title>
+          <Card.Title m="2">
             Destino: {item.arrival}
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          <Card.Title>Fecha: {item.date}</Card.Title>
-          <Card.Title>Horario: {item.time}</Card.Title>
-          <Card.Subtitle mb="2" text="muted">U$S {item.price}.00</Card.Subtitle>
-          <Card.Text>Avión: {item.plane} / Plazas disponibles: {item.seat}</Card.Text>
-          <Card.Image mb="3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OQXO2Y5Wg3-wavb5rXZTgI71ukhEft_zdg&usqp=CAU" />
+          <Card.Title m="2">Fecha: {item.date}</Card.Title>
+          <Card.Title m="2">Horario: {item.time}</Card.Title>
+          <Card.Subtitle m="2" text="muted">U$S {item.price}.00</Card.Subtitle>
+          <Card.Text m="2">Avión: {item.plane} / Plazas disponibles: {item.seat}</Card.Text>
+          <Card.Image m="auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OQXO2Y5Wg3-wavb5rXZTgI71ukhEft_zdg&usqp=CAU" />
           {log === true ?
             <Alert info><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Alert>
            : 

@@ -23,7 +23,7 @@ const HomeScreenContainer = () => {
         <>
             <NavBar/>
             <SlickTrack/>
-            <Row className="d-flex justify-content-center" mw="100">
+            <Row className="d-flex justify-content-center">
                 <InputDate sendData={getData}/>
             </Row>
             <Row className="m-3">
