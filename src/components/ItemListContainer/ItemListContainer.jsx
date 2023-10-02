@@ -3,28 +3,30 @@ import ItemList from "../ItemList/ItemList";
 import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-
-
 const ItemListContainer = ({data}) => {
 
 const [items, setItems] = useState([]);
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, 'flight'));
+      const docs = snapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
 
-useEffect(()=> {
+      if (data === undefined) {
+        setItems(docs);
+      } else {
+        setItems(data);
+      }
+    } catch (error) {
+      console.error('Error al obtener documentos:', error);
+    }
+  };
 
-    getDocs(collection(db, 'flight')).then((snapshot)=>{
-        const docs = snapshot.docs.map(doc =>{
-            return {id: doc.id, ...doc.data()}
-          })
-          if (data === undefined){
-            setItems(docs)
-          } else {
-            setItems(data)
-          }
-    })
-
-}, [data])
-
+  fetchData();
+}, [data]);
 
   return (
     <>

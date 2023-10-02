@@ -1,23 +1,73 @@
-import NavBar from "../NavBar/NavBar";
 import FlightStatus from "../FlightStatus/FlightStatus";
 import FormFlight from "../FormFlight/FormFlight";
 import { Row, Col } from "bootstrap-4-react/lib/components/layout";
-import { Alert } from 'bootstrap-4-react';
+import { Alert, Navbar, BImg, Button } from 'bootstrap-4-react';
+import Footer from "../Footer/Footer";
+import { NavLink } from "react-router-dom";
+import { UserContext } from '../../Context/UserContext';
+import React, { useContext, useEffect } from 'react';
 
 const FlightStatusContainer = () => {
 
+    const { operator, setOperator } = useContext(UserContext)
+
+    useEffect(() => {
+        if(localStorage.getItem('operator')){
+            setOperator(JSON.parse(localStorage.getItem('operator')))
+        }
+    },[operator])
+
+    const handleLogOut = () => {
+        setOperator({});
+        localStorage.removeItem('operator');
+        alert('Sesion finalizada correctamente');
+        console.log('Sesion finalizada')
+    }
+
     return(
         <>
-            <NavBar/>
-            <Alert primary m="1" className="text-center">¡Bienvenido! desde acá podés manejar todos tus vuelos</Alert>
-            <Row className="d-flex" mw="100">
-                <Col col="lg-6 md-12 sm-12" mt="1">
+            <Navbar light bg="light">
+                <Navbar.Brand href="/home">
+                <BImg
+                    style={{"borderRadius" : "50%"}}
+                    src={"https://i.ibb.co/TwdYpf5/unnamed.png"}
+                    width="30"
+                    height="30"
+                    display="inline-block"
+                    align="top"
+                    mr="1"
+                />
+                Volanding
+                </Navbar.Brand>
+                    <Button primary>
+                        <NavLink m="2" info to="/home"onClick={handleLogOut} 
+                        style={{textDecoration:"none", color:"#FFFFFF"}}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person-x-fill mr-2" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            Cerrar sesión
+                        </NavLink>
+                    </Button>   
+            </Navbar>
+
+            <Alert primary m="3" className="text-center">
+                ¡Bienvenido! 
+                {
+                    operator.name?
+                    " " + operator.name.charAt(0).toUpperCase() + operator.name.slice(1)
+                    :
+                    <></>
+                }
+                , administrá tus vuelos.</Alert>
+            <Row>
+                <Col col="lg-6 md-12 sm-12">
                     <FlightStatus/>
                 </Col>
-                <Col col="lg-6 md-12 sm-12" mt="1">
+                <Col col="lg-6 md-12 sm-12">
                     <FormFlight/>
                 </Col>
             </Row>
+            <Footer/>
         </>
     )
 }

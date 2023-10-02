@@ -26,44 +26,59 @@ const FormLogin = ( ) => {
       console.log('form', form)
   }
 
-  const logUser = (e) => {
-    e.preventDefault()
+  const logUser = async (e) => {
+    e.preventDefault();
 
-    console.log('datos del usuario ',form)
-
-    getDocs(collection(db, 'user')).then((snapshot) => {
-      const users = snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      console.log('users?', users)
-      console.log('form.email', form.email)
-      users.forEach(user => {
-        console.log('useeers', user.email)
-      });
-      const findUser = users.find(user => user.email === form.email);
-      console.warn(users.find((user) => user.email === form.email));
-      console.log('findUser', findUser)
-      if (findUser) {
-        setUser(findUser);
-
-        if (findUser.password === form.password && findUser.email === form.email) {
-          console.log('Credenciales correctas');
-          localStorage.setItem('user', JSON.stringify(findUser));
-          console.log('find User ', findUser)
-          handleLoginSuccess(findUser);
-          
-          redirect()
-        } else {
-          console.log('Credenciales incorrectas', 'Usuario = ', user);
-          alert('Credenciales incorrectas')
-        }
-      } else {
-        console.log('Usuario no encontrado');
-        alert('Usuario no encontrado')
-      }
-    });
+    if (isFormIncomplete(form)) {
+      alert('Por favor, completá todos los campos.');
+      return;
   }
 
+    try {
+        const snapshot = await getDocs(collection(db, 'user'));
+        const users = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+        });
+
+        console.log('users: ', users);
+        console.log('form.email: ', form.email);
+
+        const findUser = users.find((user) => user.email === form.email);
+        console.warn(users.find((user) => user.email === form.email));
+        console.log('findUser: ', findUser);
+
+        if (findUser) {
+            setUser(findUser);
+
+            if (findUser.password === form.password && findUser.email === form.email) {
+                console.log('Credenciales correctas');
+                localStorage.setItem('user', JSON.stringify(findUser));
+                console.log('findUser: ', findUser);
+                handleLoginSuccess(findUser);
+
+                redirect();
+            } else {
+                console.log('Credenciales incorrectas', 'User: ', user);
+                alert('Credenciales incorrectas');
+            }
+        } else {
+            console.log('Usuario no encontrado');
+            alert('Usuario no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al intentar iniciar sesión:', error.message);
+        alert('Ha ocurrido un error al intentar iniciar sesión. Por favor, intentalo de nuevo más tarde.');
+    }
+  };
+
+  const isFormIncomplete = (form) => {
+    for (const key in form) {
+        if (!form[key]) {
+            return true;
+        }
+    }
+    return false;
+};
 
   return(
     <Container className=" d-flex flex-column text-center align-items-center" w="100">
@@ -82,9 +97,9 @@ const FormLogin = ( ) => {
               <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getForm}/>
             }          
           </Form.Group>
-          <Button className="m-3" primary outline type="submit" onClick={logUser}>Iniciar sesión</Button>
-          <Button className="m-3" primary outline type="submit"><NavLink to='/FormRegister'
-          style={{'textDecoration': 'none'}}>Nuevo usuario</NavLink></Button>
+          <Button className="m-3" primary type="submit" onClick={logUser}>Iniciar sesión</Button>
+          <Button className="m-3" primary type="submit"><NavLink to='/FormRegister'
+          style={{'textDecoration': 'none', 'color': '#FFFFFF'}}>Nuevo usuario</NavLink></Button>
           <div>
             <a href="https://youtu.be/dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
           </div>
