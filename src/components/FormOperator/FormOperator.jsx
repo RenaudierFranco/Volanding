@@ -18,7 +18,7 @@ import { UserContext } from '../../Context/UserContext';
 
   
 const FormOperator = () => {
-    const { setOperator } = useContext(UserContext)
+    const { setOperator, logOut } = useContext(UserContext)
     const [ logForm, setLogForm ] = useState({email: "", password: ""});
     const [ register, setRegister ] = useState(true)
     const [ form, setForm] = useState({email:'', password:''})
@@ -69,6 +69,7 @@ const FormOperator = () => {
                     setOperator(findUser)
                     localStorage.setItem('operator', JSON.stringify(findUser));
                     console.log('findUser: ', findUser);
+                    logOut();
                     redirect();
                 } else {
                     console.log('Credenciales incorrectas', 'operator: ');
