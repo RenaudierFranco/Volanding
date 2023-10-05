@@ -2,7 +2,7 @@ import { Collapse, Card, Jumbotron, Alert, Container, Button } from 'bootstrap-4
 import { Col, Row } from 'bootstrap-4-react/lib/components/layout';
 
 const FlightStatus = () => {
-
+   
     return (
         <>
         <Container

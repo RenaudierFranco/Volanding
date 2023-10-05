@@ -24,7 +24,10 @@ const FormFlight = () => {
         
         try {
             const newFlight = form;
-    
+            const operatorId = JSON.parse(localStorage.getItem('operator')).id;
+            console.log('operatorId', operatorId)
+            newFlight['operatorId'] = operatorId
+
             const flightCollection = collection(db, 'flight');
             await addDoc(flightCollection, newFlight);
     

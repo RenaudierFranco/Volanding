@@ -5,17 +5,14 @@ import { Alert, Navbar, BImg, Button } from 'bootstrap-4-react';
 import Footer from "../Footer/Footer";
 import { NavLink } from "react-router-dom";
 import { UserContext } from '../../Context/UserContext';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../Services/Firebase/Firebase";
 
 const FlightStatusContainer = () => {
-
+    const [item, setItem] = useState();
+    const [operatorId, setOperatorId] = useState();
     const { operator, setOperator } = useContext(UserContext)
-
-    useEffect(() => {
-        if(localStorage.getItem('operator')){
-            setOperator(JSON.parse(localStorage.getItem('operator')))
-        }
-    },[operator])
 
     const handleLogOut = () => {
         setOperator({});
@@ -23,7 +20,7 @@ const FlightStatusContainer = () => {
         alert('Sesion finalizada correctamente');
         console.log('Sesion finalizada')
     }
-
+   
     return(
         <>
             <Navbar light bg="light">
@@ -43,7 +40,7 @@ const FlightStatusContainer = () => {
                         <NavLink m="2" info to="/home"onClick={handleLogOut} 
                         style={{textDecoration:"none", color:"#FFFFFF"}}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person-x-fill mr-2" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                <path fillRule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
                             </svg>
                             Cerrar sesión
                         </NavLink>
@@ -51,12 +48,12 @@ const FlightStatusContainer = () => {
             </Navbar>
 
             <Alert primary m="3" className="text-center">
-                ¡Bienvenido! 
-                {
-                    operator.name?
-                    " " + operator.name.charAt(0).toUpperCase() + operator.name.slice(1)
-                    :
-                    <></>
+            ¡Bienvenido! 
+            {
+                    operator.name !== undefined?
+                   ' '+operator.name.charAt(0).toUpperCase() + operator.name.slice(1)
+                   :
+                   <></>
                 }
                 , administrá tus vuelos.</Alert>
             <Row>
