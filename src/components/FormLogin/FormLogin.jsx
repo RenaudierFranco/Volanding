@@ -53,6 +53,7 @@ const FormLogin = ( ) => {
             if (findUser.password === form.password && findUser.email === form.email) {
                 console.log('Credenciales correctas');
                 localStorage.setItem('user', JSON.stringify(findUser));
+                localStorage.removeItem('operator');
                 console.log('findUser: ', findUser);
                 handleLoginSuccess(findUser);
 
