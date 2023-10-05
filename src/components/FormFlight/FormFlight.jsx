@@ -7,6 +7,7 @@ import { collection, addDoc } from 'firebase/firestore';
 const FormFlight = () => {
     const [form, setForm] = useState({departure:'', arrival:'', time:'', date:'', plane:'', seat:0, price:0, duration:0})
 
+
     const getForm = (e) => {
         const {name, value } = e.target
         setForm({...form, [name]: value});
@@ -14,14 +15,19 @@ const FormFlight = () => {
         console.log(form)
     }
 
-    const createFlight = async (e) => {
-        e.preventDefault();
+    const createFlight = async () => {
+
+        if (!localStorage.getItem('operator')) {
+            alert('Parece que no iniciaste sesión. Volvé a intentarlo.');
+            console.error('No se encontró operador, operador: ', localStorage.getItem('operator'))
+            return;
+        }
 
         if (isFormIncomplete(form)) {
         alert('Por favor, completá todos los campos.');
         return;
         }
-        
+
         try {
             const newFlight = form;
     
@@ -29,6 +35,7 @@ const FormFlight = () => {
             await addDoc(flightCollection, newFlight);
     
             alert('¡El vuelo se generó correctamente!');
+            window.location.reload()
         } catch (error) {
             console.error('Error al crear el vuelo:', error);
             alert('Hubo un error al generar el vuelo. Por favor, intentalo de nuevo.');
@@ -113,7 +120,7 @@ const FormFlight = () => {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Button mt="3" primary type="submit" onClick={createFlight}>Generar nuevo vuelo</Button>
+                    <Button mt="3" primary type="button" onClick={createFlight}>Generar nuevo vuelo</Button>
                 </Form>
             </Jumbotron>
         </Container>
