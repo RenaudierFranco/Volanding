@@ -9,7 +9,7 @@ const FlightStatus = (flights) => {
             <>
                 {flights.map(flight => {
                     return(
-                    <Item key={flight.id} item={flight} /> )
+                    <flight key={flight.id} item={flight} /> )
                 })}
             </>
 
