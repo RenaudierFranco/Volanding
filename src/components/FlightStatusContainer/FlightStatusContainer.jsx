@@ -10,23 +10,41 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase";
 
 const FlightStatusContainer = () => {
-    const [item, setItem] = useState();
-    const [operatorId, setOperatorId] = useState();
-    const { operator, setOperator } = useContext(UserContext)
+    const [flights, setFlights] = useState([]);
+    const { operator, setOperator } = useContext(UserContext);
 
     useEffect(() => {
-        try {
-            const storedOperator = localStorage.getItem('operator');
-    
-            if (storedOperator) {
-                const parsedOperator = JSON.parse(storedOperator);
-                setOperator(parsedOperator);
+        const fetchFlights = async () => {
+            try {
+                const storedOperator = localStorage.getItem('operator');
+
+                if (storedOperator) {
+                    const parsedOperator = JSON.parse(storedOperator);
+                    setOperator(parsedOperator);
+
+                    const flightsRef = collection(db, 'flight');
+                    const querySnapshot = await getDocs(flightsRef);
+
+                    const flightList = [];
+                    querySnapshot.forEach((doc) => {
+                        const flightData = doc.data();
+                        
+                        if (flightData.operatorId === parsedOperator.id) {
+                            flightList.push(flightData);
+                        }
+                    });
+
+                    console.log('Vuelos obtenidos de Firestore:', flightList);
+                    setFlights(flightList);
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error parsing JSON from localStorage:', error);
-        }
-    }, []);
-    
+        };
+
+        fetchFlights();
+    }, [setOperator]);
+
     const handleLogOut = () => {
         setOperator({});
         localStorage.removeItem('operator');
