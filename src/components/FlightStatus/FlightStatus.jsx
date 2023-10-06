@@ -1,10 +1,18 @@
 import { Collapse, Card, Jumbotron, Alert, Container, Button } from 'bootstrap-4-react';
 import { Col, Row } from 'bootstrap-4-react/lib/components/layout';
 
-const FlightStatus = () => {
+const FlightStatus = (flights) => {
 
     return (       
         <>
+        {/*Estoy seguro que esto no era, pero lo termino dejando asi porq ya no se como mas seguir.*/}
+            <>
+                {flights.map(flight => {
+                    return(
+                    <Item key={flight.id} item={flight} /> )
+                })}
+            </>
+
         <Container
         className=" d-flex flex-column text-center align-items-center"
         style={{
