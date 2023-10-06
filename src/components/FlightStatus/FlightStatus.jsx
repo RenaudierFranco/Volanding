@@ -1,18 +1,11 @@
 import { Collapse, Card, Jumbotron, Alert, Container, Button } from 'bootstrap-4-react';
 import { Col, Row } from 'bootstrap-4-react/lib/components/layout';
 
-const FlightStatus = (flights) => {
+const FlightStatus = ({items, deleteFlight}) => {
 
+    console.log('items flightStatus:' ,items)
     return (       
         <>
-        {/*Estoy seguro que esto no era, pero lo termino dejando asi porq ya no se como mas seguir.*/}
-            <>
-                {flights.map(flight => {
-                    return(
-                    <flight key={flight.id} item={flight} /> )
-                })}
-            </>
-
         <Container
         className=" d-flex flex-column text-center align-items-center"
         style={{
@@ -25,56 +18,53 @@ const FlightStatus = (flights) => {
             <Jumbotron text="center" w="100" shadow p="3" mb="5" bg="light" rounded>
                 <Alert primary className="w-100">Estado de los vuelos</Alert>
                 <div id="accordionExample" className="w-100">
-                    <Card>                   
-                        <Alert dark>
-                            <Row>
-                                <Col m="2">
-                                    Origen - Destino | Fecha | Hora
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col m="2">
-                                    <Button m="1" info>Editar vuelo</Button>
-                                    <Button m="1" danger>Eliminar vuelo</Button>
-                                </Col>
-                            </Row>
-                            </Alert>
-                        <Card.Header>
-                            <Collapse.Button link target="#collapseOne" id="headingOne" aria-expanded="true">
-                            Información sobre pasajero #1
-                            </Collapse.Button>
-                        </Card.Header>
-                        <Collapse id="collapseOne" show aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <Card.Body>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </Card.Body>
-                        </Collapse>
-                        </Card>
-                        <Card>
-                        <Card.Header>
-                            <Collapse.Button link target="#collapseTwo" id="headingTwo" aria-expanded="false">
-                            Información sobre pasajero #2
-                            </Collapse.Button>
-                        </Card.Header>
-                        <Collapse id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <Card.Body>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            <Container mt="2">
-                            </Container>
-                            </Card.Body>
-                        </Collapse>
-                        </Card>
-                        <Card>
-                        <Card.Header>
-                            <Collapse.Button link target="#collapseThree" id="headingThree" aria-expanded="false">
-                            Información sobre pasajero #3
-                            </Collapse.Button>
-                        </Card.Header>
-                        <Collapse id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <Card.Body>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </Card.Body>
-                        </Collapse>
+                    <Card>
+                        {items.map(item => {
+                            return(
+                            <div key={item.id}>
+                                <Alert dark>
+                                <Row>
+                                    <Col m="2">
+                                    {` ${item.departure.toUpperCase()} - ${item.arrival.toUpperCase()} | ${item.date} | ${item.time} `}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col m="2">
+                                    <Button m="1" info 
+                                    onClick={() => {alert('!Esta opción aun no esta disponible¡ Para editar un vuelo por favor eliminalo y volvelo a crear. ')}}>
+                                        Editar vuelo
+                                    </Button>
+                                    <Button m="1" danger onClick={()=> {deleteFlight(item.id)}}>
+                                        Eliminar vuelo
+                                    </Button>
+                                    </Col>
+                                </Row>
+                                </Alert>
+                                <Card.Header>
+                                <Collapse.Button
+                                    variant="link"
+                                    onClick={() => {
+                                    document.getElementById(`collapse${item.id}`).classList.toggle('show');
+                                    }}
+                                    style={{ textDecoration: 'none', color: '#000000' }}
+                                >
+                                    Detalle
+                                </Collapse.Button>
+                                </Card.Header>
+                                <Collapse
+                                id={`collapse${item.id}`}
+                                aria-labelledby={`heading${item.id}`}
+                                data-parent="#accordionExample"
+                                >
+                                <Card.Body>
+                                    <Card.Text>Fecha: {item.date}</Card.Text>
+                                    <Card.Text>Horario: {item.time}</Card.Text>
+                                    <Card.Text>Avion: {item.plane}</Card.Text>
+                                    <Card.Text>Precio: U$S {item.price}</Card.Text>
+                                </Card.Body>
+                                </Collapse>
+                            </div>
+                        )})}                   
                     </Card>
                 </div>
             </Jumbotron>

@@ -6,36 +6,32 @@ import Footer from "../Footer/Footer";
 import { NavLink } from "react-router-dom";
 import { UserContext } from '../../Context/UserContext';
 import React, { useContext, useEffect, useState } from 'react';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from "../../Services/Firebase/Firebase";
 
 const FlightStatusContainer = () => {
-    const [flights, setFlights] = useState([]);
+    const [items, setItems] = useState([]);
     const { operator, setOperator } = useContext(UserContext);
 
     useEffect(() => {
         const fetchFlights = async () => {
             try {
-                const storedOperator = localStorage.getItem('operator');
-
+                const storedOperator = JSON.parse(localStorage.getItem('operator'));
+                console.log('storedOperator.id', storedOperator.id)
                 if (storedOperator) {
-                    const parsedOperator = JSON.parse(storedOperator);
-                    setOperator(parsedOperator);
+                    setOperator(storedOperator);
 
-                    const flightsRef = collection(db, 'flight');
-                    const querySnapshot = await getDocs(flightsRef);
-
-                    const flightList = [];
-                    querySnapshot.forEach((doc) => {
-                        const flightData = doc.data();
-                        
-                        if (flightData.operatorId === parsedOperator.id) {
-                            flightList.push(flightData);
-                        }
+                    const snapshot = await getDocs(collection(db, 'flight'));
+                    const items = snapshot.docs.map(doc => {
+                      return { id: doc.id, ...doc.data() };
                     });
-
-                    console.log('Vuelos obtenidos de Firestore:', flightList);
-                    setFlights(flightList);
+                    console.log('items: ', items)
+                    const filterItems = items.filter(item => item.operatorId === storedOperator.id);
+                    console.log('filterItems: ', filterItems)
+                    if (filterItems) {
+                        setItems(filterItems);
+                        console.log('items: ', items)
+                    }
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -51,6 +47,19 @@ const FlightStatusContainer = () => {
         alert('Sesion finalizada correctamente');
         console.log('Sesion finalizada')
     }
+
+    const deleteFlight = async (flightId) => {
+        const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este vuelo?');
+    
+        if (confirmDelete) {
+          try {
+            await deleteDoc(doc(db, 'flight', flightId));
+            setItems((prevItems) => prevItems.filter((item) => item.id !== flightId));
+          } catch (error) {
+            console.error('Error al dar de baja el vuelo:', error);
+          }
+        }
+      };
    
     return(
         <>
@@ -87,10 +96,10 @@ const FlightStatusContainer = () => {
             </Alert>
             <Row>
                 <Col col="lg-6 md-12 sm-12">
-                    <FlightStatus/>
+                    <FormFlight/>   
                 </Col>
                 <Col col="lg-6 md-12 sm-12">
-                    <FormFlight/>
+                    <FlightStatus items={items} deleteFlight={deleteFlight}/>
                 </Col>
             </Row>
             <Footer/>
