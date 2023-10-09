@@ -53,14 +53,42 @@ const FlightStatusContainer = () => {
     
         if (confirmDelete) {
           try {
+
             await deleteDoc(doc(db, 'flight', flightId));
             setItems((prevItems) => prevItems.filter((item) => item.id !== flightId));
+
+            deleteFlightOrder(flightId);
+
           } catch (error) {
             console.error('Error al dar de baja el vuelo:', error);
           }
         }
       };
-   
+
+      const deleteFlightOrder = async (flightId) => {
+        try {
+          const snapshot = await getDocs(collection(db, 'flightOrder'));
+          const items = snapshot.docs.map(doc => {
+            return { id: doc.id, ...doc.data() };
+          });
+          console.log('items--', items);
+    
+          const itemsToDelete = items.filter(item => item.item.id === flightId);
+          console.log('itemsToDelete--', itemsToDelete)
+
+          for (const itemToDelete of itemsToDelete) {
+            try {
+              await deleteDoc(doc(db, 'flightOrder', itemToDelete.id));
+              console.log('FlightOrder eliminada con éxito.');
+            } catch (error) {
+              console.error('Error al eliminar FlightOrder:', error);
+            }
+          }
+        } catch (error) {
+          console.error('Error al dar de baja el vuelo:', error);
+        }
+      };
+      
     return(
         <>
             <Navbar light bg="light">

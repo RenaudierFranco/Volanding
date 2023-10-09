@@ -57,10 +57,11 @@ const FlightStatus = ({items, deleteFlight}) => {
                                 data-parent="#accordionExample"
                                 >
                                 <Card.Body>
-                                    <Card.Text>Fecha: {item.date}</Card.Text>
-                                    <Card.Text>Horario: {item.time}</Card.Text>
-                                    <Card.Text>Avion: {item.plane}</Card.Text>
-                                    <Card.Text>Precio: U$S {item.price}</Card.Text>
+                                    <Card.Text>Fecha: <span style={{color:"grey"}}>{item.date}</span></Card.Text>
+                                    <Card.Text>Horario: <span style={{color:"grey"}}>{item.time}</span></Card.Text>
+                                    <Card.Text>Avion: <span style={{color:"grey"}}>{item.plane}</span></Card.Text>
+                                    <Card.Text>Precio: <span style={{color:"grey"}}>U$S {item.price}</span></Card.Text>
+                                    <Card.Text>Duración: <span style={{color:"grey"}}>{item.duration}</span> minutos</Card.Text>
                                 </Card.Body>
                                 </Collapse>
                             </div>
