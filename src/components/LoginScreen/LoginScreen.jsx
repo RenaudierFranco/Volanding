@@ -23,13 +23,13 @@ const LoginScreen = () => {
                         <img src="https://i.ibb.co/TwdYpf5/unnamed.png" alt="Logo" width="100" height="100" style={{"borderRadius" : "35%"}} className="d-inline-block"/>
                     </Card.Title>
                     <Card.Text className="text-center">
-                        <NavLink to='/FormLoginContainer'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
+                        <NavLink to='FormLoginContainer'><Button primary style={{"width" : "300px"}}>Log in</Button></NavLink>
                     </Card.Text>
                     <Card.Text className="text-center">
-                        <NavLink to='/FormRegister'><Button primary style={{"width" : "300px"}}>Sign up</Button></NavLink>
+                        <NavLink to='FormRegister'><Button primary style={{"width" : "300px"}}>Sign up</Button></NavLink>
                     </Card.Text>
                     <Card.Text className="text-center">
-                        <NavLink to='/home'><Button primary style={{"width" : "300px"}}>Skip</Button></NavLink>
+                        <NavLink to='home'><Button primary style={{"width" : "300px"}}>Skip</Button></NavLink>
                     </Card.Text>
                 </Card.Body>
                 <Card.Body className="m-3">

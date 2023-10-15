@@ -111,7 +111,7 @@ const MyFlights = () => {
             <Lead>No pudimos encontrar ningún vuelo en esta sección</Lead>
             <hr className="my-4" />
             <p>Asegurate de haber realizado alguna reserva</p>
-            <NavLink to='/home'><Button info style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
+            <NavLink to='home'><Button info style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
           </Jumbotron>
         </>
         :
