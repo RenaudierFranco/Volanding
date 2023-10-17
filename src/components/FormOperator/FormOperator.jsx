@@ -158,7 +158,7 @@ const FormOperator = () => {
                     <Form className="">
                     <Form.Group>
                         <label htmlFor="exampleInputEmail1">Email</label>
-                        <Form.Input name="email" type="email" id="exampleInputEmail1" placeholder="Enter email" onChange={getLogForm}/>
+                        <Form.Input name="email" type="email" id="exampleInputEmail1" placeholder="Correo electrónico" onChange={getLogForm}/>
                     </Form.Group>
                     <Form.Group>
                     <label htmlFor="exampleInputPassword1">Contraseña</label>
@@ -166,7 +166,7 @@ const FormOperator = () => {
                     logForm.email.length < 5?
                     <Alert dark>*******</Alert>
                     :
-                    <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Password" onChange={getLogForm}/>
+                    <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Contraseña" onChange={getLogForm}/>
                     }          
                     </Form.Group>
                     <Button className="m-3" primary type="submit" onClick={handleLogin}>Iniciar sesión</Button>

@@ -31,7 +31,7 @@ const FlightStatus = ({items, deleteFlight}) => {
                                 <Row>
                                     <Col m="2">
                                     <Button m="1" info 
-                                    onClick={() => {alert('!Esta opción aun no esta disponible¡ Para editar un vuelo por favor eliminalo y volvelo a crear. ')}}>
+                                    onClick={() => {alert('¡Esta opción aun no esta disponible! Para editar un vuelo por favor eliminalo y volvelo a crear. ')}}>
                                         Editar vuelo
                                     </Button>
                                     <Button m="1" danger onClick={()=> {deleteFlight(item.id)}}>
@@ -62,6 +62,7 @@ const FlightStatus = ({items, deleteFlight}) => {
                                     <Card.Text>Avion: <span style={{color:"grey"}}>{item.plane}</span></Card.Text>
                                     <Card.Text>Precio: <span style={{color:"grey"}}>U$S {item.price}</span></Card.Text>
                                     <Card.Text>Duración: <span style={{color:"grey"}}>{item.duration}</span> minutos</Card.Text>
+                                    <Card.Text>Asientos: <span style={{color:"grey"}}>{item.seat}</span> minutos</Card.Text>
                                 </Card.Body>
                                 </Collapse>
                             </div>

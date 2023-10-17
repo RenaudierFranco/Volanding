@@ -1,3 +1,4 @@
+import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './components/LoginScreen/LoginScreen';
 import FormLoginContainer from './components/FormLogin/FormLoginContainer';
@@ -11,26 +12,26 @@ import UserContextProvider from './Context/UserContext';
 
 function App() {
   const isDevelopment = process.env.NODE_ENV === 'development';
-  const routerProps = isDevelopment ? {} : { basename: '/volanding' };
+  const basename = isDevelopment ? '/' : '/volanding';  // Adjust basename based on environment
 
   return (
-    <>
-      <UserContextProvider>
-        <Router {...routerProps}>
-          <Routes>
-            <Route path='/' element={<LoginScreen />} />
-            <Route path='/FormLoginContainer' element={<FormLoginContainer />} />
-            <Route path='/FormRegister' element={<FormRegister />} />
-            <Route path='/home' element={<HomeScreenContainer />} />
-            <Route path='/item/:itemId' element={<ItemDetailContainer />} />
-            <Route path='/FlightStatusContainer' element={<FlightStatusContainer />} />
-            <Route path='/MyFlights/:userId' element={<MyFlights />} />
-            <Route path='/FormOperator' element={<FormOperator />} />
-          </Routes>  
-        </Router>
-      </UserContextProvider>
-    </>
-  )
+    <UserContextProvider>
+      <Router basename={basename}>
+        <Routes>
+          <Route path="/" element={<LoginScreen />} />
+          <Route path="/FormLoginContainer" element={<FormLoginContainer />} />
+          <Route path="/FormRegister" element={<FormRegister />} />
+          <Route path="/home" element={<HomeScreenContainer />} />
+          <Route path="/item/:itemId" element={<ItemDetailContainer />} />
+          <Route path="/FlightStatusContainer" element={<FlightStatusContainer />} />
+          <Route path="/MyFlights/:userId" element={<MyFlights />} />
+          <Route path="/FormOperator" element={<FormOperator />} />
+        </Routes>
+      </Router>
+    </UserContextProvider>
+  );
 }
 
 export default App;
+
+

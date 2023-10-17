@@ -12,14 +12,14 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <NavLink 
-                  to="home"
+                  to="/home"
                   style={{textDecoration:"none", color:"#FFFFFF"}}>
                   Home
                 </NavLink>
               </li>
               <li>
                 <NavLink 
-                to="FormOperator"
+                to="/FormOperator"
                 style={{textDecoration:"none", color:"#FFFFFF"}}>
                 Operadores
                 </NavLink>

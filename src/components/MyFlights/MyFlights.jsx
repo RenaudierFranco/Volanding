@@ -111,7 +111,7 @@ const MyFlights = () => {
             <Lead>No pudimos encontrar ningún vuelo en esta sección</Lead>
             <hr className="my-4" />
             <p>Asegurate de haber realizado alguna reserva</p>
-            <NavLink to='home'><Button info style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
+            <NavLink to='/home'><Button info style={{"width" : "300px"}}>Buscar vuelos</Button></NavLink>
           </Jumbotron>
         </>
         :
@@ -132,6 +132,7 @@ const MyFlights = () => {
                     <Card.Text>Horario: {item.item.time}</Card.Text>
                     <Card.Text>Avion: {item.item.plane}</Card.Text>
                     <Card.Text>Precio: U$S {item.item.price}</Card.Text>
+                    <Card.Text>Asientos: {item.seat}</Card.Text>
 
                     <Button danger variant="danger" mt="3" ml="3" onClick={() => deleteFlight(item.id)}>Eliminar</Button>
                   </>
