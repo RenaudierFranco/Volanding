@@ -10,8 +10,6 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "../../Services/Firebase/Firebase";
 import { collection, getDocs } from 'firebase/firestore'
-import { Container } from 'bootstrap-4-react/lib/components/layout';
-
 
 const InputDate = (props) => {
 
@@ -34,6 +32,7 @@ const InputDate = (props) => {
 
     const searchFlight = (e) => {
         e.preventDefault()
+        console.log('search flight')
         const newItems = items.filter(
             item => item.arrival.toUpperCase() === form.arrival.toUpperCase())
         if(newItems.length === 0){
