@@ -62,7 +62,7 @@ const FlightStatus = ({items, deleteFlight}) => {
                                     <Card.Text>Avion: <span style={{color:"grey"}}>{item.plane}</span></Card.Text>
                                     <Card.Text>Precio: <span style={{color:"grey"}}>U$S {item.price}</span></Card.Text>
                                     <Card.Text>Duración: <span style={{color:"grey"}}>{item.duration}</span> minutos</Card.Text>
-                                    <Card.Text>Asientos: <span style={{color:"grey"}}>{item.seat}</span> minutos</Card.Text>
+                                    <Card.Text>Asientos: <span style={{color:"grey"}}>{item.seat}</span></Card.Text>
                                 </Card.Body>
                                 </Collapse>
                             </div>
