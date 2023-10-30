@@ -37,8 +37,8 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-md-4">
-            <h5>Boletín de noticias</h5>
-            <p>Suscribite a nuestro boletín para recibir noticias y ofertas especiales.</p>
+            <h5>Recibí información sobre vuelos</h5>
+            <p>Suscribite para recibir noticias y ofertas especiales.</p>
             <form>
               <div className="input-group mb-3">
                 <input type="email" className="form-control" placeholder="Correo electrónico" />
