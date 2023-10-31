@@ -6,12 +6,12 @@ import { UserContext } from '../../Context/UserContext';
 
 const NavBar = () => {
 
-  const { logIn, logOut, log, logForm, setLog, userId, setUserId, userName, setUserName} = useContext(UserContext)
+  const { logIn, logOut, isLog, logForm, setIsLog, userId, setUserId, userName, setUserName} = useContext(UserContext)
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
-      setLog(true);
+      setIsLog(true);
     }
     
     if (localStorage.getItem('userName')){
@@ -74,7 +74,7 @@ const NavBar = () => {
                   <NavLink className="nav-link" aria-current="page" to="/home">Home</NavLink>
                 </li>
                 {
-                  log?
+                  isLog?
                   <li className="nav-item">
                     <NavLink className="nav-link" to={`/MyFlights/${userId}`}>Mis vuelos</NavLink>
                   </li>
@@ -89,7 +89,7 @@ const NavBar = () => {
                 </li>
                 {
                   // Renderizado condicional Login - Logout
-                  log?
+                  isLog?
                   <li className="nav-item">
                     <NavLink className="nav-link" onClick={logOut}>Salir</NavLink>
                   </li>

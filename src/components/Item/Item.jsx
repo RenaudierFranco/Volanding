@@ -7,11 +7,12 @@ import { UserContext } from '../../Context/UserContext';
 
 const Item = ({ item }) => {
 
-  const { log, setLog} = useContext(UserContext)
+  const { isLog, setIsLog} = useContext(UserContext)
+  console.log('item: log', isLog);
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
-      setLog(true);
+      setIsLog(true);
     }
   }, []);
 
@@ -33,7 +34,7 @@ const Item = ({ item }) => {
           <Card.Subtitle m="2" text="muted">U$S {item.price}.00</Card.Subtitle>
           <Card.Text m="2">Avión: {item.plane} / Plazas disponibles: {item.seat}</Card.Text>
           <Card.Image m="auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OQXO2Y5Wg3-wavb5rXZTgI71ukhEft_zdg&usqp=CAU" />
-          {log === true ?
+          {isLog === true ?
             <Alert primary mt="3"><NavLink to={`/item/${item.id}`}>Ver detalle</NavLink></Alert>
            : 
            <Alert primary mt="3">Iniciá sesión para ver los detalles</Alert>

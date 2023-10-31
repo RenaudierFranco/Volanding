@@ -5,7 +5,7 @@ export const UserContext = createContext();
   
   const UserContextProvider = ({children}) => {
 
-  const [log, setLog] = useState(false);
+  const [isLog, setIsLog] = useState(false);
   const [logForm, setLogForm] = useState(false);
   const [ userId, setUserId ] = useState(null)
   const [ userName, setUserName] = useState('');
@@ -19,7 +19,7 @@ export const UserContext = createContext();
   }
 
   const logOut = () => {
-    setLog(false);
+    setIsLog(false);
     localStorage.setItem('isLoggedIn', 'false'); 
     localStorage.removeItem('user');
     localStorage.removeItem('newOrder');
@@ -28,7 +28,7 @@ export const UserContext = createContext();
   }
 
   const handleLoginSuccess = (user) => {
-        setLog(true);
+        setIsLog(true);
         setLogForm(false);
         localStorage.setItem('isLoggedIn', 'true'); 
         setUserId(user.id)
@@ -42,9 +42,9 @@ export const UserContext = createContext();
             handleLoginSuccess,
             logIn,  
             logOut, 
-            log, 
+            isLog, 
             logForm, 
-            setLog, 
+            setIsLog, 
             userId, 
             setUserId, 
             userName,
