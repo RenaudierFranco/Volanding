@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';  // Cambiado de HashRouter a MemoryRouter
 import LoginScreen from './components/LoginScreen/LoginScreen';
 import FormLoginContainer from './components/FormLogin/FormLoginContainer';
 import FormRegister from './components/FormRegister/FormRegister';
@@ -12,7 +12,7 @@ import UserContextProvider from './Context/UserContext';
 
 function App() {
   const isDevelopment = process.env.NODE_ENV === 'development';
-  const basename = isDevelopment ? '/' : '/volanding';  // Adjust basename based on environment
+  const basename = isDevelopment ? '/' : '/volanding';  // Ajustar basename según el entorno
 
   return (
     <UserContextProvider>
@@ -33,5 +33,3 @@ function App() {
 }
 
 export default App;
-
-

@@ -1,61 +1,54 @@
-import { React, createContext} from "react";
-import { useState } from "react";
-  
-export const UserContext = createContext();
-  
-  const UserContextProvider = ({children}) => {
+import React, { createContext, useState } from "react";
 
+export const UserContext = createContext();
+
+const UserContextProvider = ({ children }) => {
   const [isLog, setIsLog] = useState(false);
   const [logForm, setLogForm] = useState(false);
-  const [ userId, setUserId ] = useState(null)
-  const [ userName, setUserName] = useState('');
-  const [ operator, setOperator] = useState({})
-  
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState('');
+  const [operator, setOperator] = useState({});
+
   const logIn = () => {
-    logForm?
-      setLogForm(false)
-    :
-      setLogForm(true)
-  }
+    setLogForm(!logForm);
+  };
 
   const logOut = () => {
     setIsLog(false);
-    localStorage.setItem('isLoggedIn', 'false'); 
+    localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('user');
     localStorage.removeItem('newOrder');
     setUserName('');
-    localStorage.removeItem('userName')
-  }
+    localStorage.removeItem('userName');
+  };
 
   const handleLoginSuccess = (user) => {
-        setIsLog(true);
-        setLogForm(false);
-        localStorage.setItem('isLoggedIn', 'true'); 
-        setUserId(user.id)
-        localStorage.setItem('userName', user.name)
-        setUserName(user.name)
+    setIsLog(true);
+    setLogForm(false);
+    localStorage.setItem('isLoggedIn', 'true');
+    setUserId(user.id);
+    localStorage.setItem('userName', user.name);
+    setUserName(user.name);
   };
 
   return (
-        <>
-          <UserContext.Provider value= {{
-            handleLoginSuccess,
-            logIn,  
-            logOut, 
-            isLog, 
-            logForm, 
-            setIsLog, 
-            userId, 
-            setUserId, 
-            userName,
-            setUserName,
-            operator,
-            setOperator
-            }}>
-              {children}
-          </UserContext.Provider>
-        </>
-  )
-}
+    <UserContext.Provider value={{
+      handleLoginSuccess,
+      logIn,
+      logOut,
+      isLog,
+      logForm,
+      setIsLog,
+      userId,
+      setUserId,
+      userName,
+      setUserName,
+      operator,
+      setOperator
+    }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
 export default UserContextProvider;
