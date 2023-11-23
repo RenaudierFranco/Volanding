@@ -1,8 +1,39 @@
 import { Container } from 'bootstrap-4-react/lib/components/layout';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { db } from "../../Services/Firebase/Firebase";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+
+
 
 const Footer = () => {
+
+  function sendEmail
+  (email, subject, body) {
+    const collectionRef = collection(db, 'mail')
+    const emailContent = {
+      to: email,
+      message: {
+        subject: subject,
+        text: body,
+        html: `<p>${body}<p>`,
+      },
+    };
+    console.log("Listo para ser enviado.");
+    return addDoc(collectionRef, emailContent)
+  }
+
+
+  function sumbitHandler(e){
+    e.preventDefault();
+    let email = e.target.email.value;
+    let subject = e.target.subject.value;
+    let coment = e.target.coment.value;
+    sendEmail (email, subject, coment);
+    email = subject = coment =  "";
+  }
+
+
   return (
     <footer className="text-white py-5" style={{"backgroundColor":"#8f82f6"}}>
       <div className="container">
@@ -38,16 +69,19 @@ const Footer = () => {
           </div>
           <div className="col-md-4">
             <h5>Dejar comentarios</h5>
-            <form>
+            <form onSubmit={sumbitHandler}>
               <div className="input-group mb-3">
                 <div>
-                  <input type="text" className="form-control m-2" placeholder="Comentarios..." />
+                  <input type="email" className="form-control m-2" name="email" placeholder="Correo electrónico" />
                 </div>
                 <div>
-                  <input type="email" className="form-control m-2" placeholder="Correo electrónico" />
+                  <input type="text" className="form-control m-2" name="subject" placeholder="Asunto" />
+                </div>
+                <div>
+                  <input type="text" className="form-control m-2" name="coment" placeholder="Comentarios..." />
                 </div>
                 <div className="input-group m-2">
-                  <button className="btn btn-success" type="button">Suscribirse</button>
+                  <button className="btn btn-success" type="submit">Enviar</button>
                 </div>
               </div>
             </form>
