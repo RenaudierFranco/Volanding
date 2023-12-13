@@ -98,9 +98,9 @@ const FormLogin = ( ) => {
               <Form.Input name="password" type="password" id="exampleInputPassword1" placeholder="Contraseña" onChange={getForm}/>
             }          
           </Form.Group>
-          <Button className="m-3" primary type="submit" onClick={logUser}>Iniciar sesión</Button>
           <Button className="m-3" primary type="submit"><NavLink to='/FormRegister'
           style={{'textDecoration': 'none', 'color': '#FFFFFF'}}>Nuevo usuario</NavLink></Button>
+          <Button className="m-3" primary type="submit" onClick={logUser}>Iniciar sesión</Button>
           <div>
             <a href="https://youtu.be/dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
           </div>
