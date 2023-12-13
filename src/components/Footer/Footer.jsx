@@ -2,13 +2,13 @@ import { Container } from 'bootstrap-4-react/lib/components/layout';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { db } from "../../Services/Firebase/Firebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 
 
 const Footer = () => {
 
-  function sendEmail
+  function sendMail
   (email, subject, body) {
     const collectionRef = collection(db, 'mail')
     const emailContent = {
@@ -29,7 +29,7 @@ const Footer = () => {
     let email = e.target.email.value;
     let subject = e.target.subject.value;
     let coment = e.target.coment.value;
-    sendEmail (email, subject, coment);
+    sendMail (email, subject, coment);
     email = subject = coment =  "";
   }
 
