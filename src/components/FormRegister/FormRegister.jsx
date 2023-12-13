@@ -140,7 +140,7 @@ const FormRegister = () => {
           <Row>
             <Col>
               <Form.Group>
-                <label htmlFor="exampleInputEmail1">Correo Electrónico</label>
+                <label htmlFor="exampleInputEmail1">Correo electrónico</label>
                 <Form.Input type="email" name="email" id="exampleInputEmail1" placeholder="Correo electrónico" onBlur={handleBlur} onChange={getForm} />
               </Form.Group>
             </Col>
@@ -160,7 +160,7 @@ const FormRegister = () => {
             </Col>
             <Col> 
                 <Form.Group>
-                    <label htmlFor="exampleInputConfirmPassword1">Confirmar Contraseña</label>
+                    <label htmlFor="exampleInputConfirmPassword1">Confirmar contraseña</label>
                     <Form.Input type="password" name="confirmPassword" id="exampleInputConfirmPassword2" placeholder="Confirmar contraseña" onChange={handleConfirmPasswordChange}/>
                 </Form.Group>
             </Col>

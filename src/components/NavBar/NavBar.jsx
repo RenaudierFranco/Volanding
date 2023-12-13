@@ -82,7 +82,7 @@ const NavBar = () => {
                   <></>
                 }
                 <li className="nav-item">
-                  <a className="nav-link" href="https://www.youtube.com/watch?v=Emp7ntPJm2w">Sobre Nosotros</a>
+                  <a className="nav-link" href="https://www.youtube.com/watch?v=Emp7ntPJm2w">Sobre Volanding</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="https://www.youtube.com/watch?v=bolIZGtKOfw">Contacto</a>
